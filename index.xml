@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>e2immu.org</title>
-    <link>https://bnaudts.github.io/</link>
-    <description>Recent content on e2immu.org</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://bnaudts.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Effective and Eventual Immutability: a Static Code Analyser for Java on</title><link>https://www.e2immu.org/</link><description>Recent content in Effective and Eventual Immutability: a Static Code Analyser for Java on</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Tue, 06 Oct 2020 08:47:36 +0000</lastBuildDate><atom:link href="https://www.e2immu.org/index.xml" rel="self" type="application/rss+xml"/><item><title>Introducing e2immu</title><link>https://www.e2immu.org/blog/introducing-e2immu/</link><pubDate>Thu, 01 Apr 2021 09:19:42 +0100</pubDate><guid>https://www.e2immu.org/blog/introducing-e2immu/</guid><description>Hello there! After 16 months of full-time development, I&amp;rsquo;m proud to announce that e2immu is now public on GitHub as an open source project.
+e2immu is a static code analyser for Java. There&amp;rsquo;s a few analysers around already, but this one focuses strongly on immutability: determining when and where the data of an object gets modified, and ensuring that, after some initialisation phase, the content of certain objects can never be changed again.</description></item><item><title>Introduction</title><link>https://www.e2immu.org/docs/prologue/introduction/</link><pubDate>Tue, 06 Oct 2020 08:48:57 +0000</pubDate><guid>https://www.e2immu.org/docs/prologue/introduction/</guid><description>Welcome Welcome to the e2immu documentation.
+We recommend The Road to Immutability → as a first introduction to the analyser. This document is also available as PDF in the Tutorials → section.
+All downloads (sources, jars) can be found on e2immu&amp;rsquo;s GitHub page →.
+Timeline e2immu is not ready yet. While all concepts are stable, the analyser is not robust enough yet to be applied in production settings.
+We try to adhere to the following timing:</description></item><item><title>Tutorials</title><link>https://www.e2immu.org/docs/prologue/tutorials/</link><pubDate>Mon, 16 Nov 2020 13:59:39 +0100</pubDate><guid>https://www.e2immu.org/docs/prologue/tutorials/</guid><description>The main tutorial to the concepts of the e2immu analyser is:
+The Road to Immutability →, PDF Some slide decks are available:
+Slide deck 1: an e2immu tutorial
+Slide deck 2: slides about the e2immu project</description></item><item><title>Manuals</title><link>https://www.e2immu.org/docs/help/manuals/</link><pubDate>Mon, 16 Nov 2020 13:59:39 +0100</pubDate><guid>https://www.e2immu.org/docs/help/manuals/</guid><description>The main manual is:
+e2immu manual →, PDF This manual needs additional work.</description></item><item><title>Javadoc</title><link>https://www.e2immu.org/docs/help/javadocs/</link><pubDate>Mon, 16 Nov 2020 13:59:39 +0100</pubDate><guid>https://www.e2immu.org/docs/help/javadocs/</guid><description>The javadocs of the e2immu-support-x.x.x.jar can be found here.</description></item><item><title>Contributing</title><link>https://www.e2immu.org/docs/prologue/contributing/</link><pubDate>Tue, 13 Oct 2020 15:21:01 +0200</pubDate><guid>https://www.e2immu.org/docs/prologue/contributing/</guid><description>Project Governance The e2immu project is sponsored by IBTECH BV, a limited liability company under Belgian law. The project welcomes contributions from the community.
+Goal IBTECH aims for the e2immu analyser to become a solid, dependable tool in promoting and enforcing immutability constraints in recent versions of Java. Until this goal is reached, it will try to avoid widening the scope of the analyser in the direction of, for example, a general code analyser, or the ability to analyser other programming languages.</description></item><item><title>Plugins</title><link>https://www.e2immu.org/docs/help/plugins/</link><pubDate>Tue, 13 Oct 2020 15:21:01 +0200</pubDate><guid>https://www.e2immu.org/docs/help/plugins/</guid><description>Gradle plugin The Gradle plugin helps integrating the analyser in your Gradle workflow.
+All details about configuring the Gradle plugin are in the manual, see Manuals →.
+IntelliJ IDEA plugin The IntelliJ plugin is a highlighter for the IntelliJ IDEA. It shows the immutability of classes computed by the analyser in your source code editor.
+The set-up involves a helper application, the annotation store.
+The plugin&amp;rsquo;s operation is described in the manual, see Manuals →.</description></item><item><title>Dependencies</title><link>https://www.e2immu.org/docs/help/dependencies/</link><pubDate>Tue, 13 Oct 2020 15:21:01 +0200</pubDate><guid>https://www.e2immu.org/docs/help/dependencies/</guid><description>The analyser primarily depends on
+JavaParser.org to parse Java source files; ASM to parse Java byte-code. Like many other Java projects, it also uses
+slf4j and LogBack for logging; commons.io for reading and writing to files; JUnit 5 for testing. The annotation store uses
+Vertx.io for configuration and HTTP communication. Obviously, the Gradle plugin links to Gradle libraries, and the IntelliJ highlighter to Jetbrains libraries.</description></item><item><title>Reporting bugs</title><link>https://www.e2immu.org/docs/help/reporting-bugs/</link><pubDate>Thu, 12 Nov 2020 15:22:20 +0100</pubDate><guid>https://www.e2immu.org/docs/help/reporting-bugs/</guid><description>The easiest way to report a bug is to create an issue in GitHub:
+Create a bug report for the analyser</description></item><item><title>FAQ</title><link>https://www.e2immu.org/docs/help/faq/</link><pubDate>Tue, 06 Oct 2020 08:49:31 +0000</pubDate><guid>https://www.e2immu.org/docs/help/faq/</guid><description>What is e2immu? e2immu is a static code analyser for modern Java. It aims to help you write better code by making you aware of unwanted constructs, possible causes for exceptions etc. Even if it includes many &amp;ldquo;standard&amp;rdquo; warnings, e2immu is not a general code analyser: it focuses on modification and immutability. It is able to detect that classes are immutable in practice, or not, and why they are not.</description></item></channel></rss>
