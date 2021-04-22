@@ -2416,7 +2416,7 @@ Now we will try to characterise modifications that are beyond the scope of the t
 </div>
 <div class="paragraph">
 <p>Please note that characterising <em>all</em> modifications is a hopelessly complex, and unnecessary, task.
-We will, however, need to deal with what can be seen as the first of higher level modifications, if we want to be able to characterise the modifications going on in extremely important constructs such as iterators.</p>
+We will, however, need to deal with what can be seen as the first level of higher level modifications, if we want to be able to characterise the modifications going on in extremely important constructs such as iterators.</p>
 </div>
 <div class="sect2">
 <h3 id="_propagating_modifications">11.1. Propagating modifications</h3>
@@ -2488,8 +2488,8 @@ Using the <code>Consumer</code> we introduce a <code>forEach</code> method which
 </div>
 </div>
 <div class="paragraph">
-<p>The  <code>@NotModified</code> and  <code>@PropagateModification</code>  annotations are as described in the earlier section: from the point of view of <code>Circular</code>, no modifications occur because <code>accept</code> operates on fields of the implicitly immutable type <code>T</code>.
-By convention, the parameter <code>consumer</code> is not modified, so <code>Circular</code> can remain a container.</p>
+<p>From the point of view of <code>Circular</code>, no modifications occur because <code>accept</code> operates on fields of the implicitly immutable type <code>T</code>.
+No modifying methods are called on the parameter <code>consumer</code>, therefore it is not modified, and <code>Circular</code> can remain a container.</p>
 </div>
 <div class="paragraph">
 <p>How do we propagate the modification?
@@ -3556,8 +3556,10 @@ Once the final state is reached, the analyser guarantees that the temporary data
 </div>
 <div class="sect2">
 <h3 id="_utility_class_extensions_singleton">13.4. Utility class, extensions, singleton</h3>
+<div class="sect3">
+<h4 id="_utility_classes">13.4.1. Utility classes</h4>
 <div class="paragraph">
-<p>Using the simple and common definition:</p>
+<p>We use the simple and common definition:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -3582,15 +3584,18 @@ Once the final state is reached, the analyser guarantees that the temporary data
 </li>
 </ol>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_extension_classes">13.4.2. Extension classes</h4>
 <div class="paragraph">
 <p>In Java, many classes cannot easily be extended.
 Implementations of extensions typically use a utility class with the convention that the first parameter of the static method is the object of the extended method call:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Extension</span>(of=<span class="predefined-type">String</span><span class="type">[]</span>.class)
-<span class="type">class</span> <span class="class">ExtendString</span> {
-    <span class="directive">private</span> ExtendString() { <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">UnsupportedOperationException</span>(); }
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ExtensionClass</span>(of=<span class="predefined-type">String</span><span class="type">[]</span>.class)
+<span class="type">class</span> <span class="class">ExtendStringArray</span> {
+    <span class="directive">private</span> ExtendStringArray() { <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">UnsupportedOperationException</span>(); }
 
     <span class="directive">public</span> <span class="directive">static</span> <span class="predefined-type">String</span> weave(<span class="annotation">@NotModified</span> <span class="predefined-type">String</span><span class="type">[]</span> strings) {
         <span class="comment">// generate a new string by weaving the given strings (concat 1st chars, etc.)</span>
@@ -3603,18 +3608,94 @@ Implementations of extensions typically use a utility class with the convention 
 </div>
 </div>
 <div class="paragraph">
-<p>We use the following criteria to designate a utility class as an extension:</p>
+<p>We use the following criteria to designate a class as an extension:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Definition</strong>:</p>
+<p>A class is an extension class of a type <code>E</code> when</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the class is level 2 immutable;</p>
+</li>
+<li>
+<p>all non-private static methods with parameters must have a  <code>@NotNull</code>  1st parameter of type <code>E</code>, the type being extended.
+There must be at least one such method;</p>
+</li>
+<li>
+<p>non-private static methods without parameters must return a value of type <code>E</code>, and must also be  <code>@NotNull</code> .</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Static classes can be used to 'extend' closed types, as promoted by the Xtend project.
+<p>Static classes can be used to 'extend' closed types, as promoted by the <a href="https://www.eclipse.org/xtend/" target="_blank" rel="noopener">Xtend</a> project.
 Level 2 immutable classes can also play the role of extension facilitators, with the additional benefit of having some immutable data to be used as a context.</p>
+</div>
+<div class="paragraph">
+<p>Note that extension classes will often not be  <code>@Container</code> , since the first parameter will be  <code>@Modified</code>  in many cases.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_singleton_classes">13.4.3. Singleton classes</h4>
+<div class="paragraph">
+<p>A singleton class is a class which has a mechanism to limit the creation of instances to a maximum of one.
+The term 'singleton' then refers to this unique instance.</p>
+</div>
+<div class="paragraph">
+<p>The  <em>e2immu</em>  analyser currently recognizes two systems for limiting the number of instances:
+the creation of an instance in a single static field with a static constructor, and a precondition on a constructor using a private static boolean field.</p>
+</div>
+<div class="paragraph">
+<p>An example of the first strategy is:</p>
+</div>
+<div class="listingblock">
+<div class="title">First mechanism recognized to enforce a singleton</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Singleton</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">SingletonExample</span> {
+
+    <span class="directive">public</span> <span class="directive">static</span> <span class="directive">final</span> SingletonExample SINGLETON = <span class="keyword">new</span> SingletonExample(<span class="integer">123</span>);
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> k;
+
+    <span class="directive">private</span> SingletonExample(<span class="type">int</span> k) {
+        <span class="local-variable">this</span>.k = k;
+    }
+
+    <span class="directive">public</span> <span class="type">int</span> multiply(<span class="type">int</span> i) {
+        <span class="keyword">return</span> k * i;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example of the second strategy is:</p>
+</div>
+<div class="listingblock">
+<div class="title">Second mechanism recognized to enforce a singleton</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Singleton</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">SingletonWithPrecondition</span> {
+
+    <span class="directive">private</span> <span class="directive">final</span> <span class="type">int</span> k;
+    <span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> created;
+
+    <span class="directive">public</span> SingletonWithPrecondition(<span class="type">int</span> k) {
+        <span class="keyword">if</span> (created) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">UnsupportedOperationException</span>();
+        created = <span class="predefined-constant">true</span>;
+        <span class="local-variable">this</span>.k = k;
+    }
+
+    <span class="directive">public</span> <span class="type">int</span> multiply(<span class="type">int</span> i) {
+        <span class="keyword">return</span> k * i;
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3735,7 +3816,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-22 13:10:06 UTC
+Last updated 2021-04-22 13:10:04 UTC
 </div>
 </div>
 <style>
