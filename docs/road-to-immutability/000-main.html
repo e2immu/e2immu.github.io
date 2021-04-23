@@ -484,8 +484,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_propagating_modifications">11.1. Propagating modifications</a></li>
 <li><a href="#content-linking">11.2. Content linking</a></li>
 <li><a href="#_iterator_iterable_loops">11.3. Iterator, Iterable, loops</a></li>
-<li><a href="#_extending_implicitly_immutable_types">11.4. Extending implicitly immutable types</a></li>
-<li><a href="#_implications_for_immutability">11.5. Implications for immutability</a></li>
+<li><a href="#_independence_of_types">11.4. Independence of types</a></li>
+<li><a href="#_extending_implicitly_immutable_types">11.5. Extending implicitly immutable types</a></li>
 </ul>
 </li>
 <li><a href="#support-classes">12. Support classes</a>
@@ -2358,6 +2358,7 @@ The general case, where abstract types come in via a parameter, will be taken up
 Consider the following example:</p>
 </div>
 <div class="listingblock">
+<div class="title">Concrete implementation of suppliers</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">ApplyLocalFunctions</span> {
 
@@ -2405,6 +2406,101 @@ in <code>myIncrementer</code>, a modifying method is applied to <code>getAndIncr
 </div>
 <div class="paragraph">
 <p>Given that <code>ApplyLocalFunctions</code> is clearly  <code>@E1Container</code> , and the inner classes hold no other data, the inner classes are  <code>@E1Container</code>  as well.</p>
+</div>
+<div class="paragraph">
+<p>Now, if we move away from suppliers, but use consumers, we obtain:</p>
+</div>
+<div class="listingblock">
+<div class="title">Concrete implementation of consumers</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">ApplyLocalFunctions2</span> {
+
+    <span class="annotation">@Container</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">Counter</span> {
+        <span class="directive">private</span> <span class="type">int</span> counter;
+
+        <span class="annotation">@NotModified</span>
+        <span class="directive">public</span> <span class="type">int</span> getCounter() {
+            <span class="keyword">return</span> counter;
+        }
+
+        <span class="annotation">@Modified</span>
+        <span class="directive">public</span> <span class="type">int</span> increment() {
+            <span class="keyword">return</span> ++counter;
+        }
+    }
+
+    <span class="annotation">@NotModified</span>
+    <span class="directive">private</span> <span class="directive">final</span> Counter myCounter = <span class="keyword">new</span> Counter();
+
+    <span class="annotation">@E2Immutable</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> Consumer&lt;Counter&gt; incrementer = Counter::increment;
+
+    <span class="annotation">@E2Immutable</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> Consumer&lt;Counter&gt; explicitIncrementer = <span class="keyword">new</span> Consumer&lt;Counter&gt;() {
+        <span class="annotation">@Override</span>
+        <span class="annotation">@NotModified</span>
+        <span class="directive">public</span> <span class="type">void</span> accept(<span class="annotation">@Modified</span> Counter counter) { <i class="conum" data-value="2"></i><b>(2)</b>
+            counter.increment();
+        }
+    };
+
+    <span class="annotation">@E2Container</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> Consumer&lt;Counter&gt; printer = counter -&gt;
+        <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Have </span><span class="delimiter">&quot;</span></span> + counter.getCounter());
+
+    <span class="annotation">@E2Container</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> Consumer&lt;Counter&gt; explicitPrinter = <span class="keyword">new</span> Consumer&lt;Counter&gt;() {
+        <span class="annotation">@Override</span>
+        <span class="annotation">@NotModified</span>
+        <span class="directive">public</span> <span class="type">void</span> accept(<span class="annotation">@NotModified</span> Counter counter) { <i class="conum" data-value="4"></i><b>(4)</b>
+            <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Have </span><span class="delimiter">&quot;</span></span> + counter.getCounter());
+        }
+    };
+
+    <span class="directive">private</span> <span class="type">void</span> apply(<span class="annotation">@Container</span>(contract = <span class="predefined-constant">true</span>) Consumer&lt;Counter&gt; consumer) { <i class="conum" data-value="5"></i><b>(5)</b>
+        consumer.accept(myCounter);
+    }
+
+    <span class="directive">public</span> <span class="type">void</span> useApply() {
+        apply(printer); <span class="comment">// should be fine</span>
+        apply(explicitPrinter);
+        apply(incrementer); <span class="comment">// should cause an ERROR </span><i class="conum" data-value="6"></i><b>(6)</b>
+        apply(explicitIncrementer); <span class="comment">// should case an ERROR</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The anonymous type is static, has no fields, so is at least  <code>@E2Immutable</code> .
+It is not a container.
+This is clearly visible in the explicit variant&#8230;&#8203;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Here we see why <code>incrementer</code> is not a container: the method modifies its parameters.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Now, we have a container, because in the anonymous type does not modify its parameters.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Explicitly visible here in <code>explicitPrinter</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>If we insist that all parameters are containers, &#8230;&#8203;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>we can detect errors.
+Here, <code>incrementer</code> is not a container.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -2518,11 +2614,11 @@ In this example we will use <code>StringBuilder</code> as an archetypal modifiab
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>non-modifying method implies no modification on <code>c</code></td>
+<td>non-modifying method implies no modification on the implicitly immutable content of <code>c</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>parameter-modifying lambda propagates modification to <code>c</code></td>
+<td>parameter-modifying lambda propagates modification to `c&#8217;s implicitly immutable content</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -2656,17 +2752,7 @@ Because <code>e</code> is also content linked to <code>c</code>, the parameter <
 holds implicitly immutable content linked to the implicitly immutable content of the instance.</p>
 </div>
 <div class="paragraph">
-<p>Again, note that  <code>@Dependent2</code>  implies independence, because it deals with the implicitly immutable content:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p> <code>@Dependent1</code>  &#8658;  <code>@Independent</code> </p>
-</div>
-<div class="paragraph">
-<p> <code>@Dependent2</code>  &#8658;  <code>@Independent</code> </p>
-</div>
-</div>
+<p>Again, note that  <code>@Dependent2</code>  implies independence, because it deals with the implicitly immutable content.</p>
 </div>
 <div class="paragraph">
 <p>We&#8217;re now properly armed to see how a for-each loop can be defined as an iterator whose implicitly immutable content links to that of a container.</p>
@@ -2674,20 +2760,179 @@ holds implicitly immutable content linked to the implicitly immutable content of
 </div>
 <div class="sect2">
 <h3 id="_iterator_iterable_loops">11.3. Iterator, Iterable, loops</h3>
+<div class="paragraph">
+<p>Let us start with the simplest definition of an iterator, without <code>remove</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="title">Iterator, without remove</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">Iterator</span>&lt;T&gt; {
 
+    <span class="annotation">@Modified</span>
+    <span class="annotation">@Dependent1</span>
+    T next();
+
+    <span class="annotation">@Modified</span>
+    <span class="type">boolean</span> hasNext();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Either the <code>next</code> method, or the <code>hasNext</code> method, must make a change to the iterator, because it has to keep track of the next element.
+As such, we make both  <code>@Modified</code> .
+Following the discussion in the previous section, <code>next</code> is  <code>@Dependent1</code> , because it returns part of the implicitly immutable content held by the iterator.</p>
+</div>
+<div class="paragraph">
+<p>The interface <code>Iterable</code> is a supplier of iterators:</p>
+</div>
+<div class="listingblock">
+<div class="title">Iterable</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">interface</span> <span class="class">Iterable</span>&lt;T&gt; {
+
+    <span class="annotation">@NotModified</span>
+    <span class="annotation">@Dependent2</span>
+    <span class="predefined-type">Iterator</span>&lt;T&gt; iterator();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>First, creating an iterator should never be a modifying operation on a type.
+Typically, as we explore in the next section, it implies creating a sub-type, static or not, of the type implementing <code>Iterable</code>.
+Secondly, the iterator itself is independent of the fields of the implementing type, but has the ability to return its implicitly immutable content.</p>
+</div>
+<div class="paragraph">
+<p>The loop, on a variable <code>list</code> of type implementing <code>Iterable&lt;T&gt;</code>,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span>(T t: list) { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>can be interpreted as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Iterator</span>&lt;T&gt; iterator = list.iterator();
+<span class="keyword">while</span>(it.hasNext()) {
+    T t = it.next();
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The iterator is  <code>@Dependent2</code> .
+Via the <code>next</code> method, it content-links the implicitly immutable content of the <code>list</code> to <code>t</code>.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_extending_implicitly_immutable_types">11.4. Extending implicitly immutable types</h3>
+<h3 id="_independence_of_types">11.4. Independence of types</h3>
 <div class="paragraph">
-<p>With all abstract types on which only abstract methods without modification status are called.
-See the <a href="#support-lazy">Lazy</a> example.</p>
+<p>A concrete implementation of an iterator is a sub-type, static or not, of the iterable type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ImmutableArray</span>&lt;T&gt; <span class="directive">implements</span> <span class="predefined-type">Iterable</span>&lt;T&gt; {
+
+    <span class="annotation">@NotNull1</span>
+    <span class="directive">private</span> <span class="directive">final</span> T<span class="type">[]</span> elements;
+
+    <span class="annotation">@SuppressWarnings</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">unchecked</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">public</span> ImmutableArray(<span class="predefined-type">List</span>&lt;T&gt; input) {
+        <span class="local-variable">this</span>.elements = (T<span class="type">[]</span>) input.toArray();
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="annotation">@Independent</span>
+    <span class="directive">public</span> <span class="predefined-type">Iterator</span>&lt;T&gt; iterator() {
+        <span class="keyword">return</span> <span class="keyword">new</span> IteratorImpl();
+    }
+
+    <span class="annotation">@Container</span>
+    <span class="annotation">@Independent</span>
+    <span class="type">class</span> <span class="class">IteratorImpl</span> <span class="directive">implements</span> <span class="predefined-type">Iterator</span>&lt;T&gt; {
+        <span class="directive">private</span> <span class="type">int</span> i;
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">boolean</span> hasNext() {
+            <span class="keyword">return</span> i &lt; elements.length;
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="annotation">@NotNull</span>
+        <span class="directive">public</span> T next() {
+            <span class="keyword">return</span> elements[i++];
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For <code>ImmutableArray</code> to be level 2 immutable, the <code>iterator()</code> method must be independent of the field <code>elements</code>.
+How do we know this?
+The implementation type <code>IteratorImpl</code> cannot be level 2 immutable, because it needs to hold the state of the iterator.
+However, it should protect the fields of its enclosing type.
+We propose to add a definition for the independence of a type, very similar to the one enforced for level 2 immutability:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Definition</strong>: A type is <strong>independent</strong> when it follows these three rules:</p>
+</div>
+<div class="paragraph">
+<p><strong>Rule 1</strong>: All constructor parameters linked to fields, and therefore all fields linked to constructor parameters, must be  <code>@NotModified</code>;</p>
+</div>
+<div class="paragraph">
+<p><strong>Rule 2</strong>: All fields linked to constructor parameters must be either private or level 2 immutable;</p>
+</div>
+<div class="paragraph">
+<p><strong>Rule 3</strong>: All return values of methods must be independent of the fields linked to constructor parameters.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The static variant of <code>IteratorImpl</code> makes rules 1 and 2 more obvious:</p>
+</div>
+<div class="listingblock">
+<div class="title">Static iterator implementation</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">ImmutableArray</span>&lt;T&gt; <span class="directive">implements</span> <span class="predefined-type">Iterable</span>&lt;T&gt; {
+    ...
+
+    <span class="annotation">@Container</span>
+    <span class="annotation">@Independent</span>
+    <span class="directive">static</span> <span class="type">class</span> <span class="class">IteratorImpl</span> <span class="directive">implements</span> <span class="predefined-type">Iterator</span>&lt;T&gt; {
+        <span class="directive">private</span> <span class="type">int</span> i;
+        <span class="directive">private</span> <span class="directive">final</span> T<span class="type">[]</span> elements;
+
+        <span class="directive">private</span> IteratorImpl(T<span class="type">[]</span> elements) {
+            <span class="local-variable">this</span>.elements = elements;
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="directive">public</span> <span class="type">boolean</span> hasNext() {
+            <span class="keyword">return</span> i &lt; elements.length;
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="annotation">@NotNull</span>
+        <span class="directive">public</span> T next() {
+            <span class="keyword">return</span> elements[i++];
+        }
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_implications_for_immutability">11.5. Implications for immutability</h3>
+<h3 id="_extending_implicitly_immutable_types">11.5. Extending implicitly immutable types</h3>
 <div class="paragraph">
-<p>This leads us to the question of determining the static immutability type of abstract types.
-We need this information for fields of abstract type, because of the definition of immutability of the <mark>TODO</mark></p>
+<p>Looking at the <a href="#support-lazy">Lazy</a> example, which immutability properties should we give the field <code>Supplier&lt;T&gt; supplier</code>?
+The type <code>T</code> is implicitly immutable in <code>Lazy</code>, as it can be replaced by <code>java.lang.Object</code>.
+We propose to add abstract types, where <em>only</em> the abstract method is called, to the set of implicitly immutable types of the enclosing type.</p>
 </div>
 </div>
 </div>
@@ -2966,18 +3211,12 @@ This connection can be implemented using the techniques described in <a href="#p
 <h3 id="support-lazy">12.6. Lazy</h3>
 <div class="paragraph">
 <p><code>Lazy</code> implements a lazily-initialized immutable field, of unbound generic type <code>T</code>.
-As such, it is eventually a level 2 immutable type.</p>
+Properly implemented, it is an eventually level 2 immutable type.</p>
 </div>
 <div class="listingblock">
 <div class="title">Code fragment: Lazy</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">package</span> <span class="namespace">org.e2immu.analyser.util</span>;
-
-<span class="keyword">import</span> <span class="include">org.e2immu.annotation</span>.*;
-<span class="keyword">import</span> <span class="include">java.util.Objects</span>;
-<span class="keyword">import</span> <span class="include">java.util.function.Supplier</span>;
-
-<span class="annotation">@E2Container</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">t</span><span class="delimiter">&quot;</span></span>)
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">t</span><span class="delimiter">&quot;</span></span>)
 <span class="directive">public</span> <span class="type">class</span> <span class="class">Lazy</span>&lt;T&gt; {
 
     <span class="annotation">@NotNull1</span> <span class="annotation">@PropagateModification</span> <span class="annotation">@Dependent1</span>
@@ -3819,7 +4058,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-23 10:49:43 UTC
+Last updated 2021-04-23 19:46:51 UTC
 </div>
 </div>
 <style>
