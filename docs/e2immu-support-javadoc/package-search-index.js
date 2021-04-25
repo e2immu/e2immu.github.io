@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.e2immu.annotatedapi"},{"l":"org.e2immu.annotation"},{"l":"org.e2immu.support"}];updateSearchResults();
