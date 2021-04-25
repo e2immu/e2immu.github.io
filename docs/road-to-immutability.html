@@ -3437,39 +3437,39 @@ This is very standard.</p>
 <p>Calling a parameter marked  <code>@NotNull</code>  will result in a null pointer exception at some point during the object life-cycle.</p>
 </li>
 <li>
-<p>A  <code>@NotNull</code>  or  <code>@Nullable</code>  annotation on a field is a consequence of nullability computations on the assignments to the field.</p>
+<p>A  <code>@NotNull</code>  or  <code>@Nullable</code>  annotation on a field is a consequence of not-null computations on the assignments to the field.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>To be able to compute the nullability of parameters, we must specify some sort of flow or direction to break chicken-and-egg situations.
+<p>To be able to compute the not-null of parameters, we must specify some sort of flow or direction to break chicken-and-egg situations.
 We compute in the following order:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>context nullability of parameters.</p>
+<p>context not-null of parameters.</p>
 </li>
 <li>
-<p>field nullability</p>
+<p>field not-null</p>
 </li>
 <li>
-<p>external nullability of parameters linked to fields</p>
+<p>external not-null of parameters linked to fields</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
 <p>First, we examine the parameter&#8217;s usage in the method.
-Its occurrence in a not-null context directly influences the nullability of the parameter.</p>
+Its occurrence in a not-null context directly influences the not-null of the parameter.</p>
 </div>
 <div class="sect3">
-<h4 id="_higher_order_nullability">13.1.1. Higher order nullability</h4>
+<h4 id="_higher_order_not_null">13.1.1. Higher order not-null</h4>
 <div class="paragraph">
 <p>We use the annotation  <code>@NotNull1</code>  to indicate that none of the object&#8217;s fields can be null.
 This concept is useful when working with collections.</p>
 </div>
 <div class="paragraph">
-<p>Consider the following nullability annotations on the <code>List</code> API:</p>
+<p>Consider the following  <code>@NotNull</code>  variants on the <code>List</code> API:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4058,7 +4058,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-23 19:46:51 UTC
+Last updated 2021-04-25 08:28:10 UTC
 </div>
 </div>
 <style>

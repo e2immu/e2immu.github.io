@@ -452,7 +452,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_installing_e2immu">2. Installing e2immu</a>
 <ul class="sectlevel2">
 <li><a href="#_obtaining_the_analyser">2.1. Obtaining the analyser</a></li>
-<li><a href="#_building_the_analyser">2.2. Building the analyser</a></li>
+<li><a href="#_the_support_jar">2.2. The support jar</a></li>
+<li><a href="#_the_analyser">2.3. The analyser</a></li>
+<li><a href="#_the_annotation_store">2.4. The annotation store</a></li>
+<li><a href="#_the_intellij_plugin">2.5. The IntelliJ plugin</a></li>
 </ul>
 </li>
 <li><a href="#_using_e2immu"><em>Using e2immu</em></a></li>
@@ -460,8 +463,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_basic_use">3.1. Basic use</a></li>
 <li><a href="#_full_flow">3.2. Full flow</a></li>
-<li><a href="#_the_e2immu_analyser_command_line">3.3. The e2immu analyser command line</a></li>
-<li><a href="#_using_the_gradle_plugin">3.4. Using the Gradle plugin</a></li>
+<li><a href="#_the_analysers_command_line">3.3. The analyser&#8217;s command line</a></li>
+<li><a href="#_the_gradle_plugin">3.4. The Gradle plugin</a></li>
 </ul>
 </li>
 <li><a href="#_annotated_apis">4. Annotated APIs</a>
@@ -476,152 +479,153 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#inheritance-rules">5.1. Inheritance rules of annotations</a></li>
 </ul>
 </li>
+<li><a href="#_the_annotation_store_as_a_demo_project">6. The annotation store as a demo project</a></li>
 <li><a href="#_reference"><em>Reference</em></a></li>
-<li><a href="#_concepts">6. Concepts</a>
+<li><a href="#_concepts">7. Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#concept-modified">6.1. Modification</a></li>
-<li><a href="#concept-containers">6.2. Containers</a></li>
-<li><a href="#concept-linking">6.3. Linking and independence</a></li>
-<li><a href="#_immutability">6.4. Immutability</a>
+<li><a href="#concept-modified">7.1. Modification</a></li>
+<li><a href="#concept-containers">7.2. Containers</a></li>
+<li><a href="#concept-linking">7.3. Linking and independence</a></li>
+<li><a href="#_immutability">7.4. Immutability</a>
 <ul class="sectlevel3">
-<li><a href="#concept-e1immutable">6.4.1. Level 1 immutable</a></li>
-<li><a href="#concept-implicitly-immutable">6.4.2. Implicitly immutable types</a></li>
-<li><a href="#concept-e2immutable">6.4.3. Level 2 immutable</a></li>
-<li><a href="#technical-dynamic-type-annotations">6.4.4. Dynamic type annotations</a></li>
+<li><a href="#concept-e1immutable">7.4.1. Level 1 immutable</a></li>
+<li><a href="#concept-implicitly-immutable">7.4.2. Implicitly immutable types</a></li>
+<li><a href="#concept-e2immutable">7.4.3. Level 2 immutable</a></li>
+<li><a href="#technical-dynamic-type-annotations">7.4.4. Dynamic type annotations</a></li>
 </ul>
 </li>
-<li><a href="#concept-eventual">6.5. Eventual immutability</a></li>
-<li><a href="#concept-higher-order-modification">6.6. Higher-order modifications</a></li>
-<li><a href="#_miscellaneous">6.7. Miscellaneous</a>
+<li><a href="#concept-eventual">7.5. Eventual immutability</a></li>
+<li><a href="#concept-higher-order-modification">7.6. Higher-order modifications</a></li>
+<li><a href="#_miscellaneous">7.7. Miscellaneous</a>
 <ul class="sectlevel3">
-<li><a href="#concept-constant">6.7.1. Constants</a></li>
-<li><a href="#concept-statement-time">6.7.2. Statement time</a></li>
-<li><a href="#concept-singleton">6.7.3. Singleton classes</a></li>
-<li><a href="#concept-utility-class">6.7.4. Utility classes</a></li>
-<li><a href="#concept-extension-class">6.7.5. Extension classes</a></li>
-<li><a href="#concept-finalizer">6.7.6. Finalizers</a></li>
+<li><a href="#concept-constant">7.7.1. Constants</a></li>
+<li><a href="#concept-statement-time">7.7.2. Statement time</a></li>
+<li><a href="#concept-singleton">7.7.3. Singleton classes</a></li>
+<li><a href="#concept-utility-class">7.7.4. Utility classes</a></li>
+<li><a href="#concept-extension-class">7.7.5. Extension classes</a></li>
+<li><a href="#concept-finalizer">7.7.6. Finalizers</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_overview_of_annotations">7. Overview of annotations</a>
+<li><a href="#_overview_of_annotations">8. Overview of annotations</a>
 <ul class="sectlevel2">
-<li><a href="#_annotation_modes">7.1. Annotation modes</a></li>
-<li><a href="#_inheritance_of_annotations">7.2. Inheritance of annotations</a></li>
-<li><a href="#_list_of_annotations">7.3. List of annotations</a>
+<li><a href="#_annotation_modes">8.1. Annotation modes</a></li>
+<li><a href="#_inheritance_of_annotations">8.2. Inheritance of annotations</a></li>
+<li><a href="#_list_of_annotations">8.3. List of annotations</a>
 <ul class="sectlevel3">
-<li><a href="#allowsInterrupt-annotation">7.3.1. @AllowsInterrupt</a></li>
-<li><a href="#beforeMark-annotation">7.3.2. @BeforeMark</a></li>
-<li><a href="#constant-annotation">7.3.3. @Constant</a></li>
-<li><a href="#container-annotation">7.3.4. @Container</a></li>
-<li><a href="#dependent-annotation">7.3.5. @Dependent</a></li>
-<li><a href="#dependent1-annotation">7.3.6. @Dependent1</a></li>
-<li><a href="#dependent2-annotation">7.3.7. @Dependent2</a></li>
-<li><a href="#e1container-annotation">7.3.8. @E1Container</a></li>
-<li><a href="#e1immutable-annotation">7.3.9. @E1Immutable</a></li>
-<li><a href="#e2container-annotation">7.3.10. @E2Container</a></li>
-<li><a href="#e2immutable-annotation">7.3.11. @E2Immutable</a></li>
-<li><a href="#extensionClass-annotation">7.3.12. @ExtensionClass</a></li>
-<li><a href="#final-annotation">7.3.13. @Final</a></li>
-<li><a href="#_finalizer">7.3.14. @Finalizer</a></li>
-<li><a href="#_fluent">7.3.15. @Fluent</a></li>
-<li><a href="#_identity">7.3.16. @Identity</a></li>
-<li><a href="#_ignoremodifications">7.3.17. @IgnoreModifications</a></li>
-<li><a href="#_independent">7.3.18. @Independent</a></li>
-<li><a href="#_linked">7.3.19. @Linked</a></li>
-<li><a href="#_linked1">7.3.20. @Linked1</a></li>
-<li><a href="#_mark">7.3.21. @Mark</a></li>
-<li><a href="#modified-annotation">7.3.22. @Modified</a></li>
-<li><a href="#modified1-annotation">7.3.23. @Modified1</a></li>
-<li><a href="#mutableModifiesArguments-annotation">7.3.24. @MutableModifiesArguments</a></li>
-<li><a href="#notModified-annotation">7.3.25. @NotModified</a></li>
-<li><a href="#notModified1-annotation">7.3.26. @NotModified1</a></li>
-<li><a href="#notNull-annotation">7.3.27. @NotNull</a></li>
-<li><a href="#notNull1-annotation">7.3.28. @NotNull1</a></li>
-<li><a href="#notNull2-annotation">7.3.29. @NotNull2</a></li>
-<li><a href="#nullable-annotation">7.3.30. @Nullable</a></li>
-<li><a href="#only-annotation">7.3.31. @Only</a></li>
-<li><a href="#propagateModification-annotation">7.3.32. @PropagateModification</a></li>
-<li><a href="#singleton-annotation">7.3.33. @Singleton</a></li>
-<li><a href="#testMark-annotation">7.3.34. @TestMark</a></li>
-<li><a href="#utilityClass-annotation">7.3.35. @UtilityClass</a></li>
-<li><a href="#variable-annotation">7.3.36. @Variable</a></li>
+<li><a href="#allowsInterrupt-annotation">8.3.1. @AllowsInterrupt</a></li>
+<li><a href="#beforeMark-annotation">8.3.2. @BeforeMark</a></li>
+<li><a href="#constant-annotation">8.3.3. @Constant</a></li>
+<li><a href="#container-annotation">8.3.4. @Container</a></li>
+<li><a href="#dependent-annotation">8.3.5. @Dependent</a></li>
+<li><a href="#dependent1-annotation">8.3.6. @Dependent1</a></li>
+<li><a href="#dependent2-annotation">8.3.7. @Dependent2</a></li>
+<li><a href="#e1container-annotation">8.3.8. @E1Container</a></li>
+<li><a href="#e1immutable-annotation">8.3.9. @E1Immutable</a></li>
+<li><a href="#e2container-annotation">8.3.10. @E2Container</a></li>
+<li><a href="#e2immutable-annotation">8.3.11. @E2Immutable</a></li>
+<li><a href="#extensionClass-annotation">8.3.12. @ExtensionClass</a></li>
+<li><a href="#final-annotation">8.3.13. @Final</a></li>
+<li><a href="#_finalizer">8.3.14. @Finalizer</a></li>
+<li><a href="#_fluent">8.3.15. @Fluent</a></li>
+<li><a href="#_identity">8.3.16. @Identity</a></li>
+<li><a href="#_ignoremodifications">8.3.17. @IgnoreModifications</a></li>
+<li><a href="#_independent">8.3.18. @Independent</a></li>
+<li><a href="#_linked">8.3.19. @Linked</a></li>
+<li><a href="#_linked1">8.3.20. @Linked1</a></li>
+<li><a href="#_mark">8.3.21. @Mark</a></li>
+<li><a href="#modified-annotation">8.3.22. @Modified</a></li>
+<li><a href="#modified1-annotation">8.3.23. @Modified1</a></li>
+<li><a href="#mutableModifiesArguments-annotation">8.3.24. @MutableModifiesArguments</a></li>
+<li><a href="#notModified-annotation">8.3.25. @NotModified</a></li>
+<li><a href="#notModified1-annotation">8.3.26. @NotModified1</a></li>
+<li><a href="#notNull-annotation">8.3.27. @NotNull</a></li>
+<li><a href="#notNull1-annotation">8.3.28. @NotNull1</a></li>
+<li><a href="#notNull2-annotation">8.3.29. @NotNull2</a></li>
+<li><a href="#nullable-annotation">8.3.30. @Nullable</a></li>
+<li><a href="#only-annotation">8.3.31. @Only</a></li>
+<li><a href="#propagateModification-annotation">8.3.32. @PropagateModification</a></li>
+<li><a href="#singleton-annotation">8.3.33. @Singleton</a></li>
+<li><a href="#testMark-annotation">8.3.34. @TestMark</a></li>
+<li><a href="#utilityClass-annotation">8.3.35. @UtilityClass</a></li>
+<li><a href="#variable-annotation">8.3.36. @Variable</a></li>
 </ul>
 </li>
-<li><a href="#annotation-hierarchy">7.4. Relations between annotations</a>
+<li><a href="#annotation-hierarchy">8.4. Relations between annotations</a>
 <ul class="sectlevel3">
-<li><a href="#_on_types">7.4.1. On types</a></li>
-<li><a href="#_on_fields">7.4.2. On fields</a></li>
-<li><a href="#_on_constructors">7.4.3. On constructors</a></li>
-<li><a href="#_on_methods">7.4.4. On methods</a></li>
-<li><a href="#_on_parameters">7.4.5. On parameters</a></li>
-<li><a href="#nullability">7.4.6. Nullability</a></li>
-<li><a href="#_eventually_and_effectively_immutable">7.4.7. Eventually and effectively immutable</a></li>
+<li><a href="#_on_types">8.4.1. On types</a></li>
+<li><a href="#_on_fields">8.4.2. On fields</a></li>
+<li><a href="#_on_constructors">8.4.3. On constructors</a></li>
+<li><a href="#_on_methods">8.4.4. On methods</a></li>
+<li><a href="#_on_parameters">8.4.5. On parameters</a></li>
+<li><a href="#nullability">8.4.6. Nullability</a></li>
+<li><a href="#_eventually_and_effectively_immutable">8.4.7. Eventually and effectively immutable</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_list_of_errors_and_warnings">8. List of errors and warnings</a>
+<li><a href="#_list_of_errors_and_warnings">9. List of errors and warnings</a>
 <ul class="sectlevel2">
-<li><a href="#_opinionated">8.1. Opinionated</a></li>
-<li><a href="#evaluation-errors">8.2. Evaluation</a></li>
-<li><a href="#_empty_unused">8.3. Empty, unused</a></li>
-<li><a href="#_verifying_annotations">8.4. Verifying annotations</a></li>
-<li><a href="#_immutability_2">8.5. Immutability</a></li>
-<li><a href="#_odds_and_ends">8.6. Odds and ends</a></li>
+<li><a href="#_opinionated">9.1. Opinionated</a></li>
+<li><a href="#evaluation-errors">9.2. Evaluation</a></li>
+<li><a href="#_empty_unused">9.3. Empty, unused</a></li>
+<li><a href="#_verifying_annotations">9.4. Verifying annotations</a></li>
+<li><a href="#_immutability_2">9.5. Immutability</a></li>
+<li><a href="#_odds_and_ends">9.6. Odds and ends</a></li>
 </ul>
 </li>
 <li><a href="#_technical"><em>Technical</em></a></li>
-<li><a href="#_the_analyser">9. The analyser</a>
+<li><a href="#_the_analyser_2">10. The analyser</a>
 <ul class="sectlevel2">
-<li><a href="#_inspection">9.1. Inspection</a></li>
-<li><a href="#_resolution">9.2. Resolution</a></li>
-<li><a href="#_analyser_implementation">9.3. Analyser implementation</a>
+<li><a href="#_inspection">10.1. Inspection</a></li>
+<li><a href="#_resolution">10.2. Resolution</a></li>
+<li><a href="#_analyser_implementation">10.3. Analyser implementation</a>
 <ul class="sectlevel3">
-<li><a href="#_code_structure">9.3.1. Code structure</a></li>
-<li><a href="#_circular_dependencies">9.3.2. Circular dependencies</a></li>
-<li><a href="#_nested_classes">9.3.3. Nested classes</a></li>
-<li><a href="#_modification_of_a_field">9.3.4. Modification of a field</a></li>
-<li><a href="#_modification_of_a_method">9.3.5. Modification of a method</a></li>
-<li><a href="#_condition_and_state">9.3.6. Condition and state</a></li>
-<li><a href="#_computation_of_mark_only">9.3.7. Computation of @Mark, @Only</a></li>
-<li><a href="#_statement_analyser">9.3.8. Statement analyser</a></li>
-<li><a href="#_post_and_pre_conditions">9.3.9. Post- and pre-conditions</a></li>
-<li><a href="#_nullity_of_fields">9.3.10. Nullity of fields</a></li>
-<li><a href="#_loop_variables_overview">9.3.11. Loop variables overview</a></li>
-<li><a href="#_general_property_computation">9.3.12. General property computation</a></li>
-<li><a href="#_not_null_property">9.3.13. Not-null property</a></li>
-<li><a href="#_modification_property">9.3.14. Modification property</a></li>
+<li><a href="#_code_structure">10.3.1. Code structure</a></li>
+<li><a href="#_circular_dependencies">10.3.2. Circular dependencies</a></li>
+<li><a href="#_nested_classes">10.3.3. Nested classes</a></li>
+<li><a href="#_modification_of_a_field">10.3.4. Modification of a field</a></li>
+<li><a href="#_modification_of_a_method">10.3.5. Modification of a method</a></li>
+<li><a href="#_condition_and_state">10.3.6. Condition and state</a></li>
+<li><a href="#_computation_of_mark_only">10.3.7. Computation of @Mark, @Only</a></li>
+<li><a href="#_statement_analyser">10.3.8. Statement analyser</a></li>
+<li><a href="#_post_and_pre_conditions">10.3.9. Post- and pre-conditions</a></li>
+<li><a href="#_nullity_of_fields">10.3.10. Nullity of fields</a></li>
+<li><a href="#_loop_variables_overview">10.3.11. Loop variables overview</a></li>
+<li><a href="#_general_property_computation">10.3.12. General property computation</a></li>
+<li><a href="#_not_null_property">10.3.13. Not-null property</a></li>
+<li><a href="#_modification_property">10.3.14. Modification property</a></li>
 </ul>
 </li>
-<li><a href="#_variables">9.4. Variables</a>
+<li><a href="#_variables">10.4. Variables</a>
 <ul class="sectlevel3">
-<li><a href="#_variable_fields">9.4.1. Variable fields</a></li>
-<li><a href="#_different_variable_states">9.4.2. Different variable states</a></li>
-<li><a href="#_data_stored_for_a_variable">9.4.3. Data stored for a variable</a></li>
-<li><a href="#_tests_basics_0">9.4.4. Tests: Basics_0</a></li>
-<li><a href="#_tests_basics_1">9.4.5. Tests: Basics_1</a></li>
-<li><a href="#_tests_modification_0">9.4.6. Tests: Modification_0</a></li>
-<li><a href="#_breaking_delays">9.4.7. Breaking delays</a></li>
+<li><a href="#_variable_fields">10.4.1. Variable fields</a></li>
+<li><a href="#_different_variable_states">10.4.2. Different variable states</a></li>
+<li><a href="#_data_stored_for_a_variable">10.4.3. Data stored for a variable</a></li>
+<li><a href="#_tests_basics_0">10.4.4. Tests: Basics_0</a></li>
+<li><a href="#_tests_basics_1">10.4.5. Tests: Basics_1</a></li>
+<li><a href="#_tests_modification_0">10.4.6. Tests: Modification_0</a></li>
+<li><a href="#_breaking_delays">10.4.7. Breaking delays</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_supporting_tools">10. Supporting tools</a>
+<li><a href="#_supporting_tools">11. Supporting tools</a>
 <ul class="sectlevel2">
-<li><a href="#_gradle_plugin">10.1. Gradle plugin</a></li>
-<li><a href="#_key_value_store">10.2. Key-value store</a></li>
-<li><a href="#_intellij_idea_plugin">10.3.  IntelliJ IDEA  plugin</a>
+<li><a href="#_gradle_plugin">11.1. Gradle plugin</a></li>
+<li><a href="#_key_value_store">11.2. Key-value store</a></li>
+<li><a href="#_intellij_idea_plugin">11.3.  IntelliJ IDEA  plugin</a>
 <ul class="sectlevel3">
-<li><a href="#visual-objectives">10.3.1. Visual objectives</a></li>
-<li><a href="#_information_flow">10.3.2. Information flow</a></li>
-<li><a href="#_implementation">10.3.3. Implementation</a></li>
+<li><a href="#visual-objectives">11.3.1. Visual objectives</a></li>
+<li><a href="#_information_flow">11.3.2. Information flow</a></li>
+<li><a href="#_implementation">11.3.3. Implementation</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#_where_next"><em>Where next?</em></a></li>
-<li><a href="#_copyright_and_license">11. Copyright and License</a></li>
+<li><a href="#_copyright_and_license">12. Copyright and License</a></li>
 </ul>
 </div>
 </div>
@@ -644,11 +648,142 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_obtaining_the_analyser">2.1. Obtaining the analyser</h3>
-
+<div class="paragraph">
+<p>For now, the analyser&#8217;s binaries have not been uploaded to a central jar repository (like MavenCentral) yet.
+Please clone the following projects from GitHub:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/e2immu/e2immu-support" target="_blank" rel="noopener">e2immu-support</a>, a small jar containing the annotations and some support classes</p>
+</li>
+<li>
+<p><a href="https://github.com/e2immu/e2immu" target="_blank" rel="noopener">e2immu</a>, the analyser</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The support jar has been compiled with the Java 10+ API; this can easily be stripped down to Java 8 if required.
+The analyser makes extensive use of the Java 16 API <em>and</em> language features.</p>
+</div>
+<div class="paragraph">
+<p>The IntelliJ plugin is still in its infancy.
+It is not yet available in IntelliJ&#8217;s plugin repository.
+To experiment with it, clone</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/e2immu/e2immu-annotation-store" target="_blank" rel="noopener">e2immu-annotation-store</a>, the annotation store</p>
+</li>
+<li>
+<p><a href="https://github.com/e2immu/e2immu-intellij-plugin" target="_blank" rel="noopener">e2immu-intellij-plugin</a>, the IntelliJ plugin</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_building_the_analyser">2.2. Building the analyser</h3>
-
+<h3 id="_the_support_jar">2.2. The support jar</h3>
+<div class="paragraph">
+<p>The annotations and support classes can be compiled with any JDK providing the Java 10+ API.
+Execute:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew publishToMavenLocal</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to make the jar, with reference <code>org.e2immu:e2immu-support:0.2.0</code>, locally available.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_analyser">2.3. The analyser</h3>
+<div class="paragraph">
+<p>Please ensure you have at least a Java 16 JDK.
+Gradle 7.0 (lower versions do not play nice with Java 16) is provided via the Gradle wrapper.</p>
+</div>
+<div class="paragraph">
+<p>To make the jars available, publish them to your local Maven repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew publishToMavenLocal</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This pushes the following jars to your local Maven repository:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.e2immu:analyser:0.1.2</code>, the analyser</p>
+</li>
+<li>
+<p><code>org.e2immu:analyser-cli:0.1.2</code>, a small library extending the analyser with a command line</p>
+</li>
+<li>
+<p><code>org.e2immu:analyser-store-uploader:0.1.2</code>, a small library to upload annotations to the annotation store</p>
+</li>
+<li>
+<p><code>org.e2immu:gradle-plugin:0.1.2</code>, the Gradle plugin which you&#8217;ll need to run the analyser in a practical setting</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Of course, version numbers may have changed when you read this.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_annotation_store">2.4. The annotation store</h3>
+<div class="paragraph">
+<p>The annotation store is a separate project, consisting of two Java classes.
+Build it with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew build</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and start the annotation store with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew run</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>build.gradle</code> file provides support to change the port, in case 8281 is already occupied.
+For example,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew run -De2immu-port=9999</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will start the annotation store listening to port 9999.
+Please make sure this change of port is reflected in the configuration of the IDE plugin, which also needs to connect to the annotation store.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_intellij_plugin">2.5. The IntelliJ plugin</h3>
+<div class="paragraph">
+<p>The plugin is compiled with Java 8 language features only.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+At this point (April 2021), the analyser still crashes on the sources of the plugin!
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -668,7 +803,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="basic-use" class="imageblock">
 <div class="content">
-<img src="/home/runner/work/e2immu-documentation/e2immu-documentation/src/docs/asciidoc/images/e2immu_basic_use.png" alt="e2immu basic use">
+<img src="../images/e2immu_basic_use.png" alt="e2immu basic use">
 </div>
 <div class="title">Figure 1. Basic use of e2immu</div>
 </div>
@@ -736,13 +871,13 @@ This flow is depicted in <a href="#figure-annotated-xml-via-gradle">Add annotati
 </div>
 <div id="figure-fast-turnaround" class="imageblock">
 <div class="content">
-<img src="/home/runner/work/e2immu-documentation/e2immu-documentation/src/docs/asciidoc/images/e2immu_fast_turnaround.png" alt="e2immu fast turnaround">
+<img src="../images/e2immu_fast_turnaround.png" alt="e2immu fast turnaround">
 </div>
 <div class="title">Figure 2. Fast turnaround use of e2immu</div>
 </div>
 <div id="figure-annotated-xml-via-gradle" class="imageblock">
 <div class="content">
-<img src="/home/runner/work/e2immu-documentation/e2immu-documentation/src/docs/asciidoc/images/e2immu_annotated_xml_via_gradle.png" alt="e2immu annotated xml via gradle">
+<img src="../images/e2immu_annotated_xml_via_gradle.png" alt="e2immu annotated xml via gradle">
 </div>
 <div class="title">Figure 3. Add annotation.xml files to your jar</div>
 </div>
@@ -770,7 +905,7 @@ Their main advantage is clarity: all types, fields, and methods <em>relevant to 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_the_e2immu_analyser_command_line">3.3. The e2immu analyser command line</h3>
+<h3 id="_the_analysers_command_line">3.3. The analyser&#8217;s command line</h3>
 <div class="paragraph">
 <p>The input to the analyser is largely controlled by the following primary locations</p>
 </div>
@@ -891,7 +1026,7 @@ The wildcard <code>java.</code> includes <code>java.lang</code>, <code>java.io</
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_the_gradle_plugin">3.4. Using the Gradle plugin</h3>
+<h3 id="_the_gradle_plugin">3.4. The Gradle plugin</h3>
 <div class="paragraph">
 <p>The easiest way to use the analyser is via the Gradle plugin.</p>
 </div>
@@ -1185,30 +1320,125 @@ An interface that extends another interface does not inherit the annotations fro
 </div>
 </div>
 <div class="sect1">
+<h2 id="_the_annotation_store_as_a_demo_project">6. The annotation store as a demo project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next to playing a role in the communication between the IntelliJ plugin and the analyser, it serves as a demo project for the analyser.</p>
+</div>
+<div class="paragraph">
+<p>In <code>build.gradle</code>, the relevant lines are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">plugins {
+    ...
+    id <span class="string"><span class="delimiter">'</span><span class="content">org.e2immu.analyser</span><span class="delimiter">'</span></span>
+}
+...
+e2immu {
+    debug = <span class="string"><span class="delimiter">&quot;</span><span class="content">OUTPUT</span><span class="delimiter">&quot;</span></span> <span class="comment">//INSPECT,BYTECODE_INSPECTOR,ANALYSER,DELAYED&quot;</span>
+    jmods = <span class="string"><span class="delimiter">'</span><span class="content">java.base.jmod,java.logging.jmod</span><span class="delimiter">'</span></span>
+    sourcePackages = <span class="string"><span class="delimiter">&quot;</span><span class="content">org.e2immu.kvstore</span><span class="delimiter">&quot;</span></span>
+    readAnnotatedAPIPackages = <span class="string"><span class="delimiter">&quot;</span><span class="content">org.e2immu.kvstoreaapi</span><span class="delimiter">&quot;</span></span>
+    writeAnnotationXML = <span class="predefined-constant">true</span>
+    writeAnnotationXMLPackages = <span class="string"><span class="delimiter">&quot;</span><span class="content">org.e2immu.</span><span class="delimiter">&quot;</span></span>
+    upload = <span class="predefined-constant">true</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because the analyser, as a Gradle plugin, is only available in your local Maven repository, the following lines need to be present in <code>settings.gradle</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">pluginManagement {
+    repositories {
+        mavenLocal()
+        ...
+    }
+    resolutionStrategy {
+        eachPlugin {
+            <span class="keyword">if</span> (requested.id.namespace == <span class="string"><span class="delimiter">'</span><span class="content">org.e2immu</span><span class="delimiter">'</span></span>) {
+                useModule(<span class="string"><span class="delimiter">'</span><span class="content">org.e2immu:gradle-plugin:0.1.2</span><span class="delimiter">'</span></span>)
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run the analyser:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew e2immu-analyser</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should "fail" with 2 errors and 4 warnings.
+If you have not started an annotation store (yet), you should also see an <code>IOException</code> warning you that uploading to the annotation store failed.</p>
+</div>
+<div class="paragraph">
+<p>The <code>debug</code> options to <code>e2immu</code> listed above activate only the <code>OUTPUT</code> debug logger, which writes out the sources enriched with all annotations computed by the analyser.
+Run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew e2immu-analyser --debug</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to find them, obviously among a lot of other debug output.</p>
+</div>
+<div class="paragraph">
+<p>Next to the <code>build.gradle</code> build file, there is a second one, <code>build-api.gradle</code>.
+It provides two tasks, <code>runIoVertxInspected</code> and <code>runIoVertxUsage</code>, which run the analyser via its command line interpreter rather than the Gradle plugin.
+Their primary goal is to produce templates for annotated API files.
+The former contains the option <code>--write-annotated-api=INSPECTED</code>, the latter the option <code>--write-annotated-api=USAGE</code>.</p>
+</div>
+<div class="paragraph">
+<p>Executing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">./gradlew -b build-api.gradle runIoVertxUsage</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>runs the analyser without annotated API sources, which produces a lot of warnings, but also writes template files in the folder:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="shell script">build/annotatedAPIs/org/e2immu/kvstoreaapi/</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_reference"><em>Reference</em></h2>
 <div class="sectionbody">
 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_concepts">6. Concepts</h2>
+<h2 id="_concepts">7. Concepts</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="concept-modified">6.1. Modification</h3>
+<h3 id="concept-modified">7.1. Modification</h3>
 
 </div>
 <div class="sect2">
-<h3 id="concept-containers">6.2. Containers</h3>
+<h3 id="concept-containers">7.2. Containers</h3>
 
 </div>
 <div class="sect2">
-<h3 id="concept-linking">6.3. Linking and independence</h3>
+<h3 id="concept-linking">7.3. Linking and independence</h3>
 
 </div>
 <div class="sect2">
-<h3 id="_immutability">6.4. Immutability</h3>
+<h3 id="_immutability">7.4. Immutability</h3>
 <div class="sect3">
-<h4 id="concept-e1immutable">6.4.1. Level 1 immutable</h4>
+<h4 id="concept-e1immutable">7.4.1. Level 1 immutable</h4>
 <div class="paragraph">
 <p>Terminology used:</p>
 </div>
@@ -1235,7 +1465,7 @@ This transition is best understood as the removal of a number of methods, marked
 </div>
 </div>
 <div class="sect3">
-<h4 id="concept-implicitly-immutable">6.4.2. Implicitly immutable types</h4>
+<h4 id="concept-implicitly-immutable">7.4.2. Implicitly immutable types</h4>
 <div class="paragraph">
 <p>Terminology:</p>
 </div>
@@ -1249,7 +1479,7 @@ This transition is best understood as the removal of a number of methods, marked
 </div>
 </div>
 <div class="sect3">
-<h4 id="concept-e2immutable">6.4.3. Level 2 immutable</h4>
+<h4 id="concept-e2immutable">7.4.3. Level 2 immutable</h4>
 <div class="paragraph">
 <p>A type is level 2 immutable when</p>
 </div>
@@ -1275,22 +1505,22 @@ This transition is best understood as the removal of a number of methods, marked
 </div>
 </div>
 <div class="sect3">
-<h4 id="technical-dynamic-type-annotations">6.4.4. Dynamic type annotations</h4>
+<h4 id="technical-dynamic-type-annotations">7.4.4. Dynamic type annotations</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="concept-eventual">6.5. Eventual immutability</h3>
+<h3 id="concept-eventual">7.5. Eventual immutability</h3>
 
 </div>
 <div class="sect2">
-<h3 id="concept-higher-order-modification">6.6. Higher-order modifications</h3>
+<h3 id="concept-higher-order-modification">7.6. Higher-order modifications</h3>
 
 </div>
 <div class="sect2">
-<h3 id="_miscellaneous">6.7. Miscellaneous</h3>
+<h3 id="_miscellaneous">7.7. Miscellaneous</h3>
 <div class="sect3">
-<h4 id="concept-constant">6.7.1. Constants</h4>
+<h4 id="concept-constant">7.7.1. Constants</h4>
 <div class="paragraph">
 <p>Java literals are constants.
 An instance of a type whose effectively final fields have only been assigned literal values, is a constant instance.
@@ -1298,17 +1528,17 @@ Typical examples of a constant instances are found in parameterized <code>enum</
 </div>
 </div>
 <div class="sect3">
-<h4 id="concept-statement-time">6.7.2. Statement time</h4>
+<h4 id="concept-statement-time">7.7.2. Statement time</h4>
 <div class="paragraph">
 <p>Technically important for variable fields (<a href="#concept-e1immutable">Level 1 immutable</a>).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="concept-singleton">6.7.3. Singleton classes</h4>
+<h4 id="concept-singleton">7.7.3. Singleton classes</h4>
 
 </div>
 <div class="sect3">
-<h4 id="concept-utility-class">6.7.4. Utility classes</h4>
+<h4 id="concept-utility-class">7.7.4. Utility classes</h4>
 <div class="paragraph">
 <p>A class which is at the same time eventually level 2 immutable, and cannot be instantiated.</p>
 </div>
@@ -1331,23 +1561,23 @@ The fact that it cannot be instantiated is verified by</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="concept-extension-class">6.7.5. Extension classes</h4>
+<h4 id="concept-extension-class">7.7.5. Extension classes</h4>
 <div class="paragraph">
 <p>An extension class is an eventually final type whose static methods all share the same type of first parameter.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="concept-finalizer">6.7.6. Finalizers</h4>
+<h4 id="concept-finalizer">7.7.6. Finalizers</h4>
 
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_overview_of_annotations">7. Overview of annotations</h2>
+<h2 id="_overview_of_annotations">8. Overview of annotations</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_annotation_modes">7.1. Annotation modes</h3>
+<h3 id="_annotation_modes">8.1. Annotation modes</h3>
 <div class="paragraph">
 <p>Depending on where you find yourself in the continuum between object-oriented programming and functional programming, or, put differently, almost never following the container and level 2 immutable rules, or mostly adhering to them, you may wish to be either notified for following the rules, or warned by the analyser for breaking the rules.
 It is in this spirit that we envisage working in</p>
@@ -1376,7 +1606,7 @@ The <a href="#notModified-annotation">@NotModified</a> will be highlighted, whil
 </div>
 </div>
 <div class="sect2">
-<h3 id="_inheritance_of_annotations">7.2. Inheritance of annotations</h3>
+<h3 id="_inheritance_of_annotations">8.2. Inheritance of annotations</h3>
 <div class="paragraph">
 <p>In general, the analyser allows a method to do better than the method it overrides.
 It will raise an error when the overriding method is  <code>@Modified</code> , where the original is  <code>@NotModified</code>.
@@ -1384,7 +1614,7 @@ It will raise an error when the overriding method is  <code>@Modified</code> , w
 </div>
 </div>
 <div class="sect2">
-<h3 id="_list_of_annotations">7.3. List of annotations</h3>
+<h3 id="_list_of_annotations">8.3. List of annotations</h3>
 <div class="paragraph">
 <p>For each of the annotations, we answer a couple of standard questions:</p>
 </div>
@@ -1424,7 +1654,7 @@ It will raise an error when the overriding method is  <code>@Modified</code> , w
 <p>This classification hopefully helps to see the wood for the trees in the long list.</p>
 </div>
 <div class="sect3">
-<h4 id="allowsInterrupt-annotation">7.3.1. @AllowsInterrupt</h4>
+<h4 id="allowsInterrupt-annotation">8.3.1. @AllowsInterrupt</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1459,7 +1689,7 @@ Methods can be annotated with <code>@AllowsInterrupt(false)</code> to explicitly
 </div>
 </div>
 <div class="sect3">
-<h4 id="beforeMark-annotation">7.3.2. @BeforeMark</h4>
+<h4 id="beforeMark-annotation">8.3.2. @BeforeMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1499,7 +1729,7 @@ They guarantee that an eventually immutable object is in its <em>after</em> stat
 </div>
 </div>
 <div class="sect3">
-<h4 id="constant-annotation">7.3.3. @Constant</h4>
+<h4 id="constant-annotation">8.3.3. @Constant</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1561,7 +1791,7 @@ More details in <a href="#concept-constant">Constants</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="container-annotation">7.3.4. @Container</h4>
+<h4 id="container-annotation">8.3.4. @Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1605,7 +1835,7 @@ Non-containers are in <a href="#e1immutable-annotation">@E1Immutable</a> and <a 
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent-annotation">7.3.5. @Dependent</h4>
+<h4 id="dependent-annotation">8.3.5. @Dependent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1668,7 +1898,7 @@ Its opposite is  <code>@Independent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent1-annotation">7.3.6. @Dependent1</h4>
+<h4 id="dependent1-annotation">8.3.6. @Dependent1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1740,7 +1970,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent2-annotation">7.3.7. @Dependent2</h4>
+<h4 id="dependent2-annotation">8.3.7. @Dependent2</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1801,7 +2031,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e1container-annotation">7.3.8. @E1Container</h4>
+<h4 id="e1container-annotation">8.3.8. @E1Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1894,7 +2124,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e1immutable-annotation">7.3.9. @E1Immutable</h4>
+<h4 id="e1immutable-annotation">8.3.9. @E1Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1952,7 +2182,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2container-annotation">7.3.10. @E2Container</h4>
+<h4 id="e2container-annotation">8.3.10. @E2Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1995,7 +2225,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2immutable-annotation">7.3.11. @E2Immutable</h4>
+<h4 id="e2immutable-annotation">8.3.11. @E2Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2060,7 +2290,7 @@ A consequence of requirement of not modified fields, is that non-private methods
 </div>
 </div>
 <div class="sect3">
-<h4 id="extensionClass-annotation">7.3.12. @ExtensionClass</h4>
+<h4 id="extensionClass-annotation">8.3.12. @ExtensionClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2085,7 +2315,7 @@ A consequence of requirement of not modified fields, is that non-private methods
 </table>
 </div>
 <div class="sect3">
-<h4 id="final-annotation">7.3.13. @Final</h4>
+<h4 id="final-annotation">8.3.13. @Final</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2190,11 +2420,11 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_finalizer">7.3.14. @Finalizer</h4>
+<h4 id="_finalizer">8.3.14. @Finalizer</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_fluent">7.3.15. @Fluent</h4>
+<h4 id="_fluent">8.3.15. @Fluent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2236,7 +2466,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_identity">7.3.16. @Identity</h4>
+<h4 id="_identity">8.3.16. @Identity</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2277,7 +2507,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ignoremodifications">7.3.17. @IgnoreModifications</h4>
+<h4 id="_ignoremodifications">8.3.17. @IgnoreModifications</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2320,7 +2550,7 @@ The <code>print</code> method family is obviously modifying to these fields, how
 </div>
 </div>
 <div class="sect3">
-<h4 id="_independent">7.3.18. @Independent</h4>
+<h4 id="_independent">8.3.18. @Independent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2370,7 +2600,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked">7.3.19. @Linked</h4>
+<h4 id="_linked">8.3.19. @Linked</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2407,11 +2637,11 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked1">7.3.20. @Linked1</h4>
+<h4 id="_linked1">8.3.20. @Linked1</h4>
 
 </div>
 <div class="sect3">
-<h4 id="_mark">7.3.21. @Mark</h4>
+<h4 id="_mark">8.3.21. @Mark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2436,7 +2666,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="modified-annotation">7.3.22. @Modified</h4>
+<h4 id="modified-annotation">8.3.22. @Modified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2473,7 +2703,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="modified1-annotation">7.3.23. @Modified1</h4>
+<h4 id="modified1-annotation">8.3.23. @Modified1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2515,7 +2745,7 @@ In green mode, this one is the default; in red mode,  <code>@NotModified1</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mutableModifiesArguments-annotation">7.3.24. @MutableModifiesArguments</h4>
+<h4 id="mutableModifiesArguments-annotation">8.3.24. @MutableModifiesArguments</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2574,7 +2804,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified-annotation">7.3.25. @NotModified</h4>
+<h4 id="notModified-annotation">8.3.25. @NotModified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2617,7 +2847,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified1-annotation">7.3.26. @NotModified1</h4>
+<h4 id="notModified1-annotation">8.3.26. @NotModified1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2686,7 +2916,7 @@ Functional interfaces are always normally  <code>@NotModified</code>: there are 
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull-annotation">7.3.27. @NotNull</h4>
+<h4 id="notNull-annotation">8.3.27. @NotNull</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2724,7 +2954,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull1-annotation">7.3.28. @NotNull1</h4>
+<h4 id="notNull1-annotation">8.3.28. @NotNull1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2749,7 +2979,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="notNull2-annotation">7.3.29. @NotNull2</h4>
+<h4 id="notNull2-annotation">8.3.29. @NotNull2</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2774,7 +3004,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="nullable-annotation">7.3.30. @Nullable</h4>
+<h4 id="nullable-annotation">8.3.30. @Nullable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2812,7 +3042,7 @@ Use it to contract in the red mode.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="only-annotation">7.3.31. @Only</h4>
+<h4 id="only-annotation">8.3.31. @Only</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2859,7 +3089,7 @@ Please find an example with a useful <code>@Only(after="&#8230;&#8203;")</code> 
 </div>
 </div>
 <div class="sect3">
-<h4 id="propagateModification-annotation">7.3.32. @PropagateModification</h4>
+<h4 id="propagateModification-annotation">8.3.32. @PropagateModification</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2930,7 +3160,7 @@ The annotation then informs the analyser that modifications need computing at ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="singleton-annotation">7.3.33. @Singleton</h4>
+<h4 id="singleton-annotation">8.3.33. @Singleton</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2986,7 +3216,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="testMark-annotation">7.3.34. @TestMark</h4>
+<h4 id="testMark-annotation">8.3.34. @TestMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3058,7 +3288,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="utilityClass-annotation">7.3.35. @UtilityClass</h4>
+<h4 id="utilityClass-annotation">8.3.35. @UtilityClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3133,7 +3363,7 @@ The fact that it cannot be instantiated is verified by</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="variable-annotation">7.3.36. @Variable</h4>
+<h4 id="variable-annotation">8.3.36. @Variable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3194,12 +3424,12 @@ It is the opposite of  <code>@Final</code> .</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="annotation-hierarchy">7.4. Relations between annotations</h3>
+<h3 id="annotation-hierarchy">8.4. Relations between annotations</h3>
 <div class="paragraph">
 <p>In this section we summarize the relations between annotations.</p>
 </div>
 <div class="sect3">
-<h4 id="_on_types">7.4.1. On types</h4>
+<h4 id="_on_types">8.4.1. On types</h4>
 <div class="paragraph">
 <p>Note that:</p>
 </div>
@@ -3230,7 +3460,7 @@ It is the opposite of  <code>@Final</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_fields">7.4.2. On fields</h4>
+<h4 id="_on_fields">8.4.2. On fields</h4>
 <div class="paragraph">
 <p>Note that  <code>@Variable</code>  fields can be  <code>@NotNull</code> !
 This obviously requires a not-null initialiser to be present; all other assignments must be not-null as well.
@@ -3296,7 +3526,7 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_constructors">7.4.3. On constructors</h4>
+<h4 id="_on_constructors">8.4.3. On constructors</h4>
 <div class="paragraph">
 <p>Non-trivial constructors have the  <code>@Modified</code>  property.
 When there is support data, a constructor is either  <code>@Independent</code>  (green) or  <code>@Dependent</code>  (red).
@@ -3304,7 +3534,7 @@ A constructor without annotations therefore implies either that the type is not 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_methods">7.4.4. On methods</h4>
+<h4 id="_on_methods">8.4.4. On methods</h4>
 <div class="paragraph">
 <p>Opposites:</p>
 </div>
@@ -3347,7 +3577,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_parameters">7.4.5. On parameters</h4>
+<h4 id="_on_parameters">8.4.5. On parameters</h4>
 <div class="paragraph">
 <p>Opposites:</p>
 </div>
@@ -3389,7 +3619,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="nullability">7.4.6. Nullability</h4>
+<h4 id="nullability">8.4.6. Nullability</h4>
 <div class="paragraph">
 <p>By convention,</p>
 </div>
@@ -3411,7 +3641,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_eventually_and_effectively_immutable">7.4.7. Eventually and effectively immutable</h4>
+<h4 id="_eventually_and_effectively_immutable">8.4.7. Eventually and effectively immutable</h4>
 <div class="paragraph">
 <p>Field types and method return types can be eventually or effectively immutable when their formal type is not level 1 or level 2 immutable, but the dynamic or computed type is.
 In the latter case, static analysis shows that all assignments to the field, or all return statements, result in an immutable object.
@@ -3458,10 +3688,10 @@ In the former case, object flow computation proves that the mark has been passed
 </div>
 </div>
 <div class="sect1">
-<h2 id="_list_of_errors_and_warnings">8. List of errors and warnings</h2>
+<h2 id="_list_of_errors_and_warnings">9. List of errors and warnings</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_opinionated">8.1. Opinionated</h3>
+<h3 id="_opinionated">9.1. Opinionated</h3>
 <div class="paragraph">
 <p>The errors described in this section relate to bad practices that are not tolerated by the analyser:</p>
 </div>
@@ -3491,7 +3721,7 @@ The implementation of the analyser assumes that parameters cannot be assigned to
 </div>
 </div>
 <div class="sect2">
-<h3 id="evaluation-errors">8.2. Evaluation</h3>
+<h3 id="evaluation-errors">9.2. Evaluation</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">ASSERT_EVALUATES_TO_CONSTANT_FALSE</dt>
@@ -3523,7 +3753,7 @@ This message is computed via a  <code>@NotNull</code>  on a field.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_empty_unused">8.3. Empty, unused</h3>
+<h3 id="_empty_unused">9.3. Empty, unused</h3>
 <div class="paragraph">
 <p>Errors of this type are typically trivial to clean up, so why not do it immediately?</p>
 </div>
@@ -3576,7 +3806,7 @@ If this is intentional, turn it into a local variable.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verifying_annotations">8.4. Verifying annotations</h3>
+<h3 id="_verifying_annotations">9.4. Verifying annotations</h3>
 <div class="paragraph">
 <p>The following errors relate to the annotations you added to your source code, to verify that a type, method or field has a given property.</p>
 </div>
@@ -3612,7 +3842,7 @@ However, the associated values are differing.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_immutability_2">8.5. Immutability</h3>
+<h3 id="_immutability_2">9.5. Immutability</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">CALLING_MODIFYING_METHOD_ON_E2IMMU</dt>
@@ -3661,7 +3891,7 @@ Variants exist for <code>@Only(before="&#8230;&#8203;")</code>, and level 2 immu
 </div>
 </div>
 <div class="sect2">
-<h3 id="_odds_and_ends">8.6. Odds and ends</h3>
+<h3 id="_odds_and_ends">9.6. Odds and ends</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">CIRCULAR_TYPE_DEPENDENCY</dt>
@@ -3707,10 +3937,10 @@ Please refer to <a href="#concept-finalizer">Finalizers</a>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_analyser">9. The analyser</h2>
+<h2 id="_the_analyser_2">10. The analyser</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_inspection">9.1. Inspection</h3>
+<h3 id="_inspection">10.1. Inspection</h3>
 <div class="paragraph">
 <p>Special naming conventions for creating Java classes that hold annotations and companion methods:</p>
 </div>
@@ -3737,13 +3967,13 @@ The inspector removes the dollar silently.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resolution">9.2. Resolution</h3>
+<h3 id="_resolution">10.2. Resolution</h3>
 
 </div>
 <div class="sect2">
-<h3 id="_analyser_implementation">9.3. Analyser implementation</h3>
+<h3 id="_analyser_implementation">10.3. Analyser implementation</h3>
 <div class="sect3">
-<h4 id="_code_structure">9.3.1. Code structure</h4>
+<h4 id="_code_structure">10.3.1. Code structure</h4>
 <div class="paragraph">
 <p><code>PrimaryTypeAnalyser</code>:</p>
 </div>
@@ -3954,7 +4184,7 @@ Some of these changes then trickle down to the method analyser which updates the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_circular_dependencies">9.3.2. Circular dependencies</h4>
+<h4 id="_circular_dependencies">10.3.2. Circular dependencies</h4>
 <div class="paragraph">
 <p>The analyser approaches primary types independently, albeit in a carefully computed order of dependency between them.
 When it detects a circular dependency between two or more primary types, it issues a warning to indicate that a different, less powerful modification detection algorithm kicks in.
@@ -3970,7 +4200,7 @@ The main reason it has to do this is that all fields are visible to all sub-type
 </div>
 </div>
 <div class="sect3">
-<h4 id="_nested_classes">9.3.3. Nested classes</h4>
+<h4 id="_nested_classes">10.3.3. Nested classes</h4>
 <div class="paragraph">
 <p> <code>@Final</code> : across all methods in the primary type</p>
 </div>
@@ -3988,7 +4218,7 @@ They cause a problem because of the abstract methods, which can have any modific
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modification_of_a_field">9.3.4. Modification of a field</h4>
+<h4 id="_modification_of_a_field">10.3.4. Modification of a field</h4>
 <div class="paragraph">
 <p>The code executes the following steps:</p>
 </div>
@@ -4020,7 +4250,7 @@ Importantly, we consider the methods (and SAM declarations of fields) of all typ
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modification_of_a_method">9.3.5. Modification of a method</h4>
+<h4 id="_modification_of_a_method">10.3.5. Modification of a method</h4>
 <div class="paragraph">
 <p>The code executes the following steps:</p>
 </div>
@@ -4052,7 +4282,7 @@ The analyser issues this marker when the method passes on a functional interface
 </div>
 </div>
 <div class="sect3">
-<h4 id="_condition_and_state">9.3.6. Condition and state</h4>
+<h4 id="_condition_and_state">10.3.6. Condition and state</h4>
 <div class="paragraph">
 <p>A method can have restrictions on the parameter and field values called <em>preconditions</em>.
 In general, these restrictions end up as a boolean expression in <code>MethodAnalysis.precondition</code>.
@@ -4162,7 +4392,7 @@ This is most notably the case for a <code>synchronized</code> block.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_computation_of_mark_only">9.3.7. Computation of @Mark, @Only</h4>
+<h4 id="_computation_of_mark_only">10.3.7. Computation of @Mark, @Only</h4>
 <div class="paragraph">
 <p>The presence of eventual properties (level 1 immutable, level 2 immutable, content not null, &#8230;&#8203;) follows from the computation of the  <code>@Only</code>  and  <code>@Mark</code>  annotations.
 Here, we document how the analyser computes them.</p>
@@ -4187,7 +4417,7 @@ As a consequence, it is currently not possible to use the size of a collection, 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_statement_analyser">9.3.8. Statement analyser</h4>
+<h4 id="_statement_analyser">10.3.8. Statement analyser</h4>
 <div class="paragraph">
 <p>Steps:</p>
 </div>
@@ -4230,7 +4460,7 @@ The results need to be known to the evaluation context.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_post_and_pre_conditions">9.3.9. Post- and pre-conditions</h4>
+<h4 id="_post_and_pre_conditions">10.3.9. Post- and pre-conditions</h4>
 <div class="paragraph">
 <p>A non-modifying method without parameters can define an <em>aspect</em> of a type, like <code>size</code> or <code>length</code>.
 We define methods complementary to a normal class or interface method, using the naming convention <em>method name$action$aspect</em>.
@@ -4302,7 +4532,7 @@ We&#8217;ll work with the evaluated inline-functions; they have a translation me
 </div>
 </div>
 <div class="sect3">
-<h4 id="_nullity_of_fields">9.3.10. Nullity of fields</h4>
+<h4 id="_nullity_of_fields">10.3.10. Nullity of fields</h4>
 <div class="paragraph">
 <p>If the field is effectively final, it receives its values from</p>
 </div>
@@ -4344,7 +4574,7 @@ Typically, this is done in two stages:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_loop_variables_overview">9.3.11. Loop variables overview</h4>
+<h4 id="_loop_variables_overview">10.3.11. Loop variables overview</h4>
 <div class="paragraph">
 <p>Different situations</p>
 </div>
@@ -4393,7 +4623,7 @@ While we could force the variable to be <code>final</code> in the former case, w
 </div>
 </div>
 <div class="sect3">
-<h4 id="_general_property_computation">9.3.12. General property computation</h4>
+<h4 id="_general_property_computation">10.3.12. General property computation</h4>
 <div class="paragraph">
 <p>We have decided on a very strict <em>write once</em> system: once a value has been determined, it cannot be changed anymore.
 Properties are written in a heavily controlled map of type <code>VariableProperties</code>.
@@ -4405,7 +4635,7 @@ Therefore, the last statement often contains the relevant information for the ot
 </div>
 </div>
 <div class="sect3">
-<h4 id="_not_null_property">9.3.13. Not-null property</h4>
+<h4 id="_not_null_property">10.3.13. Not-null property</h4>
 <div class="paragraph">
 <p>Variables in the statement analyser can have not-null induced by the context (parameters in method calls, scope, etc).
 At the same time, fields and parameters can get not-null values from the field and parameter analyser.
@@ -4473,7 +4703,7 @@ Once a value can come from a field, the parameter analyser will copy it.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modification_property">9.3.14. Modification property</h4>
+<h4 id="_modification_property">10.3.14. Modification property</h4>
 <div class="paragraph">
 <p>The property indicating modification of a variable has been split in the same way as the not-null property:</p>
 </div>
@@ -4547,7 +4777,7 @@ Four main aspects control delays in the statement analyser:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_variables">9.4. Variables</h3>
+<h3 id="_variables">10.4. Variables</h3>
 <div class="paragraph">
 <p>We recognize the following types of variables:</p>
 </div>
@@ -4659,7 +4889,7 @@ All variables start in the first statement with an empty set of linked variables
 Because a statement reaches <code>DONE</code> status as soon as value and linked variables have been established, an explicit delay system exists to make sure that statemens which involve fields with a delayed ENN are revisited once.</p>
 </div>
 <div class="sect3">
-<h4 id="_variable_fields">9.4.1. Variable fields</h4>
+<h4 id="_variable_fields">10.4.1. Variable fields</h4>
 <div class="paragraph">
 <p>Variable fields interact with synchronisation.
 A time increase is equivalent to an opportunity for another thread to update the content of variable fields.</p>
@@ -4676,7 +4906,7 @@ Determining time obviously depends on the methods being called, but because the 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_different_variable_states">9.4.2. Different variable states</h4>
+<h4 id="_different_variable_states">10.4.2. Different variable states</h4>
 <div class="paragraph">
 <p>Each statement analyser keeps up to three different states for each variable:</p>
 </div>
@@ -4712,7 +4942,7 @@ The analyser computes the evaluation of statement <em>i</em> before starting the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_data_stored_for_a_variable">9.4.3. Data stored for a variable</h4>
+<h4 id="_data_stored_for_a_variable">10.4.3. Data stored for a variable</h4>
 <div class="paragraph">
 <p>The <code>VariableInfo</code> objects hold the following data:</p>
 </div>
@@ -4762,7 +4992,7 @@ The <code>READ</code> and <code>ASSIGNED</code> properties have the following sp
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tests_basics_0">9.4.4. Tests: Basics_0</h4>
+<h4 id="_tests_basics_0">10.4.4. Tests: Basics_0</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> effectivelyFinal = <span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>;
@@ -4800,7 +5030,7 @@ The return variable can also be set.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tests_basics_1">9.4.5. Tests: Basics_1</h4>
+<h4 id="_tests_basics_1">10.4.5. Tests: Basics_1</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; f1;
@@ -4870,7 +5100,7 @@ Modification is determined, as is nullability.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_tests_modification_0">9.4.6. Tests: Modification_0</h4>
+<h4 id="_tests_modification_0">10.4.6. Tests: Modification_0</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; set1 = <span class="keyword">new</span> <span class="predefined-type">HashSet</span>&lt;&gt;();
@@ -4894,7 +5124,7 @@ We don&#8217;t have to wait for modification since the field is public.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_breaking_delays">9.4.7. Breaking delays</h4>
+<h4 id="_breaking_delays">10.4.7. Breaking delays</h4>
 <div class="paragraph">
 <p>Break that only works partially, in iteration 1+ assignment from analyser to variable:</p>
 </div>
@@ -4976,10 +5206,10 @@ We don&#8217;t have to wait for modification since the field is public.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supporting_tools">10. Supporting tools</h2>
+<h2 id="_supporting_tools">11. Supporting tools</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_gradle_plugin">10.1. Gradle plugin</h3>
+<h3 id="_gradle_plugin">11.1. Gradle plugin</h3>
 <div class="paragraph">
 <p>The Gradle plugin greatly facilitates the use of the analyser by integrating it your project&#8217;s build process.
 We based its initial implementation on the one from <a href="https://www.sonarqube.org/" target="_blank" rel="noopener">SonarQube</a>.</p>
@@ -5018,7 +5248,7 @@ Gradle takes care of source and class path.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_key_value_store">10.2. Key-value store</h3>
+<h3 id="_key_value_store">11.2. Key-value store</h3>
 <div class="paragraph">
 <p>The key-value store is a simple, two-class implementation of an independent key-value store acting as a bridge between the  <em>e2immu</em>  analyser and the  IntelliJ IDEA  plugin.
 It is mostly agnostic to the purpose in the project: it stores key-value pairs in sub-stores called projects.</p>
@@ -5103,14 +5333,14 @@ INFO: Started kv server on port 8281; read-within-millis 5000
 </div>
 </div>
 <div class="sect2">
-<h3 id="_intellij_idea_plugin">10.3.  IntelliJ IDEA  plugin</h3>
+<h3 id="_intellij_idea_plugin">11.3.  IntelliJ IDEA  plugin</h3>
 <div class="paragraph">
 <p>Without a plugin for an IDE, the analyser would be hard to use, and the main purpose of the project, namely, unobtrusively assisting in better coding, would remain very far off.
 The current plugin for  IntelliJ IDEA  is absolutely minimal.
 We based our initial implementation on the <a href="https://plugins.jetbrains.com/plugin/13303-return-highlighter" target="_blank" rel="noopener">Return statement highlighter plugin</a> by Edoardo Luppi.</p>
 </div>
 <div class="sect3">
-<h4 id="visual-objectives">10.3.1. Visual objectives</h4>
+<h4 id="visual-objectives">11.3.1. Visual objectives</h4>
 <div class="paragraph">
 <p>For the proof of concept, we aim to color elements of the source code in such a way that there is visual information explaining why a type is not  <code>@E2Immutable</code>  or  <code>@Container</code> .
 In the green mode, we highlight the immutable elements, which useful when they are sparse.
@@ -5367,7 +5597,7 @@ The analyser colors:</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_information_flow">10.3.2. Information flow</h4>
+<h4 id="_information_flow">11.3.2. Information flow</h4>
 <div class="paragraph">
 <p>Exactly which information does the analyser store in the key-value store?
 The keys are type names, method names, parameter names, or field names in a format that both analyser and plugin understand:</p>
@@ -5404,7 +5634,7 @@ the composite key is the field&#8217;s or method&#8217;s key followed by a space
 </div>
 </div>
 <div class="sect3">
-<h4 id="_implementation">10.3.3. Implementation</h4>
+<h4 id="_implementation">11.3.3. Implementation</h4>
 <div class="paragraph">
 <p>The <code>JavaAnnotator</code> class links the plugin to the abstract syntax tree (or PSI in IntelliJ-speak).
 It is instrumental to decide which textual elements are to be highlighted.</p>
@@ -5437,7 +5667,7 @@ As soon as an element is not in the cache, the plugin requests the annotation va
 </div>
 </div>
 <div class="sect1">
-<h2 id="_copyright_and_license">11. Copyright and License</h2>
+<h2 id="_copyright_and_license">12. Copyright and License</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Copyright &#169; 2020-2021, Bart Naudts, <a href="https://www.e2immu.org" class="bare">https://www.e2immu.org</a></p>
@@ -5454,7 +5684,7 @@ If not, see <a href="http://www.gnu.org/licenses/" class="bare">http://www.gnu.o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-23 19:46:51 UTC
+Last updated 2021-04-25 08:29:24 UTC
 </div>
 </div>
 <style>
