@@ -485,7 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#content-linking">11.2. Content linking</a></li>
 <li><a href="#_iterator_iterable_loops">11.3. Iterator, Iterable, loops</a></li>
 <li><a href="#_independence_of_types">11.4. Independence of types</a></li>
-<li><a href="#_extending_implicitly_immutable_types">11.5. Extending implicitly immutable types</a></li>
+<li><a href="#_more_on_implicitly_immutable_types">11.5. More on implicitly immutable types</a></li>
 </ul>
 </li>
 <li><a href="#support-classes">12. Support classes</a>
@@ -2497,10 +2497,14 @@ This is clearly visible in the explicit variant&#8230;&#8203;</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>we can detect errors.
+<td>We can use the annotations to detect errors.
 Here, <code>incrementer</code> is not a container.</td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Using the  <code>@Container</code>  annotation in a dynamic way allows us to control which abstract types can use the method:
+when only containers are allowed, then the abstract types must not have implementations which change their parameters.</p>
 </div>
 </div>
 </div>
@@ -2928,11 +2932,14 @@ We propose to add a definition for the independence of a type, very similar to t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_extending_implicitly_immutable_types">11.5. Extending implicitly immutable types</h3>
+<h3 id="_more_on_implicitly_immutable_types">11.5. More on implicitly immutable types</h3>
 <div class="paragraph">
 <p>Looking at the <a href="#support-lazy">Lazy</a> example, which immutability properties should we give the field <code>Supplier&lt;T&gt; supplier</code>?
-The type <code>T</code> is implicitly immutable in <code>Lazy</code>, as it can be replaced by <code>java.lang.Object</code>.
-We propose to add abstract types, where <em>only</em> the abstract method is called, to the set of implicitly immutable types of the enclosing type.</p>
+The type <code>T</code> is implicitly immutable in <code>Lazy</code>, as it can be replaced by <code>java.lang.Object</code>.</p>
+</div>
+<div class="paragraph">
+<p>We propose to add abstract types, where <em>only</em> the abstract method is called, to the set of implicitly immutable types of the enclosing type.
+The reasoning is that whilst you can access the type, you still cannot know the effect of this action.</p>
 </div>
 </div>
 </div>
@@ -4058,7 +4065,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-25 08:44:48 UTC
+Last updated 2021-04-25 21:17:05 UTC
 </div>
 </div>
 <style>
