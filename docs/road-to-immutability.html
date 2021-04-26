@@ -7,7 +7,7 @@
 <meta name="generator" content="Asciidoctor 2.0.10">
 <meta name="description" content="A walk-through of the concepts and definitions of _e2immu_">
 <meta name="author" content="Bart Naudts &lt;bart.naudts@e2immu.org&gt;">
-<title>The road to immutability</title>
+<title>The Road to Immutability</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>The road to immutability</h1>
+<h1>The Road to Immutability</h1>
 <div class="details">
 <span id="author" class="author">Bart Naudts &lt;bart.naudts@e2immu.org&gt;</span><br>
 </div>
@@ -470,6 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_propagation">9.3. Propagation</a></li>
 <li><a href="#_before_the_mark">9.4. Before the mark</a></li>
 <li><a href="#_extensions_of_annotations">9.5. Extensions of annotations</a></li>
+<li><a href="#_frameworks_and_contracts">9.6. Frameworks and contracts</a></li>
 </ul>
 </li>
 <li><a href="#modification-part2">10. Modification, part2</a>
@@ -2123,6 +2124,60 @@ In the case of eventual level 2 immutability,</p>
 </div>
 <div class="paragraph">
 <p>Eventual finality simply adds a  <code>@Final(after="mark")</code> annotation to each of these situations.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_frameworks_and_contracts">9.6. Frameworks and contracts</h3>
+<div class="paragraph">
+<p>A fair number of Java frameworks introduce dependency injection and initializer methods.
+This concept is, in many cases, compatible with the idea of eventual immutability: once dependency injection has taken place, and an initializing method has been called, the framework stops intervening in the value of the fields.</p>
+</div>
+<div class="paragraph">
+<p>It is therefore not difficult to imagine, and implement in the analyser, a <em>before</em> state (initialization still ongoing) and an <em>after</em> state (initialization done) associated with the particular framework.
+The example below shows how this could be done for the <code>Verticle</code> interface of the <a href="https://vertx.io" target="_blank" rel="noopener">vertx.io framework</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Excerpts and annotations of Verticle.java and AbstractVerticle.java</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E1Container</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+<span class="type">interface</span> <span class="class">Verticle</span> {
+
+    <span class="annotation">@Mark</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> init(Vertx vertx, <span class="predefined-type">Context</span> context);
+
+    <span class="annotation">@Only</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+    Vertx getVertx();
+
+    <span class="annotation">@Only</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> start(Promise&lt;<span class="predefined-type">Void</span>&gt; startPromise) <span class="directive">throws</span> <span class="exception">Exception</span>;
+
+    <span class="annotation">@Only</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+    <span class="type">void</span> stop(Promise&lt;<span class="predefined-type">Void</span>&gt; startPromise) <span class="directive">throws</span> <span class="exception">Exception</span>;
+}
+
+<span class="directive">public</span> <span class="directive">abstract</span> <span class="type">class</span> <span class="class">AbstractVerticle</span> <span class="directive">implements</span> Verticle {
+    <span class="annotation">@Final</span>(after=<span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">protected</span> Vertx vertx;
+
+    <span class="annotation">@Final</span>(after=<span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
+    <span class="directive">protected</span> <span class="predefined-type">Context</span> context;
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> Vertx getVertx() {
+        <span class="keyword">return</span> vertx;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> init(Vertx vertx, <span class="predefined-type">Context</span> context) {
+        <span class="local-variable">this</span>.vertx = vertx;
+        <span class="local-variable">this</span>.context = context;
+    }
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Currently, early 2021, contracted eventual immutability has not been implemented yet in the analyser.</p>
 </div>
 </div>
 </div>
@@ -4065,7 +4120,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-25 21:17:05 UTC
+Last updated 2021-04-26 15:06:18 UTC
 </div>
 </div>
 <style>

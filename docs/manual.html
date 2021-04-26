@@ -476,12 +476,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#annotationxml-files">5. Annotation XML files</a></li>
-<li><a href="#_visualising_immutability">6. Visualising immutability</a>
-<ul class="sectlevel2">
-<li><a href="#inheritance-rules">6.1. Inheritance rules of annotations</a></li>
-</ul>
-</li>
-<li><a href="#_the_annotation_store_as_a_demo_project">7. The annotation store as a demo project</a></li>
+<li><a href="#_visualising_immutability">6. Visualising immutability</a></li>
+<li><a href="#demo-project">7. The annotation store as a demo project</a></li>
 <li><a href="#_reference"><em>Reference</em></a></li>
 <li><a href="#_concepts">8. Concepts</a>
 <ul class="sectlevel2">
@@ -510,130 +506,96 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#_preconditions">9. Preconditions</a></li>
-<li><a href="#_instance_state">10. Instance state</a>
+<li><a href="#_analyser_details">9. Analyser details</a>
 <ul class="sectlevel2">
-<li><a href="#companion-methods">10.1. Companion methods</a></li>
+<li><a href="#_preconditions">9.1. Preconditions</a></li>
+<li><a href="#_instance_state">9.2. Instance state</a></li>
+<li><a href="#companion-methods">9.3. Companion methods</a></li>
 </ul>
 </li>
-<li><a href="#_overview_of_annotations">11. Overview of annotations</a>
+<li><a href="#_overview_of_annotations">10. Overview of annotations</a>
 <ul class="sectlevel2">
-<li><a href="#_annotation_modes">11.1. Annotation modes</a></li>
-<li><a href="#_inheritance_of_annotations">11.2. Inheritance of annotations</a></li>
-<li><a href="#list-of-annotations">11.3. List of annotations</a>
+<li><a href="#_annotation_modes">10.1. Annotation modes</a></li>
+<li><a href="#_inheritance_of_annotations">10.2. Inheritance of annotations</a></li>
+<li><a href="#list-of-annotations">10.3. List of annotations</a>
 <ul class="sectlevel3">
-<li><a href="#allowsInterrupt-annotation">11.3.1. @AllowsInterrupt</a></li>
-<li><a href="#beforeMark-annotation">11.3.2. @BeforeMark</a></li>
-<li><a href="#constant-annotation">11.3.3. @Constant</a></li>
-<li><a href="#container-annotation">11.3.4. @Container</a></li>
-<li><a href="#dependent-annotation">11.3.5. @Dependent</a></li>
-<li><a href="#dependent1-annotation">11.3.6. @Dependent1</a></li>
-<li><a href="#dependent2-annotation">11.3.7. @Dependent2</a></li>
-<li><a href="#e1container-annotation">11.3.8. @E1Container</a></li>
-<li><a href="#e1immutable-annotation">11.3.9. @E1Immutable</a></li>
-<li><a href="#e2container-annotation">11.3.10. @E2Container</a></li>
-<li><a href="#e2immutable-annotation">11.3.11. @E2Immutable</a></li>
-<li><a href="#extensionClass-annotation">11.3.12. @ExtensionClass</a></li>
-<li><a href="#final-annotation">11.3.13. @Final</a></li>
-<li><a href="#_finalizer">11.3.14. @Finalizer</a></li>
-<li><a href="#_fluent">11.3.15. @Fluent</a></li>
-<li><a href="#_identity">11.3.16. @Identity</a></li>
-<li><a href="#_ignoremodifications">11.3.17. @IgnoreModifications</a></li>
-<li><a href="#_independent">11.3.18. @Independent</a></li>
-<li><a href="#_linked">11.3.19. @Linked</a></li>
-<li><a href="#_linked1">11.3.20. @Linked1</a></li>
-<li><a href="#_mark">11.3.21. @Mark</a></li>
-<li><a href="#modified-annotation">11.3.22. @Modified</a></li>
-<li><a href="#modified1-annotation">11.3.23. @Modified1</a></li>
-<li><a href="#mutableModifiesArguments-annotation">11.3.24. @MutableModifiesArguments</a></li>
-<li><a href="#notModified-annotation">11.3.25. @NotModified</a></li>
-<li><a href="#notModified1-annotation">11.3.26. @NotModified1</a></li>
-<li><a href="#notNull-annotation">11.3.27. @NotNull</a></li>
-<li><a href="#notNull1-annotation">11.3.28. @NotNull1</a></li>
-<li><a href="#notNull2-annotation">11.3.29. @NotNull2</a></li>
-<li><a href="#nullable-annotation">11.3.30. @Nullable</a></li>
-<li><a href="#only-annotation">11.3.31. @Only</a></li>
-<li><a href="#propagateModification-annotation">11.3.32. @PropagateModification</a></li>
-<li><a href="#singleton-annotation">11.3.33. @Singleton</a></li>
-<li><a href="#testMark-annotation">11.3.34. @TestMark</a></li>
-<li><a href="#utilityClass-annotation">11.3.35. @UtilityClass</a></li>
-<li><a href="#variable-annotation">11.3.36. @Variable</a></li>
+<li><a href="#allowsInterrupt-annotation">10.3.1. @AllowsInterrupt</a></li>
+<li><a href="#beforeMark-annotation">10.3.2. @BeforeMark</a></li>
+<li><a href="#constant-annotation">10.3.3. @Constant</a></li>
+<li><a href="#container-annotation">10.3.4. @Container</a></li>
+<li><a href="#dependent-annotation">10.3.5. @Dependent</a></li>
+<li><a href="#dependent1-annotation">10.3.6. @Dependent1</a></li>
+<li><a href="#dependent2-annotation">10.3.7. @Dependent2</a></li>
+<li><a href="#e1container-annotation">10.3.8. @E1Container</a></li>
+<li><a href="#e1immutable-annotation">10.3.9. @E1Immutable</a></li>
+<li><a href="#e2container-annotation">10.3.10. @E2Container</a></li>
+<li><a href="#e2immutable-annotation">10.3.11. @E2Immutable</a></li>
+<li><a href="#extensionClass-annotation">10.3.12. @ExtensionClass</a></li>
+<li><a href="#final-annotation">10.3.13. @Final</a></li>
+<li><a href="#_finalizer">10.3.14. @Finalizer</a></li>
+<li><a href="#_fluent">10.3.15. @Fluent</a></li>
+<li><a href="#_identity">10.3.16. @Identity</a></li>
+<li><a href="#_ignoremodifications">10.3.17. @IgnoreModifications</a></li>
+<li><a href="#_independent">10.3.18. @Independent</a></li>
+<li><a href="#_linked">10.3.19. @Linked</a></li>
+<li><a href="#_linked1">10.3.20. @Linked1</a></li>
+<li><a href="#_mark">10.3.21. @Mark</a></li>
+<li><a href="#modified-annotation">10.3.22. @Modified</a></li>
+<li><a href="#modified1-annotation">10.3.23. @Modified1</a></li>
+<li><a href="#mutableModifiesArguments-annotation">10.3.24. @MutableModifiesArguments</a></li>
+<li><a href="#notModified-annotation">10.3.25. @NotModified</a></li>
+<li><a href="#notModified1-annotation">10.3.26. @NotModified1</a></li>
+<li><a href="#notNull-annotation">10.3.27. @NotNull</a></li>
+<li><a href="#notNull1-annotation">10.3.28. @NotNull1</a></li>
+<li><a href="#notNull2-annotation">10.3.29. @NotNull2</a></li>
+<li><a href="#nullable-annotation">10.3.30. @Nullable</a></li>
+<li><a href="#only-annotation">10.3.31. @Only</a></li>
+<li><a href="#propagateModification-annotation">10.3.32. @PropagateModification</a></li>
+<li><a href="#singleton-annotation">10.3.33. @Singleton</a></li>
+<li><a href="#testMark-annotation">10.3.34. @TestMark</a></li>
+<li><a href="#utilityClass-annotation">10.3.35. @UtilityClass</a></li>
+<li><a href="#variable-annotation">10.3.36. @Variable</a></li>
 </ul>
 </li>
-<li><a href="#annotation-hierarchy">11.4. Relations between annotations</a>
+<li><a href="#annotation-hierarchy">10.4. Relations between annotations</a>
 <ul class="sectlevel3">
-<li><a href="#_on_types">11.4.1. On types</a></li>
-<li><a href="#_on_fields">11.4.2. On fields</a></li>
-<li><a href="#_on_constructors">11.4.3. On constructors</a></li>
-<li><a href="#_on_methods">11.4.4. On methods</a></li>
-<li><a href="#_on_parameters">11.4.5. On parameters</a></li>
-<li><a href="#nullability">11.4.6. Nullability</a></li>
-<li><a href="#_eventually_and_effectively_immutable">11.4.7. Eventually and effectively immutable</a></li>
+<li><a href="#_on_types">10.4.1. On types</a></li>
+<li><a href="#_on_fields">10.4.2. On fields</a></li>
+<li><a href="#_on_constructors">10.4.3. On constructors</a></li>
+<li><a href="#_on_methods">10.4.4. On methods</a></li>
+<li><a href="#_on_parameters">10.4.5. On parameters</a></li>
+<li><a href="#nullability">10.4.6. Nullability</a></li>
+<li><a href="#_eventually_and_effectively_immutable">10.4.7. Eventually and effectively immutable</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_list_of_errors_and_warnings">12. List of errors and warnings</a>
+<li><a href="#_list_of_errors_and_warnings">11. List of errors and warnings</a>
 <ul class="sectlevel2">
-<li><a href="#_opinionated">12.1. Opinionated</a></li>
-<li><a href="#evaluation-errors">12.2. Evaluation</a></li>
-<li><a href="#_empty_unused">12.3. Empty, unused</a></li>
-<li><a href="#_verifying_annotations">12.4. Verifying annotations</a></li>
-<li><a href="#_immutability_2">12.5. Immutability</a></li>
-<li><a href="#_odds_and_ends">12.6. Odds and ends</a></li>
+<li><a href="#_opinionated">11.1. Opinionated</a></li>
+<li><a href="#evaluation-errors">11.2. Evaluation</a></li>
+<li><a href="#_empty_unused">11.3. Empty, unused</a></li>
+<li><a href="#_verifying_annotations">11.4. Verifying annotations</a></li>
+<li><a href="#_immutability_2">11.5. Immutability</a></li>
+<li><a href="#_odds_and_ends">11.6. Odds and ends</a></li>
 </ul>
 </li>
 <li><a href="#_technical"><em>Technical</em></a></li>
-<li><a href="#_the_analyser_2">13. The analyser</a>
+<li><a href="#_supporting_tools">12. Supporting tools</a>
 <ul class="sectlevel2">
-<li><a href="#_inspection">13.1. Inspection</a></li>
-<li><a href="#_resolution">13.2. Resolution</a></li>
-<li><a href="#_analyser_implementation">13.3. Analyser implementation</a>
+<li><a href="#_gradle_plugin">12.1. Gradle plugin</a></li>
+<li><a href="#_key_value_store">12.2. Key-value store</a></li>
+<li><a href="#_intellij_idea_plugin">12.3.  IntelliJ IDEA  plugin</a>
 <ul class="sectlevel3">
-<li><a href="#_code_structure">13.3.1. Code structure</a></li>
-<li><a href="#_circular_dependencies">13.3.2. Circular dependencies</a></li>
-<li><a href="#_nested_classes">13.3.3. Nested classes</a></li>
-<li><a href="#_modification_of_a_field">13.3.4. Modification of a field</a></li>
-<li><a href="#_modification_of_a_method">13.3.5. Modification of a method</a></li>
-<li><a href="#_condition_and_state">13.3.6. Condition and state</a></li>
-<li><a href="#_computation_of_mark_only">13.3.7. Computation of @Mark, @Only</a></li>
-<li><a href="#_statement_analyser">13.3.8. Statement analyser</a></li>
-<li><a href="#_post_and_pre_conditions">13.3.9. Post- and pre-conditions</a></li>
-<li><a href="#_nullity_of_fields">13.3.10. Nullity of fields</a></li>
-<li><a href="#_loop_variables_overview">13.3.11. Loop variables overview</a></li>
-<li><a href="#_general_property_computation">13.3.12. General property computation</a></li>
-<li><a href="#_not_null_property">13.3.13. Not-null property</a></li>
-<li><a href="#_modification_property">13.3.14. Modification property</a></li>
-</ul>
-</li>
-<li><a href="#_variables">13.4. Variables</a>
-<ul class="sectlevel3">
-<li><a href="#_variable_fields">13.4.1. Variable fields</a></li>
-<li><a href="#_different_variable_states">13.4.2. Different variable states</a></li>
-<li><a href="#_data_stored_for_a_variable">13.4.3. Data stored for a variable</a></li>
-<li><a href="#_tests_basics_0">13.4.4. Tests: Basics_0</a></li>
-<li><a href="#_tests_basics_1">13.4.5. Tests: Basics_1</a></li>
-<li><a href="#_tests_modification_0">13.4.6. Tests: Modification_0</a></li>
-<li><a href="#_breaking_delays">13.4.7. Breaking delays</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_supporting_tools">14. Supporting tools</a>
-<ul class="sectlevel2">
-<li><a href="#_gradle_plugin">14.1. Gradle plugin</a></li>
-<li><a href="#_key_value_store">14.2. Key-value store</a></li>
-<li><a href="#_intellij_idea_plugin">14.3.  IntelliJ IDEA  plugin</a>
-<ul class="sectlevel3">
-<li><a href="#visual-objectives">14.3.1. Visual objectives</a></li>
-<li><a href="#_information_flow">14.3.2. Information flow</a></li>
-<li><a href="#_implementation">14.3.3. Implementation</a></li>
+<li><a href="#visual-objectives">12.3.1. Visual objectives</a></li>
+<li><a href="#_information_flow">12.3.2. Information flow</a></li>
+<li><a href="#_implementation">12.3.3. Implementation</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#_where_next"><em>Where next?</em></a></li>
-<li><a href="#_copyright_and_license">15. Copyright and License</a></li>
+<li><a href="#_copyright_and_license">13. Copyright and License</a></li>
 </ul>
 </div>
 </div>
@@ -656,6 +618,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 This document is work in progress.
+In some places, it is nothing but a skeleton.
 </td>
 </tr>
 </table>
@@ -973,11 +936,10 @@ The Maven or Gradle plugin typically takes care of correct values for source inp
 They are still uploaded when the <code>--upload</code> option is activated.</p>
 </li>
 <li>
-<p><code>--debug=&lt;logtargets&gt;</code>: log targets to activate for debug output</p>
+<p><code>--debug=&lt;logtargets&gt;</code>: log targets to activate for debug output. Their names can be found in the class <code>org.e2immu.analyser.util.Logger.LogTarget</code>.</p>
 </li>
 <li>
-<p><code>--ignore-errors</code>: do not end the analyser in an error state when errors have been raised by the analyser.
-They are still uploaded when the <code>--upload</code> option is activated.</p>
+<p><code>--ignore-errors</code>: do not end the analyser in an error state when errors have been raised by the analyser.</p>
 </li>
 </ul>
 </div>
@@ -1002,7 +964,7 @@ The default is to upload all annotations of all types encountered during the par
 </ul>
 </div>
 <div class="paragraph">
-<p>The following options are available to control the files written:</p>
+<p>The following options are available to control the output of Annotation XML files written:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1015,14 +977,14 @@ The default is to write them for all the packages of <code>.java</code> files pa
 </li>
 <li>
 <p><code>--write-annotation-xml-dir=&lt;directory&gt;</code>: alternative location to write the Xml files.
-Defaults to the resources directory of the project.</p>
+The value defaults to the resources directory of the project.</p>
 </li>
 <li>
 <p><code>--write-annotated-api</code> (short: <code>-a</code>)</p>
 </li>
 <li>
 <p><code>--write-annotated-api-packages=&lt;packages&gt;</code>: a comma-separated list of package names for which annotated API files are to be written.
-The default is to write them for all the packages of <code>.java</code> files parsed</p>
+The default is to write them for all the packages of <code>.java</code> files parsed.</p>
 </li>
 <li>
 <p><code>--write-annotated-api-dir=&lt;directory&gt;</code>: alternative location to write the annotated API files.
@@ -1319,154 +1281,28 @@ In Annotated API files, CONTRACT is the default type, and needs not be specified
 <div class="sect1">
 <h2 id="annotationxml-files">5. Annotation XML files</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p><mark>TODO</mark></p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_visualising_immutability">6. Visualising immutability</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="inheritance-rules">6.1. Inheritance rules of annotations</h3>
 <div class="paragraph">
-<p>As a general rule, we would like to impose that any class that implements an interface, inherits all the annotations of that interface.
-For example, if <code>java.util.List</code> is a container, then we want any implementation of that interface to be a container too.</p>
-</div>
-<div class="paragraph">
-<p>Frequently used JDK classes such as <code>java.lang.String</code> are marked <code>final</code> themselves, so that they cannot be subclassed.
-But in general, it seems a bad idea to weaken contracts.
-On the other hand, we can mark <code>java.lang.Object</code> as  <code>@E2Immutable</code> , while obviously not all its derived classes can be of that type.</p>
-</div>
-<div class="paragraph">
-<p>But the marks for eventually final and immutable classes push us to add some rules.
-Consider the <code>Verticle</code> interface and parts of its default implementation <code>AbstractVerticle</code>
-(please refer the section on Vertx integration <mark>TODO</mark> for an in-depth treatment):</p>
-</div>
-<div class="listingblock">
-<div class="title">Excerpts and annotations of Verticle.java and AbstractVerticle.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@EventuallyFinal</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>, framework = <span class="predefined-constant">true</span>)
-<span class="type">interface</span> <span class="class">Verticle</span> {
-
-    <span class="annotation">@Mark</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
-    <span class="type">void</span> init(<span class="annotation">@NullNotAllowed</span> Vertx vertx, <span class="annotation">@NullNotAllowed</span> <span class="predefined-type">Context</span> context);
-
-    <span class="annotation">@NotAllowed</span>(before = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
-    <span class="annotation">@NotModified</span>
-    Vertx getVertx();
-
-    <span class="annotation">@NotAllowed</span>(before = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
-    <span class="type">void</span> start(Promise&lt;<span class="predefined-type">Void</span>&gt; startPromise) <span class="directive">throws</span> <span class="exception">Exception</span>;
-
-    <span class="annotation">@NotAllowed</span>(before = <span class="string"><span class="delimiter">&quot;</span><span class="content">init</span><span class="delimiter">&quot;</span></span>)
-    <span class="type">void</span> stop(Promise&lt;<span class="predefined-type">Void</span>&gt; startPromise) <span class="directive">throws</span> <span class="exception">Exception</span>;
-}
-
-<span class="directive">public</span> <span class="directive">abstract</span> <span class="type">class</span> <span class="class">AbstractVerticle</span> <span class="directive">implements</span> Verticle {
-    <span class="directive">protected</span> Vertx vertx;
-    <span class="directive">protected</span> <span class="predefined-type">Context</span> context;
-
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> Vertx getVertx() {
-        <span class="keyword">return</span> vertx;
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> <span class="type">void</span> init(Vertx vertx, <span class="predefined-type">Context</span> context) {
-        <span class="local-variable">this</span>.vertx = vertx;
-        <span class="local-variable">this</span>.context = context;
-    }
-    ...
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Our primary motivation here is to make sure that <code>vertx</code> and <code>context</code> are never assigned to in code derived from <code>AbstractVerticle</code>: the code analyser will ensure they become effectively final.
-On top of that, we can try to monitor calls the <code>getVertx</code> method before the verticle has been registered, and calls to <code>init</code> from outside the framework.</p>
-</div>
-<div class="paragraph">
-<p>Now, inside a class that derives from <code>AbstractVerticle</code>, a similar situation arises:</p>
-</div>
-<div class="listingblock">
-<div class="title">MyVerticle.java</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@EventuallyFinal</span>(after = <span class="string"><span class="delimiter">&quot;</span><span class="content">start</span><span class="delimiter">&quot;</span></span>, framework = <span class="predefined-constant">true</span>)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">MyVerticle</span> <span class="directive">extends</span> AbstractVerticle {
-    <span class="directive">private</span> HttpServer server;
-    <span class="directive">private</span> JsonObject configuration;
-
-    <span class="annotation">@Override</span>
-    <span class="annotation">@Mark</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">start</span><span class="delimiter">&quot;</span></span>)
-    <span class="directive">public</span> <span class="type">void</span> start(Promise&lt;<span class="predefined-type">Void</span>&gt; startPromise) {
-        server = vertx.createHttpServer(); <i class="conum" data-value="1"></i><b>(1)</b>
-        ConfigRetriever retriever = ConfigRetriever.create(vertx, options); <i class="conum" data-value="1"></i><b>(1)</b>
-        retriever.getConfig(ar -&gt; {
-            <span class="keyword">if</span> (ar.failed()) {
-                startPromise.fail(<span class="string"><span class="delimiter">&quot;</span><span class="content">Cannot read config</span><span class="delimiter">&quot;</span></span>);
-            } <span class="keyword">else</span> {
-                configuration = ar.result();
-                startPromise.complete(); <i class="conum" data-value="2"></i><b>(2)</b>
-            }
-        });
-    }
-
-    <span class="directive">private</span> <span class="type">void</span> handleRequest(RoutingContext routingContext) {
-        textResult(routingContext, <span class="string"><span class="delimiter">&quot;</span><span class="content">a=</span><span class="delimiter">&quot;</span></span> + configuration.a);
-    }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>vertx</code> field has been initialised, is effectively final, and is non-null.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Logical exit point of the method: only after having executed this handler, which assigns to <code>configuration</code>, the rest of the program can continue.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The two fields in this subclass will become effectively final, but, crucially, later than the <code>vertx</code> field.
-The <code>handleRequest</code> method will be only be called after the <code>start</code> method logically ends.</p>
-</div>
-<div class="paragraph">
-<p>Should we treat the effective finality <code>AbstractVerticle</code> and <code>MyVerticle</code> as independent?
-Or do we want to impose <a href="#final-annotation">@Final</a> on any concrete implementation of <code>AbstractVerticle</code>?
-My intuition would say <em>yes</em>, we should do that, because of the nature of the class imposed on <code>MyVerticle</code> by the <code>Verticle</code> interface:
-it is going to be a class which has a start/stop lifecycle, instantiated by a framework, where code runs in the context of the framework and services started in that framework.
-Instances of this class should not be passed on; public methods should not be available for 'outsiders'.
-In most situations, the start/stop nature is binary, and while it may have a protracted starting phase, it will not become a start/phase 1/phase 2/stop lifecycle.
-But there are too many other examples where this would seem impractical.
-Therefore, we&#8217;ll stick to</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Summary of inheritance rules</div>
-<div class="paragraph">
-<p>As a general rule, a class inherits all annotations from directly implemented interfaces, but not from a possible parent class and its interfaces implemented.
-An interface that extends another interface does not inherit the annotations from its ancestor.</p>
-</div>
-<div class="paragraph">
-<p>However, methods inherit the annotations of methods they override.</p>
-</div>
-<div class="paragraph">
-<p>Marks for <a href="#final-annotation">@Final</a> and <a href="#e2immutable-annotation">@E2Immutable</a> annotations are restricted to the methods listed in the type that has the annotation, and the fields linked to them.</p>
-</div>
-</div>
-</div>
+<p><mark>TODO</mark></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_annotation_store_as_a_demo_project">7. The annotation store as a demo project</h2>
+<h2 id="demo-project">7. The annotation store as a demo project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Next to playing a role in the communication between the IntelliJ plugin and the analyser, it serves as a demo project for the analyser.</p>
+<p>This section assumes you have installed the analyser and its supporting jars, as described in <a href="#installing">Installing e2immu</a>.</p>
 </div>
 <div class="paragraph">
-<p>In <code>build.gradle</code>, the relevant lines are:</p>
+<p>Next to playing a role in the communication between the IntelliJ plugin and the analyser, the annotation store serves as a demo project for the analyser.
+In its <code>build.gradle</code> file, the relevant lines to run the analyser are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1714,29 +1550,31 @@ The fact that it cannot be instantiated is verified by</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_preconditions">9. Preconditions</h2>
+<h2 id="_analyser_details">9. Analyser details</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_preconditions">9.1. Preconditions</h3>
+<div class="paragraph">
+<p><mark>TODO</mark></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_instance_state">9.2. Instance state</h3>
+
+</div>
+<div class="sect2">
+<h3 id="companion-methods">9.3. Companion methods</h3>
 <div class="paragraph">
 <p><mark>TODO</mark></p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_instance_state">10. Instance state</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="companion-methods">10.1. Companion methods</h3>
-<div class="paragraph">
-<p><mark>TODO</mark></p>
-</div>
-</div>
-</div>
 </div>
 <div class="sect1">
-<h2 id="_overview_of_annotations">11. Overview of annotations</h2>
+<h2 id="_overview_of_annotations">10. Overview of annotations</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_annotation_modes">11.1. Annotation modes</h3>
+<h3 id="_annotation_modes">10.1. Annotation modes</h3>
 <div class="paragraph">
 <p>Depending on where you find yourself in the continuum between object-oriented programming and functional programming, or, put differently, almost never following the container and level 2 immutable rules, or mostly adhering to them, you may wish to be either notified for following the rules, or warned by the analyser for breaking the rules.
 It is in this spirit that we envisage working in</p>
@@ -1765,7 +1603,7 @@ The <a href="#notModified-annotation">@NotModified</a> will be highlighted, whil
 </div>
 </div>
 <div class="sect2">
-<h3 id="_inheritance_of_annotations">11.2. Inheritance of annotations</h3>
+<h3 id="_inheritance_of_annotations">10.2. Inheritance of annotations</h3>
 <div class="paragraph">
 <p>In general, the analyser allows a method to do better than the method it overrides.
 It will raise an error when the overriding method is  <code>@Modified</code> , where the original is  <code>@NotModified</code>.
@@ -1773,7 +1611,7 @@ It will raise an error when the overriding method is  <code>@Modified</code> , w
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-of-annotations">11.3. List of annotations</h3>
+<h3 id="list-of-annotations">10.3. List of annotations</h3>
 <div class="paragraph">
 <p>For each of the annotations, we answer a couple of standard questions:</p>
 </div>
@@ -1813,7 +1651,7 @@ It will raise an error when the overriding method is  <code>@Modified</code> , w
 <p>This classification hopefully helps to see the wood for the trees in the long list.</p>
 </div>
 <div class="sect3">
-<h4 id="allowsInterrupt-annotation">11.3.1. @AllowsInterrupt</h4>
+<h4 id="allowsInterrupt-annotation">10.3.1. @AllowsInterrupt</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1848,7 +1686,7 @@ Methods can be annotated with <code>@AllowsInterrupt(false)</code> to explicitly
 </div>
 </div>
 <div class="sect3">
-<h4 id="beforeMark-annotation">11.3.2. @BeforeMark</h4>
+<h4 id="beforeMark-annotation">10.3.2. @BeforeMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1888,7 +1726,7 @@ They guarantee that an eventually immutable object is in its <em>after</em> stat
 </div>
 </div>
 <div class="sect3">
-<h4 id="constant-annotation">11.3.3. @Constant</h4>
+<h4 id="constant-annotation">10.3.3. @Constant</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1950,7 +1788,7 @@ More details in <a href="#concept-constant">Constants</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="container-annotation">11.3.4. @Container</h4>
+<h4 id="container-annotation">10.3.4. @Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1994,7 +1832,7 @@ Non-containers are in <a href="#e1immutable-annotation">@E1Immutable</a> and <a 
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent-annotation">11.3.5. @Dependent</h4>
+<h4 id="dependent-annotation">10.3.5. @Dependent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2057,7 +1895,7 @@ Its opposite is  <code>@Independent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent1-annotation">11.3.6. @Dependent1</h4>
+<h4 id="dependent1-annotation">10.3.6. @Dependent1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2129,7 +1967,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent2-annotation">11.3.7. @Dependent2</h4>
+<h4 id="dependent2-annotation">10.3.7. @Dependent2</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2190,7 +2028,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e1container-annotation">11.3.8. @E1Container</h4>
+<h4 id="e1container-annotation">10.3.8. @E1Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2283,7 +2121,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e1immutable-annotation">11.3.9. @E1Immutable</h4>
+<h4 id="e1immutable-annotation">10.3.9. @E1Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2341,7 +2179,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2container-annotation">11.3.10. @E2Container</h4>
+<h4 id="e2container-annotation">10.3.10. @E2Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2387,7 +2225,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2immutable-annotation">11.3.11. @E2Immutable</h4>
+<h4 id="e2immutable-annotation">10.3.11. @E2Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2450,7 +2288,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="extensionClass-annotation">11.3.12. @ExtensionClass</h4>
+<h4 id="extensionClass-annotation">10.3.12. @ExtensionClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2493,7 +2331,7 @@ More details can be found in <a href="#concept-extension-class">Extension classe
 </div>
 </div>
 <div class="sect3">
-<h4 id="final-annotation">11.3.13. @Final</h4>
+<h4 id="final-annotation">10.3.13. @Final</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2598,7 +2436,7 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_finalizer">11.3.14. @Finalizer</h4>
+<h4 id="_finalizer">10.3.14. @Finalizer</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"></code></pre>
@@ -2609,7 +2447,7 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_fluent">11.3.15. @Fluent</h4>
+<h4 id="_fluent">10.3.15. @Fluent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2661,7 +2499,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_identity">11.3.16. @Identity</h4>
+<h4 id="_identity">10.3.16. @Identity</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2712,7 +2550,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ignoremodifications">11.3.17. @IgnoreModifications</h4>
+<h4 id="_ignoremodifications">10.3.17. @IgnoreModifications</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2755,7 +2593,7 @@ The <code>print</code> method family is obviously modifying to these fields, how
 </div>
 </div>
 <div class="sect3">
-<h4 id="_independent">11.3.18. @Independent</h4>
+<h4 id="_independent">10.3.18. @Independent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2805,7 +2643,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked">11.3.19. @Linked</h4>
+<h4 id="_linked">10.3.19. @Linked</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2842,13 +2680,13 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked1">11.3.20. @Linked1</h4>
+<h4 id="_linked1">10.3.20. @Linked1</h4>
 <div class="paragraph">
 <p><mark>TODO</mark></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mark">11.3.21. @Mark</h4>
+<h4 id="_mark">10.3.21. @Mark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2876,7 +2714,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="modified-annotation">11.3.22. @Modified</h4>
+<h4 id="modified-annotation">10.3.22. @Modified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2913,7 +2751,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="modified1-annotation">11.3.23. @Modified1</h4>
+<h4 id="modified1-annotation">10.3.23. @Modified1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2956,7 +2794,7 @@ In green mode, this one is the default; in red mode,  <code>@NotModified1</code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mutableModifiesArguments-annotation">11.3.24. @MutableModifiesArguments</h4>
+<h4 id="mutableModifiesArguments-annotation">10.3.24. @MutableModifiesArguments</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3015,7 +2853,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified-annotation">11.3.25. @NotModified</h4>
+<h4 id="notModified-annotation">10.3.25. @NotModified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3061,7 +2899,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified1-annotation">11.3.26. @NotModified1</h4>
+<h4 id="notModified1-annotation">10.3.26. @NotModified1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3133,7 +2971,7 @@ Functional interfaces are always normally  <code>@NotModified</code>: there are 
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull-annotation">11.3.27. @NotNull</h4>
+<h4 id="notNull-annotation">10.3.27. @NotNull</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3171,7 +3009,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull1-annotation">11.3.28. @NotNull1</h4>
+<h4 id="notNull1-annotation">10.3.28. @NotNull1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3196,7 +3034,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="notNull2-annotation">11.3.29. @NotNull2</h4>
+<h4 id="notNull2-annotation">10.3.29. @NotNull2</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3221,7 +3059,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="nullable-annotation">11.3.30. @Nullable</h4>
+<h4 id="nullable-annotation">10.3.30. @Nullable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3259,7 +3097,7 @@ Use it to contract in the red mode.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="only-annotation">11.3.31. @Only</h4>
+<h4 id="only-annotation">10.3.31. @Only</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3306,7 +3144,7 @@ Please find an example with a useful <code>@Only(after="&#8230;&#8203;")</code> 
 </div>
 </div>
 <div class="sect3">
-<h4 id="propagateModification-annotation">11.3.32. @PropagateModification</h4>
+<h4 id="propagateModification-annotation">10.3.32. @PropagateModification</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3377,7 +3215,7 @@ The annotation then informs the analyser that modifications need computing at ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="singleton-annotation">11.3.33. @Singleton</h4>
+<h4 id="singleton-annotation">10.3.33. @Singleton</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3433,7 +3271,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="testMark-annotation">11.3.34. @TestMark</h4>
+<h4 id="testMark-annotation">10.3.34. @TestMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3505,7 +3343,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="utilityClass-annotation">11.3.35. @UtilityClass</h4>
+<h4 id="utilityClass-annotation">10.3.35. @UtilityClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3580,7 +3418,7 @@ The fact that it cannot be instantiated is verified by</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="variable-annotation">11.3.36. @Variable</h4>
+<h4 id="variable-annotation">10.3.36. @Variable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3641,12 +3479,12 @@ It is the opposite of  <code>@Final</code> .</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="annotation-hierarchy">11.4. Relations between annotations</h3>
+<h3 id="annotation-hierarchy">10.4. Relations between annotations</h3>
 <div class="paragraph">
 <p>In this section we summarize the relations between annotations.</p>
 </div>
 <div class="sect3">
-<h4 id="_on_types">11.4.1. On types</h4>
+<h4 id="_on_types">10.4.1. On types</h4>
 <div class="paragraph">
 <p>Note that:</p>
 </div>
@@ -3677,7 +3515,7 @@ It is the opposite of  <code>@Final</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_fields">11.4.2. On fields</h4>
+<h4 id="_on_fields">10.4.2. On fields</h4>
 <div class="paragraph">
 <p>Note that  <code>@Variable</code>  fields can be  <code>@NotNull</code> !
 This obviously requires a not-null initialiser to be present; all other assignments must be not-null as well.
@@ -3743,7 +3581,7 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_constructors">11.4.3. On constructors</h4>
+<h4 id="_on_constructors">10.4.3. On constructors</h4>
 <div class="paragraph">
 <p>Non-trivial constructors have the  <code>@Modified</code>  property.
 When there is support data, a constructor is either  <code>@Independent</code>  (green) or  <code>@Dependent</code>  (red).
@@ -3751,7 +3589,7 @@ A constructor without annotations therefore implies either that the type is not 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_methods">11.4.4. On methods</h4>
+<h4 id="_on_methods">10.4.4. On methods</h4>
 <div class="paragraph">
 <p>Opposites:</p>
 </div>
@@ -3794,7 +3632,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_parameters">11.4.5. On parameters</h4>
+<h4 id="_on_parameters">10.4.5. On parameters</h4>
 <div class="paragraph">
 <p>Opposites:</p>
 </div>
@@ -3836,7 +3674,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="nullability">11.4.6. Nullability</h4>
+<h4 id="nullability">10.4.6. Nullability</h4>
 <div class="paragraph">
 <p>By convention,</p>
 </div>
@@ -3858,7 +3696,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_eventually_and_effectively_immutable">11.4.7. Eventually and effectively immutable</h4>
+<h4 id="_eventually_and_effectively_immutable">10.4.7. Eventually and effectively immutable</h4>
 <div class="paragraph">
 <p>Field types and method return types can be eventually or effectively immutable when their formal type is not level 1 or level 2 immutable, but the dynamic or computed type is.
 In the latter case, static analysis shows that all assignments to the field, or all return statements, result in an immutable object.
@@ -3905,10 +3743,10 @@ In the former case, object flow computation proves that the mark has been passed
 </div>
 </div>
 <div class="sect1">
-<h2 id="_list_of_errors_and_warnings">12. List of errors and warnings</h2>
+<h2 id="_list_of_errors_and_warnings">11. List of errors and warnings</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_opinionated">12.1. Opinionated</h3>
+<h3 id="_opinionated">11.1. Opinionated</h3>
 <div class="paragraph">
 <p>The errors described in this section relate to bad practices that are not tolerated by the analyser:</p>
 </div>
@@ -3938,7 +3776,7 @@ The implementation of the analyser assumes that parameters cannot be assigned to
 </div>
 </div>
 <div class="sect2">
-<h3 id="evaluation-errors">12.2. Evaluation</h3>
+<h3 id="evaluation-errors">11.2. Evaluation</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">ASSERT_EVALUATES_TO_CONSTANT_FALSE</dt>
@@ -3970,7 +3808,7 @@ This message is computed via a  <code>@NotNull</code>  on a field.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_empty_unused">12.3. Empty, unused</h3>
+<h3 id="_empty_unused">11.3. Empty, unused</h3>
 <div class="paragraph">
 <p>Errors of this type are typically trivial to clean up, so why not do it immediately?</p>
 </div>
@@ -4023,7 +3861,7 @@ If this is intentional, turn it into a local variable.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verifying_annotations">12.4. Verifying annotations</h3>
+<h3 id="_verifying_annotations">11.4. Verifying annotations</h3>
 <div class="paragraph">
 <p>The following errors relate to the annotations you added to your source code, to verify that a type, method or field has a given property.</p>
 </div>
@@ -4059,7 +3897,7 @@ However, the associated values are differing.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_immutability_2">12.5. Immutability</h3>
+<h3 id="_immutability_2">11.5. Immutability</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">CALLING_MODIFYING_METHOD_ON_E2IMMU</dt>
@@ -4108,7 +3946,7 @@ Variants exist for <code>@Only(before="&#8230;&#8203;")</code>, and level 2 immu
 </div>
 </div>
 <div class="sect2">
-<h3 id="_odds_and_ends">12.6. Odds and ends</h3>
+<h3 id="_odds_and_ends">11.6. Odds and ends</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">CIRCULAR_TYPE_DEPENDENCY</dt>
@@ -4154,1279 +3992,10 @@ Please refer to <a href="#concept-finalizer">Finalizers</a>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_analyser_2">13. The analyser</h2>
+<h2 id="_supporting_tools">12. Supporting tools</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_inspection">13.1. Inspection</h3>
-<div class="paragraph">
-<p>Special naming conventions for creating Java classes that hold annotations and companion methods:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Types</dt>
-<dd>
-<p>A sub-type immediately below the primary type in the file can have a dollar at the end.
-This indicates that the sub-type becomes a primary type, with the name identical to the sub-type name without the dollar, and the package detailed by a static final field called <code>PACKAGE_NAME</code> in the primary type.</p>
-</dd>
-<dt class="hdlist1">Methods</dt>
-<dd>
-<p>the rare occasion of adding an annotation to <code>getClass</code>, which is final in <code>java.lang.Object</code>, requires a dollar at the end which the inspector will remove.</p>
-</dd>
-<dt class="hdlist1">Constructors</dt>
-<dd>
-<p>when the type has a $ at the end, the constructor has to follow.
-The inspector removes the dollar silently.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Note that the name of the primary type holding the sub-types is completely irrelevant.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_resolution">13.2. Resolution</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_analyser_implementation">13.3. Analyser implementation</h3>
-<div class="sect3">
-<h4 id="_code_structure">13.3.1. Code structure</h4>
-<div class="paragraph">
-<p><code>PrimaryTypeAnalyser</code>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>starts from a <code>SortedType</code>, which contains one <code>PrimaryType</code> and a list of <code>WithInspectionAndAnalysis</code> (methods, fields, sub-types)</p>
-</li>
-<li>
-<p>creates and calls <code>TypeAnalyser</code>, <code>MethodAnalyser</code>, <code>FieldAnalyser</code>, and assigns <code>TypeAnalysis</code>, <code>MethodAnalysis</code>, <code>FieldAnalysis</code>
-to <code>TypeInfo.typeAnalysis</code>, <code>MethodInfo.methodAnalysis</code>, <code>FieldInfo.fieldAnalysis</code>.</p>
-</li>
-<li>
-<p>the <code>TypeAnalyser</code> creates, fills, and returns the <code>TypeAnalysis</code> object</p>
-</li>
-<li>
-<p>the <code>FieldAnalyser</code> creates, fills, and returns the <code>FieldAnalysis</code> object</p>
-</li>
-<li>
-<p>the <code>MethodAnalyser</code> creates, fills, and returns the <code>MethodAnalysis</code> object, but it also creates:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>ParameterAnalyser</code> objects, which fill, create and return <code>ParameterAnalysis</code> objects</p>
-</li>
-<li>
-<p><code>BlockAnalyser</code> objects, which fill, create and return <code>StatementAnalysis</code> objects.
-Each <code>StatementAnalysis</code> object corresponds recursively to a <code>Statement</code> in the <code>methodBody</code> block.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>TypeResolution</code> contains:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the list of circular dependencies</p>
-</li>
-<li>
-<p>the set of implicitly immutable data types for this type</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>TypeAnalysis</code> object holds:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a map of constant object flows</p>
-</li>
-<li>
-<p>a map of approved preconditions, ready for  <code>@Mark</code>  and  <code>@Only</code> </p>
-</li>
-<li>
-<p>annotations and properties via the parent <code>Analysis</code> object</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>FieldResolution</code> contains:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a flag marking if the type is implicitly immutable</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>FieldAnalysis</code> object holds:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the object flow of the field</p>
-</li>
-<li>
-<p>an effectively final value, which is an instance of <code>FinalFieldValue</code> unless we know better; it is not set when the field is  <code>@Variable</code> </p>
-</li>
-<li>
-<p>a list of variables linked to the field (other fields, parameters)</p>
-</li>
-<li>
-<p>a set of internal object flows</p>
-</li>
-<li>
-<p>an error map for marking illegal assignments</p>
-</li>
-<li>
-<p>an error flag</p>
-</li>
-<li>
-<p>annotations and properties via the parent <code>Analysis</code> object</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>MethodResolution</code> contains:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a set of methods of the same type that this method (transitively) calls</p>
-</li>
-<li>
-<p>a flag noting whether it is part of construction</p>
-</li>
-<li>
-<p>a flag whether it creates an object of itself</p>
-</li>
-<li>
-<p>a flag indicating that it only calls static methods</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>MethodAnalysis</code> object holds:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a single return value, if available</p>
-</li>
-<li>
-<p>summary information about <code>This</code> (mostly modification, we can maybe reduce this to single boolean?)</p>
-</li>
-<li>
-<p>a list of <code>StatementAnalysis</code> objects holding return value information.
-<mark>NOTE</mark> we can also store them in the method analyser, there may not be a need to hold on to them.</p>
-</li>
-<li>
-<p>a map of variables linked to fields and parameters</p>
-</li>
-<li>
-<p>a set of variables linked to the return value(s) of the method</p>
-</li>
-<li>
-<p>the joint precondition</p>
-</li>
-<li>
-<p>the precondition part for  <code>@Mark</code>  and  <code>@Only</code> </p>
-</li>
-<li>
-<p>information about possible  <code>@Mark</code>  and  <code>@Only</code>  annotations (can maybe moved directly into the annotations)</p>
-</li>
-<li>
-<p>a set of internal object flows</p>
-</li>
-<li>
-<p>the object flow of the method</p>
-</li>
-<li>
-<p>a fair number of error flags</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>StatementAnalysis</code> object holds:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>information about the statement: <code>Statement</code> reference, parent, next, list of blocks, indices and index</p>
-</li>
-<li>
-<p>a flag indicating if the statement (or block represented by the initial statement of the block) ecapes</p>
-</li>
-<li>
-<p>a flag indicating that the next statement is never reached</p>
-</li>
-<li>
-<p>an error flag</p>
-</li>
-<li>
-<p>a precondition represented by this statement</p>
-</li>
-<li>
-<p>the state of the method after evaluating this statement</p>
-</li>
-<li>
-<p>the precondition of the method after evaluating this statement</p>
-</li>
-<li>
-<p>if the statement has an expression part, the value of the expression</p>
-</li>
-<li>
-<p>replacement information</p>
-</li>
-<li>
-<p>a flag indicating if the method flow reaches the statement</p>
-</li>
-<li>
-<p>all variables referenced so far, and their properties (fully incremental)</p>
-</li>
-<li>
-<p>dependency information so far</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Evaluation of expressions requires an <code>EvaluationContext</code> object which moves from statement to statement, applying resulting changes into the <code>StatementAnalysis</code> object after each evaluation.
-Some of these changes then trickle down to the method analyser which updates the <code>MethodAnalysis</code> object.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_circular_dependencies">13.3.2. Circular dependencies</h4>
-<div class="paragraph">
-<p>The analyser approaches primary types independently, albeit in a carefully computed order of dependency between them.
-When it detects a circular dependency between two or more primary types, it issues a warning to indicate that a different, less powerful modification detection algorithm kicks in.
-We consider circular dependencies bad programming practice; generally, interfaces can be introduced to remedy this.
-The manual modification annotations on the interface method effectively substitute for the assumptions that the less powerful modification algorithm makes.</p>
-</div>
-<div class="paragraph">
-<p>Inside a primary type, the analyser deals with circular dependencies between the sub-types, the methods and the fields by running multiple iterations.
-The main reason it has to do this is that all fields are visible to all sub-types, even if they are marked <code>private</code>.</p>
-</div>
-<div class="paragraph">
-<p>The processing list determines the order in which the analyser processes fields, methods and sub-types.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_nested_classes">13.3.3. Nested classes</h4>
-<div class="paragraph">
-<p> <code>@Final</code> : across all methods in the primary type</p>
-</div>
-<div class="paragraph">
-<p>Parent or enclosing type when non-static must be have the property as well:  <code>@E1Immutable</code> ,  <code>@E2Immutable</code> ,  <code>@Container</code> ,  <code>@Independent</code> .</p>
-</div>
-<div class="paragraph">
-<p>What to do with abstract superclasses?
-They cause a problem because of the abstract methods, which can have any modification status.
-<mark>TODO</mark> think and implement.</p>
-</div>
-<div class="paragraph">
-<p>Eventual?
-<mark>TODO</mark> think and implement.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_modification_of_a_field">13.3.4. Modification of a field</h4>
-<div class="paragraph">
-<p>The code executes the following steps:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Wait until  <code>@Final</code>  or  <code>@Variable</code>  has been established.
-If  <code>@Variable</code> , then the field becomes  <code>@Modified</code> .</p>
-</li>
-<li>
-<p>If the field is of a functional interface type, the field is  <code>@NotModified</code> unless we can establish that there is an initializer or unambiguous constructor assignment with an explicit declaration (method reference, lambda, anonymous class implementation).</p>
-</li>
-<li>
-<p>As a short-cut, determine that the field is  <code>@NotModified</code> if its type is level 2 immutable.
-Whilst not technically necessary, this short-cut may resolve situations more quickly.</p>
-</li>
-<li>
-<p>Wait until the field summaries in methods have been set.
-This typically takes exactly one iteration, because a method which reads a field is later in the processing list.</p>
-</li>
-<li>
-<p>Wait until modification information is available for those methods which read the field.
-Importantly, we consider the methods (and SAM declarations of fields) of all types in the primary type.</p>
-</li>
-<li>
-<p>Determine modification based on the modification information in the field summaries.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_modification_of_a_method">13.3.5. Modification of a method</h4>
-<div class="paragraph">
-<p>The code executes the following steps:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>If the method&#8217;s field summaries contains an assignment to any field, inside the primary type, then the method is  <code>@Modified</code> .</p>
-</li>
-<li>
-<p>Wait until linking information (and hence modification information on fields) becomes available.</p>
-</li>
-<li>
-<p>If any of the field summaries contains a marker for a modified field, then the method becomes  <code>@Modified</code> .
-The analyser provides these marks when, amongst others, it sees a modifying method call on the field, or the field is an argument to a modifying parameter.</p>
-</li>
-<li>
-<p>Next, check the modification status of <code>this</code> in <code>thisSummary</code>, when the analyser has observed a local method call.
-The method is  <code>@Modified</code>  when the analyser has observed a modification to any of the <code>this</code> objects (<code>super</code>, &#8230;&#8203;).</p>
-</li>
-<li>
-<p>Then, check the marker for circular method calls or undeclared functional interfaces.
-In this situation, the modification status of the method depends on the presence of other modifying methods, non-private fields, on dependent methods.</p>
-</li>
-<li>
-<p>Finally, check the marker to copy the modification status from another method.
-The analyser issues this marker when the method passes on a functional interface argument to the other method.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_condition_and_state">13.3.6. Condition and state</h4>
-<div class="paragraph">
-<p>A method can have restrictions on the parameter and field values called <em>preconditions</em>.
-In general, these restrictions end up as a boolean expression in <code>MethodAnalysis.precondition</code>.
-The exception to this rule are the not-null and size restrictions on parameters, which become properties during evaluation, and are written out as separate annotations.</p>
-</div>
-<div class="paragraph">
-<p>Preconditions that participate in  <code>@Mark</code>  and  <code>@Only</code>  are stored in <code>MethodAnalysis.preconditionForEventual</code>.
-They are computed from normal preconditions.</p>
-</div>
-<div class="paragraph">
-<p>As the analyser progresses through the blocks and statements, it keeps track of:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the current <em>condition</em>, which is the boolean conjunction of all conditions in ever deeper <code>if</code> statements, (negated in the <code>else</code> block);</p>
-</li>
-<li>
-<p>the current <em>state</em>, which is the boolean conjunction of all restrictions on variables.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In the condition, top-level disjunctions indicate independent statements, while in the state, top-level conjunctions indicate independent statements:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">void</span> method1(<span class="predefined-type">String</span> a, <span class="predefined-type">String</span> b) {
-    <span class="keyword">if</span>(a == <span class="predefined-constant">null</span> || b == <span class="predefined-constant">null</span>) {
-        <span class="comment">// condition and state are: a == null || b == null;</span>
-        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">NullPointerException</span>();
-    }
-    <span class="comment">// state is: a != null &amp;&amp; b != null; empty condition</span>
-    ...
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In Java, because of short-circuiting, this is functionally identical to the 'independent' form:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">void</span> method2(<span class="predefined-type">String</span> a, <span class="predefined-type">String</span> b) {
-    <span class="keyword">if</span>(a == <span class="predefined-constant">null</span>) {
-        <span class="comment">// condition and state are: a == null</span>
-        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">NullPointerException</span>();
-    }
-    <span class="comment">// state is: a != null; empty condition</span>
-    <span class="keyword">if</span>(b == <span class="predefined-constant">null</span>) {
-        <span class="comment">// condition is: b == null; state is: a != null &amp;&amp; b == null</span>
-        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">NullPointerException</span>();
-    }
-    <span class="comment">// state is: a != null &amp;&amp; b != null; empty condition</span>
-    ...
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Condition and state travel deeper inside the blocks:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">void</span> method3(<span class="predefined-type">String</span> a, <span class="predefined-type">String</span> b) {
-    <span class="keyword">if</span>(a == <span class="predefined-constant">null</span>) {
-        <span class="comment">// condition and state are: a == null</span>
-        <span class="keyword">if</span>(b == <span class="predefined-constant">null</span>) {
-            <span class="comment">// condition and state are: a == null &amp;&amp; b == null</span>
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">UnsupportedOperationException</span>();
-        }
-        <span class="comment">// condition is: a == null; state is: a == null &amp;&amp; b != null</span>
-        <span class="keyword">return</span>;
-    }
-    <span class="comment">// state is: a != null; empty condition</span>
-    ...
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Both in <code>method1</code> and <code>method2</code>, the escape via a runtime exception introduces  <code>@NotNull</code>  annotations on the parameters.
-The analyser employs dedicated logic to ensure that in a second pass, it does not flag the condition in the <code>if</code> statement as a constant value.
-In <code>method3</code>, the conjunction in the condition after two successive <code>if</code> statements does not allow for individual not-null restrictions.
-The result is a precondition, annotated as <code>@Precondition("(not (null == a) or not (null == b))")</code>.
-Note that, perhaps counter-intuitively, if we were to replace the <code>return</code> statement with a <code>throws</code> statement, it would have <code>a == null</code> as condition, and not <code>a == null &amp;&amp; b != null</code>.</p>
-</div>
-<div class="paragraph">
-<p>The rules for adding and removing to condition and state are:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>start the method with the state equal to the preconditions, if applicable;</p>
-</li>
-<li>
-<p>when entering a conditional block, start a new <code>ConditionManager</code> with the statement&#8217;s expression added to the current condition and state;</p>
-</li>
-<li>
-<p>when a conditional block does not return, add the boolean complement to the state;</p>
-</li>
-<li>
-<p>in case of assignments or modifying methods, clear the state (partially);</p>
-</li>
-<li>
-<p>the state of parameters and effectively final fields travels up from inside blocks, but only if these blocks are unconditional.
-This is most notably the case for a <code>synchronized</code> block.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_computation_of_mark_only">13.3.7. Computation of @Mark, @Only</h4>
-<div class="paragraph">
-<p>The presence of eventual properties (level 1 immutable, level 2 immutable, content not null, &#8230;&#8203;) follows from the computation of the  <code>@Only</code>  and  <code>@Mark</code>  annotations.
-Here, we document how the analyser computes them.</p>
-</div>
-<div class="paragraph">
-<p>The analyser associates eventuality with a precondition on a field (or technically, on one or more fields); it labels the precondition with a mark string.
-Methods that guard against the precondition are <em>before</em> the mark, methods that guard against the boolean complement are <em>after</em> the mark.
-We define a guard here as the throwing of a run-time exception when the field&#8217;s value does not satisfy the condition.</p>
-</div>
-<div class="paragraph">
-<p>Each method holds information about such a precondition in <code>SetOnce&lt;Eventual&gt; eventual</code>.
-The <code>MethodAnalyser</code> computes the information in <code>computeOnlyMarkPrepWork</code> and <code>computeOnlyMarkAnnotate</code>.</p>
-</div>
-<div class="paragraph">
-<p>Then, the <code>TypeAnalyser</code> combines the information of the methods in <code>analyseOnlyMarkEventuallyE1Immutable</code>; the end result of the whole computation resides in <code>SetOnceMap&lt;String, Value&gt; approvedPreconditions</code> in <code>TypeAnalysis</code>.
-The keys are the different preconditions that have been approved for eventuality computation, the values are the associated mark strings consisting of the variable names of the fields in the precondition.
-Note: the current implementation relies on the precondition to be lifted using an assignment rather than a content change; the code resides in the level 1 immutability check.
-As a consequence, it is currently not possible to use the size of a collection, for example, as a precondition.</p>
-</div>
-<div class="paragraph">
-<p>The eventual annotation will receive a comma-separated list with all the marks in <code>approvedPreconditions</code>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_statement_analyser">13.3.8. Statement analyser</h4>
-<div class="paragraph">
-<p>Steps:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create local variable (<code>for(T t: ts)</code>, assignment statement)</p>
-</li>
-<li>
-<p>evaluate initialisers (classic <code>for</code>, <code>try</code> with resources, normal assignment statements).
-The results of the initialisers need to be known to the evaluation context, but cannot be permanent yet.</p>
-</li>
-<li>
-<p>evaluate updates (classic <code>for</code>).
-The results of the updaters need to be known to the evaluation context, but cannot be permanent yet.</p>
-</li>
-<li>
-<p>evaluate main expression (many statements).
-The results need to be known to the evaluation context.</p>
-</li>
-<li>
-<p>specific <code>return</code> statement code, update method-level data;</p>
-</li>
-<li>
-<p>specific <code>if</code>, <code>switch</code> code to check evaluations to constant</p>
-</li>
-<li>
-<p>primary block, recursive call; merge back by calling <code>lift</code></p>
-</li>
-<li>
-<p>sub-blocks, recursive calls; merge back by calling <code>lift</code></p>
-</li>
-<li>
-<p>determine state after this statement</p>
-</li>
-<li>
-<p>finally, make the results of the evaluation(s) permanent by calling <code>finalise</code></p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_post_and_pre_conditions">13.3.9. Post- and pre-conditions</h4>
-<div class="paragraph">
-<p>A non-modifying method without parameters can define an <em>aspect</em> of a type, like <code>size</code> or <code>length</code>.
-We define methods complementary to a normal class or interface method, using the naming convention <em>method name$action$aspect</em>.
-Let&#8217;s call them companion methods for now.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Modification+aspect</dt>
-<dd>
-<p>for modifying methods, show how the aspect changes from before to after the modification.</p>
-</dd>
-<dt class="hdlist1">Value (+aspect)</dt>
-<dd>
-<p>compute edge case values, and return the normal value otherwise.
-Aspect can be used, but does not have to be present.</p>
-</dd>
-<dt class="hdlist1">Precondition</dt>
-<dd>
-<p>describe the precondition in terms of parameters or field values</p>
-</dd>
-<dt class="hdlist1">Invariant</dt>
-<dd>
-<p>without aspect present, it has to be a condition on fields which holds all the time.</p>
-</dd>
-<dt class="hdlist1">Invariant+aspect</dt>
-<dd>
-<p>this expression describes an invariant of the aspect.
-For example, <code>size &gt;= 0</code>, before and after any method.</p>
-</dd>
-<dt class="hdlist1">Postcondition</dt>
-<dd>
-<p>describe the postcondition of the fields after the modification.
-(This is the modification without aspect.)</p>
-</dd>
-<dt class="hdlist1">Transfer (+aspect)</dt>
-<dd>
-<p>assign state to the return element, transferring it from the current object.</p>
-</dd>
-<dt class="hdlist1">Generate</dt>
-<dd>
-<p>generate any other type of</p>
-</dd>
-<dt class="hdlist1">Erase</dt>
-<dd>
-<p>we need to think about something that erases state.
-A <code>clear()</code> method on a collection should remove all <code>contains(x)</code> clauses.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Implementation issues:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Get rid of SIZE and everything surrounding it</p>
-</li>
-<li>
-<p>Parsing the methods, and storing them in the type in a reasonable data structure.
-We&#8217;ll work with the evaluated inline-functions; they have a translation mechanism already built in.</p>
-</li>
-<li>
-<p>The system generates preconditions, ensure that they can be tested.</p>
-</li>
-<li>
-<p>From a companion method we have to translate.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_nullity_of_fields">13.3.10. Nullity of fields</h4>
-<div class="paragraph">
-<p>If the field is effectively final, it receives its values from</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>its initialiser</p>
-</li>
-<li>
-<p>assignments in the constructor and methods that are exclusively part of the construction phase</p>
-</li>
-<li>
-<p>modifying methods cannot change the value, but they can erase constructor information (<code>instance type X</code> instead of <code>new X(&#8230;&#8203;)</code>)</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>If the field is variable, there can be assignments in public methods not part of the assignment phase.</p>
-</div>
-<div class="paragraph">
-<p>Either way, nullity comes from both methods where an assignment take place, and methods where restrictions are placed on the nullity.
-The latter can take place in modifying and non-modifying methods.</p>
-</div>
-<div class="paragraph">
-<p>The statement analyser of the first occurrence of a field in a method introduces a value for the field <em>only when both the field&#8217;s value and its nullity are known</em>.
-We need to ensure here that this rule will not be the cause of endless delay loops.</p>
-</div>
-<div class="paragraph">
-<p>The expected complication is in methods where there is no value yet for the field, but we still expect the nullity of the field variable to be computed.
-The field analyser must be able to grab this nullity independently of the value:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>for each method, it needs to know if nullity computations have not been halted.
-Typically, this is done in two stages:</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_loop_variables_overview">13.3.11. Loop variables overview</h4>
-<div class="paragraph">
-<p>Different situations</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>variable defined outside a loop</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>read in the loop, but not assigned in the loop: normal situation</p>
-</li>
-<li>
-<p>assigned in the loop</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>variable defined in the loop statement.
-Either can be assigned inside the loop as well.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><code>for(String s: strings)</code></p>
-</li>
-<li>
-<p><code>for(int i=0; i&lt;n; i++)</code></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><code>localVariablesAssignedInThisLoop</code> needs to be frozen before we know the distinction between situations 1 and 2.
-As long as the latest assignment is before the loop, the variable in the loop is represented by <code>var$loop</code>.
-Once we&#8217;re beyond the assignment, it becomes <code>var$loop$assigmentId</code>.</p>
-</div>
-<div class="paragraph">
-<p>We make no distinction between <code>forEach</code> and <code>for</code>: in both cases, the variable is added to the <code>localVariablesAssignedInThisLoop</code> set.
-While we could force the variable to be <code>final</code> in the former case, we&#8217;ll want different versions in case modifying methods are called on them.</p>
-</div>
-<div class="paragraph">
-<p>In the <code>forEach</code> case, we assign a value, once, during the evaluation phase of the loop statement.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_general_property_computation">13.3.12. General property computation</h4>
-<div class="paragraph">
-<p>We have decided on a very strict <em>write once</em> system: once a value has been determined, it cannot be changed anymore.
-Properties are written in a heavily controlled map of type <code>VariableProperties</code>.
-The value <code>Level.DELAY</code> is never written in the map, as it indicates that no value has been determined yet.</p>
-</div>
-<div class="paragraph">
-<p>In the statement analyser, property values travel from one statement to the next.
-Therefore, the last statement often contains the relevant information for the other analysers to read.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_not_null_property">13.3.13. Not-null property</h4>
-<div class="paragraph">
-<p>Variables in the statement analyser can have not-null induced by the context (parameters in method calls, scope, etc).
-At the same time, fields and parameters can get not-null values from the field and parameter analyser.
-Combining both in a single, non-incremental value turns out to be impossible.
-Therefore, we split, for every variable, non-null in</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>CONTEXT_NOT_NULL</code>: non-null value induced by context</p>
-</li>
-<li>
-<p><code>NOT_NULL_EXPRESSION</code>: non-null value coming from assignments and statement context</p>
-</li>
-<li>
-<p><code>EXTERNAL_NOT_NULL</code>: from the field analyser</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The combination of <code>CONTEXT_NOT_NULL</code> and <code>EXTERNAL_NOT_NULL</code> is the property called <code>NOT_NULL_EXPRESSION</code>, which is read-only unless there is a contract not-null.
-It is delayed when one of its components is delayed.</p>
-</div>
-<div class="paragraph">
-<p>While evaluating expressions, we use the property <code>NOT_NULL_EXPRESSION</code>.</p>
-</div>
-<div class="paragraph">
-<p>The method analyser records the return value&#8217;s not-null in <code>NOT_NULL_EXPRESSION</code>, read from the return variable&#8217;s <code>NOT_NULL_EXPRESSION</code>.
-The field analyser writes in <code>EXTERNAL_NOT_NULL</code>, and reads from the variables' <code>CONTEXT_NOT_NULL</code> (when no assignment was made), and the assignment&#8217;s values' <code>NOT_NULL_EXPRESSION</code>.</p>
-</div>
-<div class="paragraph">
-<p>The parameter analyser maintains the two aspects: context from the statement analyser, and external from the field analyser.</p>
-</div>
-<div class="paragraph">
-<p>The statement analyser uses the properties <code>CONTEXT_NOT_NULL_DELAY</code> and <code>CONTEXT_NOT_NULL_DELAY_RESOLVED</code> to control a delay on <code>CONTEXT_NOT_NULL</code>, when a method&#8217;s not-null properties, where the variable occurs as argument, have not been analysed yet.</p>
-</div>
-<div class="paragraph">
-<p>It is important to record the flow of the properties, and especially the mechanisms to break delays when no information is present.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">In the statement analyser</dt>
-<dd>
-<p>Let us consider the following cases:</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>the variable occurs in the <code>ChangeData</code> of <code>apply</code> of the main expression: any delays are resolved to <code>NULLABLE</code>, when no context not-null delay is present</p>
-</li>
-<li>
-<p>the variable does not occur in the <code>ChangeData</code>, but is still involved (say the local copy of a variable field <code>s$0</code>)</p>
-</li>
-</ol>
-</div>
-</dd>
-<dt class="hdlist1">In the field analyser</dt>
-<dt class="hdlist1">In the parameter analyser</dt>
-<dd>
-<p>Once a context not-null is known in the statement analyser&#8217;s last statement, the parameter&#8217;s value can be set.
-Important: this is one-way traffic!
-The first statement does NOT copy this value into the 'INITIAL'.
-Once a value can come from a field, the parameter analyser will copy it.</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_modification_property">13.3.14. Modification property</h4>
-<div class="paragraph">
-<p>The property indicating modification of a variable has been split in the same way as the not-null property:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>variables in statements use <code>CONTEXT_MODIFIED</code> and <code>MODIFIED_OUTSIDE_METHOD</code>, summarized in <code>MODIFIED_VARIABLE</code>.</p>
-</li>
-<li>
-<p>the method&#8217;s modification status is in <code>MODIFIED_METHOD</code></p>
-</li>
-<li>
-<p>a field&#8217;s modification is in <code>MODIFIED_OUTSIDE_METHOD</code></p>
-</li>
-<li>
-<p>modification of <code>this</code> is recorded in <code>METHOD_CALLED</code></p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The statement analyser uses the properties <code>METHOD_DELAY</code> and <code>METHOD_DELAY_RESOLVED</code> to control a delay on <code>CONTEXT_MODIFIED</code>, when a method&#8217;s modification properties, where the variable occurs as argument or scope, have not been analysed yet.</p>
-</div>
-<div class="paragraph">
-<p>Again let us record the flow of properties and delay-breaking mechanisms:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">In the statement analyser</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>should normally be broken in <code>MethodLevelData</code>, compute modification.</p>
-</li>
-</ol>
-</div>
-</dd>
-<dt class="hdlist1">In the parameter analyser</dt>
-<dd>
-<p>Entirely the same as for the not-null.
-=== Statement analysis</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>There is one <code>StatementAnalysis</code> object per statement, so a method consists of a chain of statements.
-All variables that exist in statement <em>i</em> will exist in statement <em>i+1</em> as well.
-A method&#8217;s last statement is the place to find the final value of non-local variables.</p>
-</div>
-<div class="paragraph">
-<p>Statement analysis is carried out until all statement analysers reach status <code>DONE</code>.
-A statement analyser <em>i+1</em> cannot reach done unless <em>i</em> is already has reached <code>DONE</code>.
-Four main aspects control delays in the statement analyser:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>the status of the analyser of the previous statement</p>
-</li>
-<li>
-<p>the value of variables</p>
-</li>
-<li>
-<p>the linked variable set of variables</p>
-</li>
-<li>
-<p>the three expressions in the condition manager: condition, state, pre-condition</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_variables">13.4. Variables</h3>
-<div class="paragraph">
-<p>We recognize the following types of variables:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>fields, where it is important whether the field is effectively final, variable, or as yet undecided in the first iteration(s)</p>
-</li>
-<li>
-<p>parameters, which are non-assignable</p>
-</li>
-<li>
-<p>local variables, among which copies of variable fields and versions of variables used in loops but defined outside them</p>
-</li>
-<li>
-<p><code>this</code>, <code>super</code></p>
-</li>
-<li>
-<p>dependent variables, like the cells in an array; mostly treated as local variables</p>
-</li>
-<li>
-<p>one return variable for each method, which is assigned a value in a <code>return</code> statement</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Some variables never leave the statement analyser(s).
-However, there are important information flows:</p>
-</div>
-<div class="paragraph">
-<p>The method analyser reads</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>the fact whether fields have been assigned to help decide on the modification of the method;</p>
-</li>
-<li>
-<p>the value of the return variable of the last statement to decide on the method&#8217;s return value;</p>
-</li>
-<li>
-<p>the modification properties of the <code>this</code> and <code>super</code> variables to help decide on the modification of the method.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The field analyser reads</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>almost all information about the fields occurring in the last statement</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The parameter analyser reads</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>properties of the parameter variables in the last statement</p>
-</li>
-<li>
-<p>properties and from the field analyser in case a parameter has been assigned to a field or linked to a field</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The statement analyser copies back information</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>from the field analyser, about fields occurring in the statement</p>
-</li>
-<li>
-<p>from the parameter analyser</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>It is important to note that there is very limited 'circular' information flow.</p>
-</div>
-<div class="paragraph">
-<p>Fields are created in the statement analyser only when they occur.
-Given the write-once nature of the design, their value remains undecided until the field analyser has decided whether the variable is effectively final or not.
-In the latter case, the actual value of a field can change from one statement to the next (or even within statements); this requires additional logic.</p>
-</div>
-<div class="paragraph">
-<p>Modification and linking is a one-way flow from</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>main computation is in the statement analyser</p>
-</li>
-<li>
-<p>from the statement analyser to the field analyser: the computation of <code>CONTEXT_MODIFIED</code>, closely coupled with the computation of the linked variables of a field variable.
-All variables start in the first statement with an empty set of linked variables, and a <code>Level.FALSE</code> value for the context modification, unless the user explicitly contracted the modification status of the parameter with an annotation.</p>
-</li>
-<li>
-<p>from the field analyser to parameter analyser: in the form of the <code>MODIFIED_IN_METHOD</code> property, which ends up combined with <code>CONTEXT_MODIFIED</code> into the parameter&#8217;s final <code>MODIFIED_VARIABLE</code> property determining its  <code>@Modified</code> / <code>@NotModified</code> annotation.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>External not-null (ENN) travels from the parameter analyser back to the statement analysers, after values of fields have been established.
-Because a statement reaches <code>DONE</code> status as soon as value and linked variables have been established, an explicit delay system exists to make sure that statemens which involve fields with a delayed ENN are revisited once.</p>
-</div>
-<div class="sect3">
-<h4 id="_variable_fields">13.4.1. Variable fields</h4>
-<div class="paragraph">
-<p>Variable fields interact with synchronisation.
-A time increase is equivalent to an opportunity for another thread to update the content of variable fields.</p>
-</div>
-<div class="paragraph">
-<p>The analyser can determine if a method increases time when called.
-Calls to non-private methods always increase time because the user can override them.
-Certain statements increase time (<code>try-catch</code>, <code>synchronized</code>).
-The method resolver determines if a method increases time or not.</p>
-</div>
-<div class="paragraph">
-<p>The statement analyser keeps track of time.
-Determining time obviously depends on the methods being called, but because the method resolver determines if a method increases time, this happens in a deterministic way in the first iteration of the analyser.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_different_variable_states">13.4.2. Different variable states</h4>
-<div class="paragraph">
-<p>Each statement analyser keeps up to three different states for each variable:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Initial state</dt>
-<dd>
-<p>the initial state is either the state as inherited from the previous statement, or the variable&#8217;s initial state.
-The latter situation occurs for every variable introduced in the first statement of each method.</p>
-</dd>
-<dt class="hdlist1">Evaluation state</dt>
-<dd>
-<p>the state after evaluation of the main expression of the statement.
-Obviously, not all statements have such an expression, or the variable may not occur at all in the expression, in which case the evaluation state can be skipped.</p>
-</dd>
-<dt class="hdlist1">Merge state</dt>
-<dd>
-<p>if the statement has sub-blocks, a summary state exists to allow progressing to the next statement.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Information always travels from initial, potentially via evaluation, to merge; never in a different order!
-The analyser computes the evaluation of statement <em>i</em> before starting the statement analyser of the sub-blocks, and computes the merge of statement <em>i</em> after all statement analysers in all sub-blocks have been activated.</p>
-</div>
-<div class="paragraph">
-<p>We use suffixes <code>-C</code>, <code>-E</code> and <code>:M</code> respectively, which means that the following comparisons hold alphanumerically:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="integer">0</span>-C &lt; <span class="integer">0</span>-E &lt; O<span class="float">.0</span><span class="float">.0</span>-C &lt; <span class="float">0.0</span><span class="float">.0</span>-E &lt; <span class="float">0.0</span><span class="float">.0</span>:M &lt; <span class="float">0.0</span><span class="float">.1</span>-C &lt; ... &lt; <span class="integer">0</span>:M &lt; <span class="integer">1</span>-C &lt; ...</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_data_stored_for_a_variable">13.4.3. Data stored for a variable</h4>
-<div class="paragraph">
-<p>The <code>VariableInfo</code> objects hold the following data:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Variable</dt>
-<dd>
-<p>the variable being stored.
-Always present from the start.</p>
-</dd>
-<dt class="hdlist1">Assignment ID</dt>
-<dd>
-<p>A marker for when this particular <code>VariableInfo</code> object is created.
-It contains the statement index, and the level in the container, separated by a colon.
-This value is present from the creation of the <code>VariableInfo</code> object, even though it can vary across <code>VariableInfo</code> objects for the same variable.</p>
-</dd>
-<dt class="hdlist1">Value</dt>
-<dd>
-<p>starts off with <code>NO_VALUE</code> (not assigned), and becomes immutable when it receives a value.</p>
-</dd>
-<dt class="hdlist1">Linked variables</dt>
-<dd>
-<p>start off with <code>null</code>, and becomes immutable when it receives a value.
-Bar one exception, the linked variables come with the assignment of a value, potentially in a later iteration.
-The linked variables of a variable field change when the analyser creates a new local copy for reading, i.e., outside an assignment.</p>
-</dd>
-<dt class="hdlist1">Properties</dt>
-<dd>
-<p>a properties map, with <code>Level.DELAY</code> being the default value.</p>
-</dd>
-<dt class="hdlist1">Statement time</dt>
-<dd>
-<p>a constant <code>NOT_A_VARIABLE_FIELD</code> for all non-variable fields.
-For fields, starts off with <code>VARIABLE_FIELD_DELAYED</code> (not assigned) until we know if the field is variable or not.
-Then, for variable fields, it stores the statement time of the latest assignment.</p>
-</dd>
-<dt class="hdlist1">Object flow</dt>
-<dd>
-<p>generally also set during an assignment.
-The value <code>NO_FLOW</code> is used when no value as been set.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>All these fields are immutable once they have been set, except the <code>properties</code> map, which is incremental.
-The <code>READ</code> and <code>ASSIGNED</code> properties have the following special behaviour: &#8230;&#8203; <mark>TODO</mark></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tests_basics_0">13.4.4. Tests: Basics_0</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">String</span> effectivelyFinal = <span class="string"><span class="delimiter">&quot;</span><span class="content">abc</span><span class="delimiter">&quot;</span></span>;
-<span class="directive">public</span> <span class="predefined-type">String</span> getEffectivelyFinal() {
-    <span class="keyword">return</span> effectivelyFinal;
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Analysers:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Statement analyser, iteration 0, statement 0, return statement.
-The field <code>effectivelyFinal</code> does not yet exist in the list of variables; the change data yields a <code>FieldReference</code> pointing to a value of <code>NO_VALUE</code>, and a marker that the variable is read in this statement.</p>
-</li>
-<li>
-<p>Method analyser: <mark>TODO</mark></p>
-</li>
-<li>
-<p>Field analyser, iteration 0: it is immediately clear that the field is explicitly final, and that the initialiser is level 2 immutable.
-Therefore, an effectively final value can be assigned: <code>"abc"</code>.
-Everything can be concluded.</p>
-</li>
-<li>
-<p>Statement analyser, iteration 1: at initialisation, the variable is created, and the effectively final value is filled.
-The main evaluation can therefore return a value.
-The return variable can also be set.</p>
-</li>
-<li>
-<p>Method analyser: can conclude all except for the approved pre-conditions, which will remain unresolved?</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tests_basics_1">13.4.5. Tests: Basics_1</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; f1;
-
-<span class="directive">public</span> Basics_1(<span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; p0, <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; p1, <span class="predefined-type">String</span> p2) {
-    <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; s1 = p0;
-    <span class="local-variable">this</span>.f1 = s1;
-}
-
-<span class="directive">public</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; getF1() { <span class="keyword">return</span> f1; }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Iteration 0, statement analyser for the constructor:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>statement 0: at initialisation, <code>this</code> and the three parameters are created as variables, in the <code>INITIAL</code> phase.
-The local variable <code>s1</code> is created, and assigned to the first parameter.
-Both exist in <code>EVAL</code> phase, one with an assignment id, the other with a read id.</p>
-</li>
-<li>
-<p>statement 1: a field reference is created, and assigned the value <code>p0</code>.
-The field is linked to this parameter.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Iteration 0, statement analyser for the getter:
-* statement 0: the field does not yet exist in the list of variables.
-It is marked as read during evaluation, and will be created during the initialisation step of the next iteration.
-The return variable has been created at initialisation, but for now has no value.</p>
-</div>
-<div class="paragraph">
-<p>Iteration 0, field analyser:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the field is marked as effectively final.</p>
-</li>
-<li>
-<p>because there is no /</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Iteration 1, statement analyser for getter:
-* the field <code>f1</code> has the value <code>instance type Set&lt;String&gt;</code>, not linked locally.
-* the return variable points to the field <code>f1</code>.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">IMPORTANT</dt>
-<dd>
-<p>We could also return the value of <code>f1</code> in the return statement, but at the moment we don&#8217;t think it matters that much.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Iteration 1, field analyser:
-Modification is determined, as is nullability.</p>
-</div>
-<div class="paragraph">
-<p>Iteration 2: parameter analyser: the <code>@NotNull</code> of the field travels to the parameter.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tests_modification_0">13.4.6. Tests: Modification_0</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; set1 = <span class="keyword">new</span> <span class="predefined-type">HashSet</span>&lt;&gt;();
-
-<span class="directive">public</span> <span class="type">void</span> add(<span class="annotation">@NotNull</span> <span class="predefined-type">String</span> v) {
-    set1.add(v);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Iteration 0, statement analyser in <code>add</code>, statement 0:
-* the expression evaluates to <code>NO_VALUE</code> as <code>set1</code> is not a known variable</p>
-</div>
-<div class="paragraph">
-<p>Iteration 0, field analyser:
-* the field is explicitly final.
-We don&#8217;t have to wait for modification since the field is public.</p>
-</div>
-<div class="paragraph">
-<p>Iteration 1, statement analyser in <code>add</code>: Value, linked variables, and <code>@Modified</code> determined.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_breaking_delays">13.4.7. Breaking delays</h4>
-<div class="paragraph">
-<p>Break that only works partially, in iteration 1+ assignment from analyser to variable:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"> <span class="keyword">if</span> (initialValue.expressionIsDelayed &amp;&amp; notYetAssignedToWillBeAssignedToLater) {
-    <span class="predefined-type">String</span> objectId = index + <span class="string"><span class="delimiter">&quot;</span><span class="content">-</span><span class="delimiter">&quot;</span></span> + fieldReference.fieldInfo.fullyQualifiedName();
-    <span class="predefined-type">Expression</span> initial = NewObject.initialValueOfField(objectId,
-        primitives, fieldReference.parameterizedType());
-    initialValue = <span class="keyword">new</span> ExpressionAndDelay(initial, <span class="predefined-constant">false</span>);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Infinite when break not present, with break the analyser works fine:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">FirstThen_0</span>&lt;S&gt; {
-
-    <span class="directive">private</span> S first;
-
-    <span class="directive">public</span> FirstThen_0(<span class="annotation">@NotNull</span> S first) {
-        <span class="local-variable">this</span>.first = Objects.requireNonNull(first);
-    }
-
-    <span class="directive">public</span> <span class="type">void</span> set() {
-        <span class="keyword">if</span> (first == <span class="predefined-constant">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">UnsupportedOperationException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Already set</span><span class="delimiter">&quot;</span></span>);
-        first = <span class="predefined-constant">null</span>;
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Infinite when break not present, too early with break:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Singleton_7</span> {
-
-    <span class="directive">private</span> <span class="directive">static</span> <span class="type">boolean</span> created;
-
-    <span class="directive">public</span> Singleton_7(<span class="type">int</span> k) {
-        <span class="keyword">if</span> (created) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">UnsupportedOperationException</span>();
-        created = <span class="predefined-constant">false</span>;
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Infinite either way:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Project_2</span> {
-
-    <span class="directive">static</span> <span class="type">class</span> <span class="class">Container</span> {
-        <span class="directive">final</span> <span class="predefined-type">String</span> value;
-
-        <span class="directive">public</span> <span class="predefined-type">Container</span>(<span class="predefined-type">String</span> value) {
-            <span class="local-variable">this</span>.value = value;
-        }
-    }
-
-    <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, <span class="predefined-type">Container</span>&gt; kvStore = <span class="keyword">new</span> <span class="predefined-type">ConcurrentHashMap</span>&lt;&gt;();
-
-    <span class="directive">public</span> <span class="predefined-type">String</span> set(<span class="predefined-type">String</span> key, <span class="predefined-type">String</span> value) {
-        <span class="predefined-type">Container</span> prev = kvStore.get(key);
-        <span class="keyword">if</span> (prev == <span class="predefined-constant">null</span>) {
-            <span class="keyword">new</span> <span class="predefined-type">Container</span>(value); <span class="comment">// removing container also solves the problem</span>
-        }
-        <span class="keyword">return</span> prev.value; <span class="comment">// cause of the problem (change to key or constant solves the issue)</span>
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_supporting_tools">14. Supporting tools</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_gradle_plugin">14.1. Gradle plugin</h3>
+<h3 id="_gradle_plugin">12.1. Gradle plugin</h3>
 <div class="paragraph">
 <p>The Gradle plugin greatly facilitates the use of the analyser by integrating it your project&#8217;s build process.
 We based its initial implementation on the one from <a href="https://www.sonarqube.org/" target="_blank" rel="noopener">SonarQube</a>.</p>
@@ -5465,7 +4034,7 @@ Gradle takes care of source and class path.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_key_value_store">14.2. Key-value store</h3>
+<h3 id="_key_value_store">12.2. Key-value store</h3>
 <div class="paragraph">
 <p>The key-value store is a simple, two-class implementation of an independent key-value store acting as a bridge between the  <em>e2immu</em>  analyser and the  IntelliJ IDEA  plugin.
 It is mostly agnostic to the purpose in the project: it stores key-value pairs in sub-stores called projects.</p>
@@ -5550,14 +4119,14 @@ INFO: Started kv server on port 8281; read-within-millis 5000
 </div>
 </div>
 <div class="sect2">
-<h3 id="_intellij_idea_plugin">14.3.  IntelliJ IDEA  plugin</h3>
+<h3 id="_intellij_idea_plugin">12.3.  IntelliJ IDEA  plugin</h3>
 <div class="paragraph">
 <p>Without a plugin for an IDE, the analyser would be hard to use, and the main purpose of the project, namely, unobtrusively assisting in better coding, would remain very far off.
 The current plugin for  IntelliJ IDEA  is absolutely minimal.
 We based our initial implementation on the <a href="https://plugins.jetbrains.com/plugin/13303-return-highlighter" target="_blank" rel="noopener">Return statement highlighter plugin</a> by Edoardo Luppi.</p>
 </div>
 <div class="sect3">
-<h4 id="visual-objectives">14.3.1. Visual objectives</h4>
+<h4 id="visual-objectives">12.3.1. Visual objectives</h4>
 <div class="paragraph">
 <p>For the proof of concept, we aim to color elements of the source code in such a way that there is visual information explaining why a type is not  <code>@E2Immutable</code>  or  <code>@Container</code> .
 In the green mode, we highlight the immutable elements, which useful when they are sparse.
@@ -5814,7 +4383,7 @@ The analyser colors:</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_information_flow">14.3.2. Information flow</h4>
+<h4 id="_information_flow">12.3.2. Information flow</h4>
 <div class="paragraph">
 <p>Exactly which information does the analyser store in the key-value store?
 The keys are type names, method names, parameter names, or field names in a format that both analyser and plugin understand:</p>
@@ -5851,7 +4420,7 @@ the composite key is the field&#8217;s or method&#8217;s key followed by a space
 </div>
 </div>
 <div class="sect3">
-<h4 id="_implementation">14.3.3. Implementation</h4>
+<h4 id="_implementation">12.3.3. Implementation</h4>
 <div class="paragraph">
 <p>The <code>JavaAnnotator</code> class links the plugin to the abstract syntax tree (or PSI in IntelliJ-speak).
 It is instrumental to decide which textual elements are to be highlighted.</p>
@@ -5905,7 +4474,7 @@ As soon as an element is not in the cache, the plugin requests the annotation va
 </div>
 </div>
 <div class="sect1">
-<h2 id="_copyright_and_license">15. Copyright and License</h2>
+<h2 id="_copyright_and_license">13. Copyright and License</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Copyright &#169; 2020-2021, Bart Naudts, <a href="https://www.e2immu.org" class="bare">https://www.e2immu.org</a></p>
@@ -5922,7 +4491,7 @@ If not, see <a href="http://www.gnu.org/licenses/" class="bare">http://www.gnu.o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-25 21:18:44 UTC
+Last updated 2021-04-26 15:07:29 UTC
 </div>
 </div>
 <style>
