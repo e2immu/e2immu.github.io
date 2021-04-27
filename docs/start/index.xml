@@ -6,7 +6,7 @@ it aspires to be educational: large software projects are easier to maintain whe
 The Road to Immutability →, PDF There&amp;rsquo;s also a slide deck covering the basic concepts.
 TL;DR modification: changes to the object graph of an object&amp;rsquo;s fields.
 container: a type which does not make modifications to the parameters of its constructors and non-private methods. You can use it as safe storage for your objects.</description></item><item><title>Analyser</title><link>https://www.e2immu.org/docs/start/analyser/</link><pubDate>Mon, 16 Nov 2020 13:59:39 +0100</pubDate><guid>https://www.e2immu.org/docs/start/analyser/</guid><description>Next to promoting the use of practical immutability, the e2immu project provides a static code analyser to help enforce the proper use of these immutability concepts.
-The analyser is opinonated: it warns against a number of bad practices, such as:
+The analyser is opinionated: it warns against a number of bad practices, such as:
 Assigning to a field outside the type of that field, is not allowed. Why? We believe that modification belongs to the type itself, as per the concept of a container.</description></item><item><title>Build, install, run</title><link>https://www.e2immu.org/docs/start/buildinstall/</link><pubDate>Mon, 16 Nov 2020 13:59:39 +0100</pubDate><guid>https://www.e2immu.org/docs/start/buildinstall/</guid><description>Building and installing the analyser and related projects is detailed in the Installing e2immu → section of the manual.
 TL;DR STEP 1: Ensure you have a JDK 16 (https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) or better, and git (https://git-scm.com/download/win).
 STEP 2: Clone the project(s) from GitHub, minimally e2immu-support → and e2immu →.
