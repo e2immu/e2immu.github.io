@@ -461,6 +461,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_definition">8.1. Definition</a></li>
 <li><a href="#dynamic-type-annotations">8.2. Dynamic type annotations</a></li>
 <li><a href="#inheritance">8.3. Inheritance</a></li>
+<li><a href="#static-side-effects">8.4. Static side effects</a></li>
+<li><a href="#value-based-classes">8.5. Value-based classes</a></li>
 </ul>
 </li>
 <li><a href="#eventual-immutability">9. Eventual immutability</a>
@@ -1779,6 +1781,190 @@ No getter should ever be modifying.</p>
 <div class="paragraph">
 <p>The other direction is more interesting, while equally simple to explain: deriving from a parent class cannot increase the immutability level.
 Explicitly changing a modifying method into a non-modifying one is not allowed by the analyser.</p>
+</div>
+<div class="paragraph">
+<p>We will allow interfaces to be used to set expectations: when <code>java.util.Set</code> is defined to be a  <code>@Container</code> , it makes sense to demand that every implementation of <code>Set</code> is a  <code>@Container</code>  as well.
+This rule will extend to  <code>@E1Immutable</code> ,  <code>@E2Immutable</code> , and  <code>@Independent</code> .</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="static-side-effects">8.4. Static side effects</h3>
+<div class="paragraph">
+<p>Up to now, we have made no distinction between static fields and instance fields: modifications are modifications.
+Inside a primary type, we will stick to this rule.
+In the following example, each call to <code>getK</code> increments a counter, which is a modifying operation because the type owns the counter:</p>
+</div>
+<div class="listingblock">
+<div class="title">Modifications on static fields are modifications</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E1Container</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CountAccess</span>&lt;K&gt; {
+    <span class="directive">private</span> <span class="directive">final</span> K k;
+
+    <span class="annotation">@Modified</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">AtomicInteger</span> counter = <span class="keyword">new</span> <span class="predefined-type">AtomicInteger</span>();
+
+    <span class="directive">public</span> CountAccess(K k) {
+        <span class="local-variable">this</span>.k = k;
+    }
+
+    <span class="annotation">@Modified</span>
+    <span class="directive">public</span> K getK() {
+        counter.getAndIncrement();
+        <span class="keyword">return</span> k;
+    }
+
+    <span class="annotation">@NotModified</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">int</span> countAccessToK() {
+        <span class="keyword">return</span> counter.get();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can explicitly ignore modifications with the  <code>@IgnoreModifications</code>  annotation, which may make sense from a semantic point of view:</p>
+</div>
+<div class="listingblock">
+<div class="title">Modification on static field explicitly ignored</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">CountAccess</span>&lt;K&gt; {
+    <span class="directive">private</span> <span class="directive">final</span> K k;
+
+    <span class="annotation">@IgnoreModifications</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">AtomicInteger</span> counter = <span class="keyword">new</span> <span class="predefined-type">AtomicInteger</span>();
+
+    <span class="directive">public</span> CountAccess(K k) {
+        <span class="local-variable">this</span>.k = k;
+    }
+
+    <span class="annotation">@NotModified</span>
+    <span class="directive">public</span> K getK() {
+        counter.getAndIncrement();
+        <span class="keyword">return</span> k;
+    }
+
+    <span class="annotation">@NotModified</span>
+    <span class="directive">public</span> <span class="directive">static</span> <span class="type">int</span> countAccessToK() {
+        <span class="keyword">return</span> counter.get();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next section, on <a href="#value-based-classes">Value-based classes</a>, briefly explores these semantic differences.</p>
+</div>
+<div class="paragraph">
+<p>Note that when the modification takes place inside the constructor, it is "ignored", because constructors are meant to be modifying:</p>
+</div>
+<div class="listingblock">
+<div class="title">Modification takes place inside constructor</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">HasUniqueIdentifier</span>&lt;K&gt; {
+    <span class="directive">public</span> <span class="directive">final</span> K k;
+    <span class="directive">public</span> <span class="directive">final</span> <span class="type">int</span> identifier;
+
+    <span class="annotation">@NotModified</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">AtomicInteger</span> generator = <span class="keyword">new</span> <span class="predefined-type">AtomicInteger</span>();
+
+    <span class="directive">public</span> HasUniqueIdentifier(K k) {
+        <span class="local-variable">this</span>.k = k;
+        identifier = generator.getAndIncrement();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When static modifying methods are called, on a field not belonging to the primary type or any of the parent types, or directly on a type expression which does not refer to any of the types in the primary type or parent types, we will make an exception to this rule, and classify the modification as a <em>static side effect</em>.
+This leads to consistency with the rules of level 2 immutable types, which only look at the fields and assume that when methods do not modify the fields, they are actually non-modifying.</p>
+</div>
+<div class="paragraph">
+<p>Without an  <code>@IgnoreModifications</code>  annotation on the field <code>System.out</code> (which we would typically add), printing to the console results in</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@StaticSideEffects</span>
+<span class="annotation">@NotModified</span>
+<span class="directive">public</span> K getK() {
+    <span class="predefined-type">System</span>.out.println(<span class="string"><span class="delimiter">&quot;</span><span class="content">Getting </span><span class="delimiter">&quot;</span></span>+k);
+    <span class="keyword">return</span> k;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We leave it up to the programmer or designer to determine whether static calls deserve a  <code>@StaticSideEffects</code>  warning, or not.
+In almost all instances, we prefer a singleton instance (see <a href="#singleton-classes">Singleton classes</a>) over a class with modifying static methods.
+In singletons the normal modification rules apply, unless  <code>@IgnoreModifications</code>  decorates the static field which allows access to the singleton.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="value-based-classes">8.5. Value-based classes</h3>
+<div class="paragraph">
+<p>Quoting from the JDK 8 documentation, value-based classes are</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>final and immutable (though may contain references to mutable objects);</p>
+</li>
+<li>
+<p>have implementations of equals, hashCode, and toString which are computed solely from the instance&#8217;s state and not from its identity or the state of any other object or variable;</p>
+</li>
+<li>
+<p>make no use of identity-sensitive operations such as reference equality (==) between instances, identity hash code of instances, or synchronization on an instances&#8217;s intrinsic lock;</p>
+</li>
+<li>
+<p>are considered equal solely based on equals(), not based on reference equality (==);</p>
+</li>
+<li>
+<p>do not have accessible constructors, but are instead instantiated through factory methods which make no commitment as to the identity of returned instances;</p>
+</li>
+<li>
+<p>are freely substitutable when equal, meaning that interchanging any two instances x and y that are equal according to equals() in any computation or method invocation should produce no visible change in behavior.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Item 1 requires level 1 immutability (all fields are  <code>@Final</code> ) but does not specify any of the restrictions we require for level 2 immutability.
+Item 2 implies that should <code>equals</code>, <code>hashCode</code> or <code>toString</code> make a modification to the object, its state changes, which would then change the object with respect to other objects.
+We could conclude that these three methods cannot be modifying.</p>
+</div>
+<div class="paragraph">
+<p>Loosely speaking, objects of a value-based class can be identified by the values of their fields.
+Level 2 immutability (or deeper) is not requirement to be a value-based class.
+However, most level 2 immutable types will become value-classes.
+Revisiting the example from the previous section, we can construct a counter-example:</p>
+</div>
+<div class="listingblock">
+<div class="title">Level 2 immutable type which is not value-based</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">HasUniqueIdentifier</span>&lt;K&gt; {
+    <span class="directive">public</span> <span class="directive">final</span> K k;
+    <span class="directive">public</span> <span class="directive">final</span> <span class="type">int</span> identifier;
+
+    <span class="annotation">@NotModified</span>
+    <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">AtomicInteger</span> generator = <span class="keyword">new</span> <span class="predefined-type">AtomicInteger</span>();
+
+    <span class="directive">public</span> HasUniqueIdentifier(K k) {
+        <span class="local-variable">this</span>.k = k;
+        identifier = generator.getAndIncrement();
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">boolean</span> equals(<span class="predefined-type">Object</span> other) {
+        <span class="keyword">if</span>(<span class="local-variable">this</span> == other) <span class="keyword">return</span> <span class="predefined-constant">true</span>;
+        <span class="keyword">if</span>(other <span class="keyword">instanceof</span> HasUniqueIdentifier&lt;?&gt; hasUniqueIdentifier) {
+            <span class="keyword">return</span> identifier == hasUniqueIdentifier.identifier;
+        }
+        <span class="keyword">return</span> <span class="predefined-constant">false</span>;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>equals</code> method violates item 2 of the value-class definition, maybe not to the letter but at least in its spirit: the field <code>k</code> is arguably the most important field, and its value is not taken into account when computing equality.</p>
 </div>
 </div>
 </div>
@@ -3944,7 +4130,7 @@ Level 2 immutable classes can also play the role of extension facilitators, with
 </div>
 </div>
 <div class="sect3">
-<h4 id="_singleton_classes">13.4.3. Singleton classes</h4>
+<h4 id="singleton-classes">13.4.3. Singleton classes</h4>
 <div class="paragraph">
 <p>A singleton class is a class which has a mechanism to limit the creation of instances to a maximum of one.
 The term 'singleton' then refers to this unique instance.</p>
@@ -4120,7 +4306,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-26 15:06:18 UTC
+Last updated 2021-06-07 10:52:02 UTC
 </div>
 </div>
 <style>
