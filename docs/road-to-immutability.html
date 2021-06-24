@@ -1855,23 +1855,41 @@ In the following example, each call to <code>getK</code> increments a counter, w
 <p>The next section, on <a href="#value-based-classes">Value-based classes</a>, briefly explores these semantic differences.</p>
 </div>
 <div class="paragraph">
-<p>Note that when the modification takes place inside the constructor, it is "ignored", because constructors are meant to be modifying:</p>
+<p>Note that when the modification takes place inside the constructor, it is still not ignored, because for static fields,
+static code blocks act as the constructor:</p>
 </div>
 <div class="listingblock">
 <div class="title">Modification takes place inside constructor</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E1Container</span>
 <span class="directive">public</span> <span class="type">class</span> <span class="class">HasUniqueIdentifier</span>&lt;K&gt; {
     <span class="directive">public</span> <span class="directive">final</span> K k;
     <span class="directive">public</span> <span class="directive">final</span> <span class="type">int</span> identifier;
 
-    <span class="annotation">@NotModified</span>
+    <span class="annotation">@Modified</span>
     <span class="directive">private</span> <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">AtomicInteger</span> generator = <span class="keyword">new</span> <span class="predefined-type">AtomicInteger</span>();
 
     <span class="directive">public</span> HasUniqueIdentifier(K k) {
         <span class="local-variable">this</span>.k = k;
         identifier = generator.getAndIncrement();
     }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Only modifications in a static code block are ignored:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CountAccess</span>&lt;K&gt; {
+    ...
+    private <span class="directive">static</span> <span class="directive">final</span> <span class="predefined-type">AtomicInteger</span> counter;
+
+    <span class="directive">static</span> {
+        counter = <span class="keyword">new</span> <span class="predefined-type">AtomicInteger</span>();
+        counter.getAndIncrement(); <span class="comment">// this modification is ignored</span>
+    }
+    ...
 }</code></pre>
 </div>
 </div>
@@ -1895,7 +1913,7 @@ This leads to consistency with the rules of level 2 immutable types, which only 
 <div class="paragraph">
 <p>We leave it up to the programmer or designer to determine whether static calls deserve a  <code>@StaticSideEffects</code>  warning, or not.
 In almost all instances, we prefer a singleton instance (see <a href="#singleton-classes">Singleton classes</a>) over a class with modifying static methods.
-In singletons the normal modification rules apply, unless  <code>@IgnoreModifications</code>  decorates the static field which allows access to the singleton.</p>
+In singletons the normal modification rules apply, unless  <code>@IgnoreModifications</code>  decorates the static field giving access to the singleton.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4306,7 +4324,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-06-07 10:52:02 UTC
+Last updated 2021-06-24 08:35:13 UTC
 </div>
 </div>
 <style>
