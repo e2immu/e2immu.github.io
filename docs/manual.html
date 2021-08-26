@@ -525,36 +525,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#container-annotation">10.3.4. @Container</a></li>
 <li><a href="#dependent-annotation">10.3.5. @Dependent</a></li>
 <li><a href="#dependent1-annotation">10.3.6. @Dependent1</a></li>
-<li><a href="#dependent2-annotation">10.3.7. @Dependent2</a></li>
-<li><a href="#e1container-annotation">10.3.8. @E1Container</a></li>
-<li><a href="#e1immutable-annotation">10.3.9. @E1Immutable</a></li>
-<li><a href="#e2container-annotation">10.3.10. @E2Container</a></li>
-<li><a href="#e2immutable-annotation">10.3.11. @E2Immutable</a></li>
-<li><a href="#extensionClass-annotation">10.3.12. @ExtensionClass</a></li>
-<li><a href="#final-annotation">10.3.13. @Final</a></li>
-<li><a href="#_finalizer">10.3.14. @Finalizer</a></li>
-<li><a href="#_fluent">10.3.15. @Fluent</a></li>
-<li><a href="#_identity">10.3.16. @Identity</a></li>
-<li><a href="#_ignoremodifications">10.3.17. @IgnoreModifications</a></li>
-<li><a href="#_independent">10.3.18. @Independent</a></li>
-<li><a href="#_linked">10.3.19. @Linked</a></li>
-<li><a href="#_linked1">10.3.20. @Linked1</a></li>
-<li><a href="#_mark">10.3.21. @Mark</a></li>
-<li><a href="#modified-annotation">10.3.22. @Modified</a></li>
-<li><a href="#modified1-annotation">10.3.23. @Modified1</a></li>
-<li><a href="#mutableModifiesArguments-annotation">10.3.24. @MutableModifiesArguments</a></li>
-<li><a href="#notModified-annotation">10.3.25. @NotModified</a></li>
-<li><a href="#notModified1-annotation">10.3.26. @NotModified1</a></li>
-<li><a href="#notNull-annotation">10.3.27. @NotNull</a></li>
-<li><a href="#notNull1-annotation">10.3.28. @NotNull1</a></li>
-<li><a href="#notNull2-annotation">10.3.29. @NotNull2</a></li>
-<li><a href="#nullable-annotation">10.3.30. @Nullable</a></li>
-<li><a href="#only-annotation">10.3.31. @Only</a></li>
-<li><a href="#propagateModification-annotation">10.3.32. @PropagateModification</a></li>
-<li><a href="#singleton-annotation">10.3.33. @Singleton</a></li>
-<li><a href="#testMark-annotation">10.3.34. @TestMark</a></li>
-<li><a href="#utilityClass-annotation">10.3.35. @UtilityClass</a></li>
-<li><a href="#variable-annotation">10.3.36. @Variable</a></li>
+<li><a href="#e1container-annotation">10.3.7. @E1Container</a></li>
+<li><a href="#e1immutable-annotation">10.3.8. @E1Immutable</a></li>
+<li><a href="#e2container-annotation">10.3.9. @E2Container</a></li>
+<li><a href="#e2immutable-annotation">10.3.10. @E2Immutable</a></li>
+<li><a href="#extensionClass-annotation">10.3.11. @ExtensionClass</a></li>
+<li><a href="#final-annotation">10.3.12. @Final</a></li>
+<li><a href="#_finalizer">10.3.13. @Finalizer</a></li>
+<li><a href="#_fluent">10.3.14. @Fluent</a></li>
+<li><a href="#_identity">10.3.15. @Identity</a></li>
+<li><a href="#_ignoremodifications">10.3.16. @IgnoreModifications</a></li>
+<li><a href="#_independent">10.3.17. @Independent</a></li>
+<li><a href="#_linked">10.3.18. @Linked</a></li>
+<li><a href="#_linked1">10.3.19. @Linked1</a></li>
+<li><a href="#_mark">10.3.20. @Mark</a></li>
+<li><a href="#modified-annotation">10.3.21. @Modified</a></li>
+<li><a href="#mutableModifiesArguments-annotation">10.3.22. @MutableModifiesArguments</a></li>
+<li><a href="#notModified-annotation">10.3.23. @NotModified</a></li>
+<li><a href="#notNull-annotation">10.3.24. @NotNull</a></li>
+<li><a href="#notNull1-annotation">10.3.25. @NotNull1</a></li>
+<li><a href="#nullable-annotation">10.3.26. @Nullable</a></li>
+<li><a href="#only-annotation">10.3.27. @Only</a></li>
+<li><a href="#singleton-annotation">10.3.28. @Singleton</a></li>
+<li><a href="#testMark-annotation">10.3.29. @TestMark</a></li>
+<li><a href="#utilityClass-annotation">10.3.30. @UtilityClass</a></li>
+<li><a href="#variable-annotation">10.3.31. @Variable</a></li>
 </ul>
 </li>
 <li><a href="#annotation-hierarchy">10.4. Relations between annotations</a>
@@ -1221,7 +1216,7 @@ Actually, none of the decorations to a type, method, or field matter, as long as
         <span class="type">boolean</span> add(<span class="annotation">@Dependent1</span> <span class="annotation">@NotNull</span> E e) { <span class="keyword">return</span> <span class="predefined-constant">true</span>; }
 
         <span class="annotation">@Independent</span>
-        <span class="type">boolean</span> addAll(<span class="annotation">@Dependent2</span> <span class="annotation">@NotNull1</span> java.util.Collection&lt;? <span class="directive">extends</span> E&gt; collection) {
+        <span class="type">boolean</span> addAll(<span class="annotation">@Dependent1</span> <span class="annotation">@NotNull1</span> java.util.Collection&lt;? <span class="directive">extends</span> E&gt; collection) {
             <span class="keyword">return</span> <span class="predefined-constant">true</span>;
         }
 
@@ -1967,68 +1962,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent2-annotation">10.3.7. @Dependent2</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Summary</dt>
-<dd>
-<p>This annotation is one of the <a href="#concept-higher-order-modification">Higher-order modifications</a> annotations.
-It is only computed for <a href="#concept-linking">independent</a> parameters or methods.
-When computed on a parameter, it indicates that part of the <a href="#concept-implicitly-immutable">implicitly immutable content</a>
-of the argument will be assigned to the fields of the method&#8217;s type.
-When computed on a method, it signifies that part of the implicitly immutable content of the return value is assigned to the fields of the method&#8217;s type.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>This annotation is central to iteration over the implicitly immutable content of a type.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>This annotation has no opposite.
-By definition, implies  <code>@Independent</code> .</p>
-</dd>
-<dt class="hdlist1">Example</dt>
-<dd>
-<p>This annotation has been contracted in many collection-framework methods, such as</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">boolean</span> <span class="predefined-type">Collections</span>.addAll(<span class="annotation">@Dependent2</span> <span class="predefined-type">Collection</span>&lt;? <span class="directive">extends</span> E&gt; coll);
-
-<span class="annotation">@Dependent2</span>
-Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="e1container-annotation">10.3.8. @E1Container</h4>
+<h4 id="e1container-annotation">10.3.7. @E1Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2121,7 +2055,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e1immutable-annotation">10.3.9. @E1Immutable</h4>
+<h4 id="e1immutable-annotation">10.3.8. @E1Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2179,7 +2113,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2container-annotation">10.3.10. @E2Container</h4>
+<h4 id="e2container-annotation">10.3.9. @E2Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2225,7 +2159,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2immutable-annotation">10.3.11. @E2Immutable</h4>
+<h4 id="e2immutable-annotation">10.3.10. @E2Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2288,7 +2222,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 </div>
 </div>
 <div class="sect3">
-<h4 id="extensionClass-annotation">10.3.12. @ExtensionClass</h4>
+<h4 id="extensionClass-annotation">10.3.11. @ExtensionClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2315,8 +2249,7 @@ Stream&lt;E&gt; <span class="predefined-type">Collections</span>.stream();</code
 <dl>
 <dt class="hdlist1">Summary</dt>
 <dd>
-<p>An extension class is a level 2 immutable class which uses
-More details can be found in <a href="#concept-extension-class">Extension classes</a>.</p>
+<p>An extension class is a level 2 immutable class which uses More details can be found in <a href="#concept-extension-class">Extension classes</a>.</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 </dl>
@@ -2331,7 +2264,7 @@ More details can be found in <a href="#concept-extension-class">Extension classe
 </div>
 </div>
 <div class="sect3">
-<h4 id="final-annotation">10.3.13. @Final</h4>
+<h4 id="final-annotation">10.3.12. @Final</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2436,7 +2369,7 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_finalizer">10.3.14. @Finalizer</h4>
+<h4 id="_finalizer">10.3.13. @Finalizer</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"></code></pre>
@@ -2447,7 +2380,7 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_fluent">10.3.15. @Fluent</h4>
+<h4 id="_fluent">10.3.14. @Fluent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2499,7 +2432,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_identity">10.3.16. @Identity</h4>
+<h4 id="_identity">10.3.15. @Identity</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2550,7 +2483,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ignoremodifications">10.3.17. @IgnoreModifications</h4>
+<h4 id="_ignoremodifications">10.3.16. @IgnoreModifications</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2569,7 +2502,7 @@ This is of consequence in the definition of independence for methods, as depende
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
 </tr>
 </tbody>
 </table>
@@ -2577,7 +2510,8 @@ This is of consequence in the definition of independence for methods, as depende
 <dl>
 <dt class="hdlist1">Summary</dt>
 <dd>
-<p>Helper annotation to mark that modifications on a field are to be ignored, because they fall outside the scope of the application.</p>
+<p>Helper annotation to mark that modifications on a field or parameter are to be ignored, because they fall outside the scope of the application.
+This annotation is implicit on parameters of a functional interface type of of <code>java.util.function</code> (e.g., <code>Consumer</code>, <code>Function</code>, etc.).</p>
 </dd>
 <dt class="hdlist1">Mode</dt>
 <dd>
@@ -2593,7 +2527,7 @@ The <code>print</code> method family is obviously modifying to these fields, how
 </div>
 </div>
 <div class="sect3">
-<h4 id="_independent">10.3.18. @Independent</h4>
+<h4 id="_independent">10.3.17. @Independent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2643,7 +2577,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked">10.3.19. @Linked</h4>
+<h4 id="_linked">10.3.18. @Linked</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2680,13 +2614,13 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked1">10.3.20. @Linked1</h4>
+<h4 id="_linked1">10.3.19. @Linked1</h4>
 <div class="paragraph">
 <p><mark>TODO</mark></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mark">10.3.21. @Mark</h4>
+<h4 id="_mark">10.3.20. @Mark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2714,7 +2648,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="modified-annotation">10.3.22. @Modified</h4>
+<h4 id="modified-annotation">10.3.21. @Modified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2751,50 +2685,7 @@ Its opposite is  <code>@Dependent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="modified1-annotation">10.3.23. @Modified1</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Summary</dt>
-<dd>
-<p>This annotation is part of the <a href="#concept-higher-order-modification">higher-order modifications</a>.</p>
-</dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>the opposite annotation is  <code>@NotModified1</code>.
-In green mode, this one is the default; in red mode,  <code>@NotModified1</code> is the default.</p>
-</dd>
-<dt class="hdlist1">Example</dt>
-<dd>
-<p>Applying a c
-<mark>TODO</mark></p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect3">
-<h4 id="mutableModifiesArguments-annotation">10.3.24. @MutableModifiesArguments</h4>
+<h4 id="mutableModifiesArguments-annotation">10.3.22. @MutableModifiesArguments</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2853,7 +2744,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified-annotation">10.3.25. @NotModified</h4>
+<h4 id="notModified-annotation">10.3.23. @NotModified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2899,79 +2790,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified1-annotation">10.3.26. @NotModified1</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Summary</dt>
-<dd>
-<p>This annotation is part of the <a href="#concept-higher-order-modification">higher-order modifications</a>.
-Contracted to a parameter of an abstract type, it indicates that the abstract method cannot be implemented in a modifying way.
-Computed on parameters of any type with <a href="#concept-implicitly-immutable">implicitly immutable content</a>, it signifies that</p>
-</dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>It exists only in the green mode; there is no opposite.
-It can only be used for contracting, the analyser cannot generate it.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>This annotation is a dynamic type annotation on functional types in fields, methods and parameters.
-The analyser can compute it in certain circumstances; in other cases, the user can show intent by requesting this property.</p>
-</div>
-<div class="paragraph">
-<p>Note that because suppliers have no parameters, only modifications to the closure apply.
-Functional interfaces are always normally  <code>@NotModified</code>: there are no modifying methods on them apart from the abstract method.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example</dt>
-<dd>
-<p>We first show an example of a  <code>@NotModified1</code> contract:</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here, the analyser computes the annotation:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><mark>TODO</mark></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="notNull-annotation">10.3.27. @NotNull</h4>
+<h4 id="notNull-annotation">10.3.24. @NotNull</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3009,7 +2828,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull1-annotation">10.3.28. @NotNull1</h4>
+<h4 id="notNull1-annotation">10.3.25. @NotNull1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3032,34 +2851,17 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </tr>
 </tbody>
 </table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Summary</dt>
+<dd>
+<p>the content of an object is  <code>@NotNull</code> , meaning that all the accessible fields of the object are  <code>@NotNull</code> .</p>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect3">
-<h4 id="notNull2-annotation">10.3.29. @NotNull2</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="nullable-annotation">10.3.30. @Nullable</h4>
+<h4 id="nullable-annotation">10.3.26. @Nullable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3097,7 +2899,7 @@ Use it to contract in the red mode.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="only-annotation">10.3.31. @Only</h4>
+<h4 id="only-annotation">10.3.27. @Only</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3144,78 +2946,7 @@ Please find an example with a useful <code>@Only(after="&#8230;&#8203;")</code> 
 </div>
 </div>
 <div class="sect3">
-<h4 id="propagateModification-annotation">10.3.32. @PropagateModification</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Summary</dt>
-<dd>
-<p>This annotation is part of the <a href="#concept-higher-order-modification">higher-order modifications</a>.
-The analyser adds this annotation when an abstract method without modification information is called on a parameter.
-This abstract method can be modifying or not, and in general it cannot be known which is the case.
-The annotation then informs the analyser that modifications need computing at caller-time.</p>
-<div class="paragraph">
-<p>The annotation is also possible on fields, in case the parameter becomes the effectively final value of a field.</p>
-</div>
-</dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>There is no opposite.</p>
-</dd>
-<dt class="hdlist1">Example</dt>
-<dd>
-<p>A typical implementation of <code>forEach</code> is a nice example:</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@FunctionalInterface</span>
-<span class="directive">public</span> <span class="type">interface</span> <span class="class">Consumer</span>&lt;T&gt; {
-    <span class="type">void</span> accept(T t); <i class="conum" data-value="1"></i><b>(1)</b>
-    ...
-}
-<span class="annotation">@Container</span>
-<span class="directive">public</span> <span class="type">interface</span> <span class="class">Set</span>&lt;T&gt; {
-    <span class="keyword">default</span> <span class="type">void</span> forEach(<span class="annotation">@PropagateModification</span> Consumer&lt;T&gt; consumer) {
-      <span class="keyword">for</span>(T t: <span class="local-variable">this</span>) consumer.accept(t);
-    }
-    ...
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>No modification information present on <code>accept</code>.</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="singleton-annotation">10.3.33. @Singleton</h4>
+<h4 id="singleton-annotation">10.3.28. @Singleton</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3271,7 +3002,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="testMark-annotation">10.3.34. @TestMark</h4>
+<h4 id="testMark-annotation">10.3.29. @TestMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3343,7 +3074,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="utilityClass-annotation">10.3.35. @UtilityClass</h4>
+<h4 id="utilityClass-annotation">10.3.30. @UtilityClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3418,7 +3149,7 @@ The fact that it cannot be instantiated is verified by</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="variable-annotation">10.3.36. @Variable</h4>
+<h4 id="variable-annotation">10.3.31. @Variable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3533,7 +3264,7 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 <p>a field is either  <code>@NotModified</code> or  <code>@Modified</code> </p>
 </li>
 <li>
-<p>a field is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or  <code>@NotNull2</code> ), or  <code>@Nullable</code>  (see also <a href="#nullability">Nullability</a>).</p>
+<p>a field is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or {nn2}), or  <code>@Nullable</code>  (see also <a href="#nullability">Nullability</a>).</p>
 </li>
 </ul>
 </div>
@@ -3603,7 +3334,7 @@ A constructor without annotations therefore implies either that the type is not 
 This property is only relevant when there is support data, and the method is  <code>@NotModified</code></p>
 </li>
 <li>
-<p>a method is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or  <code>@NotNull2</code> ) (green), or  <code>@Nullable</code>  (red)</p>
+<p>a method is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or {nn2}) (green), or  <code>@Nullable</code>  (red)</p>
 </li>
 </ul>
 </div>
@@ -3642,7 +3373,7 @@ This property is only relevant when there is support data, and the method is  <c
 <p>a parameter is either  <code>@NotModified</code> (green) or  <code>@Modified</code>  (red)</p>
 </li>
 <li>
-<p>a parameter is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or  <code>@NotNull2</code> ) (green), or  <code>@Nullable</code>  (red)</p>
+<p>a parameter is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or {nn2}) (green), or  <code>@Nullable</code>  (red)</p>
 </li>
 </ul>
 </div>
@@ -3684,7 +3415,7 @@ This property is only relevant when there is support data, and the method is  <c
 <p> <code>@NotNull1</code>  implies  <code>@NotNull</code> </p>
 </li>
 <li>
-<p> <code>@NotNull2</code>  implies  <code>@NotNull</code> ,  <code>@NotNull1</code> </p>
+<p>{nn2} implies  <code>@NotNull</code> ,  <code>@NotNull1</code> </p>
 </li>
 <li>
 <p>etc.</p>
@@ -4491,7 +4222,7 @@ If not, see <a href="http://www.gnu.org/licenses/" class="bare">http://www.gnu.o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-06-24 08:36:28 UTC
+Last updated 2021-08-26 08:23:13 UTC
 </div>
 </div>
 <style>
