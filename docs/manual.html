@@ -1917,7 +1917,7 @@ Its opposite is  <code>@Independent</code> .</p>
 <dl>
 <dt class="hdlist1">Summary</dt>
 <dd>
-<p>As one of the <a href="#concept-higher-order-modification">Higher-order modifications</a> annotations,  <code>@Dependent1</code> 
+<p>As one of the <a href="#concept-higher-order-modification">Higher-order modifications</a> annotations, {dependent1}
 on a parameter, of <a href="#concept-implicitly-immutable">implicitly immutable type</a>, indicates that this parameter is assigned to one of the fields, or assigned into the object graph of one of the fields.
 When computed on a method, the return value of the method, again of implicitly immutable type, is known to be part of the object graph of the fields.</p>
 </dd>
@@ -2561,7 +2561,7 @@ Additionally, on methods, the analyser only computes the annotation when the met
 <dt class="hdlist1">Mode</dt>
 <dd>
 <p>Use this annotation in the green mode.
-Its opposite is  <code>@Dependent</code> .</p>
+Its opposite is {dependent}.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3315,7 +3315,7 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 <h4 id="_on_constructors">10.4.3. On constructors</h4>
 <div class="paragraph">
 <p>Non-trivial constructors have the  <code>@Modified</code>  property.
-When there is support data, a constructor is either  <code>@Independent</code>  (green) or  <code>@Dependent</code>  (red).
+When there is support data, a constructor is either  <code>@Independent</code>  (green) or {dependent} (red).
 A constructor without annotations therefore implies either that the type is not  <code>@E1Immutable</code> , or that the constructor is not assigning to support data fields.</p>
 </div>
 </div>
@@ -3330,7 +3330,7 @@ A constructor without annotations therefore implies either that the type is not 
 <p>a method is either  <code>@NotModified</code> (green) or  <code>@Modified</code>  (red)</p>
 </li>
 <li>
-<p>a method is either  <code>@Independent</code>  (green) or  <code>@Dependent</code>  (red).
+<p>a method is either  <code>@Independent</code>  (green) or {dependent} (red).
 This property is only relevant when there is support data, and the method is  <code>@NotModified</code></p>
 </li>
 <li>
@@ -4031,7 +4031,7 @@ Independence is not necessary when there are no support types, and, given that w
 <td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Dependent</code>  (implying  <code>@NotModified</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{dependent} (implying  <code>@NotModified</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 </tr>
@@ -4071,7 +4071,7 @@ To be consistent with the system for methods, the analyser will only emit the an
 <td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Dependent</code>  (when support data)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{dependent} (when support data)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 </tr>
@@ -4222,7 +4222,7 @@ If not, see <a href="http://www.gnu.org/licenses/" class="bare">http://www.gnu.o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-08-26 08:23:13 UTC
+Last updated 2021-10-09 10:45:38 UTC
 </div>
 </div>
 <style>
