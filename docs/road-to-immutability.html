@@ -4084,25 +4084,50 @@ However, it should protect the fields owned by its enclosing type, up to the sam
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Definition</strong>: A type is <strong>level 1 independent</strong>, annotated  <code>@Independent1</code> , when</p>
+<p><strong>Definition</strong>: an <strong>external modification</strong> is a modification, carried out outside the type,</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>on a field, directly accessed from the object, or</p>
+</li>
+<li>
+<p>on an argument or return value, executed after the constructor or method call on the object.</p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 <div class="paragraph">
-<p>Rule 1: fields linked to the parameters of non-private constructors or non-private methods, must be  <code>@NotModified</code>.</p>
+<p>Clearly, such external modifications are not possible when the type of the argument, return value, or field is level 2 immutable.
+External modifications are only possible when the constructor, method or field is non-private.</p>
 </div>
 <div class="paragraph">
-<p>Rule 2: fields linked to the parameters of non-private constructors or non-private method, are either private, or of level 2 immutable type.</p>
+<p>Armed with this definition, we can define the independence of types:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Definitions</strong>:</p>
 </div>
 <div class="paragraph">
-<p>Rule 3: none of the parameters of its non-private constructors, none of the parameters of its non-private methods, and no return value of a non-private method is dependent on the fields.</p>
+<p>A type is <strong>dependent</strong> when external modifications impact the accessible content of the type.</p>
+</div>
+<div class="paragraph">
+<p>A type is <strong>level 1 independent</strong>, annotated  <code>@Independent1</code> , when external modifications cannot impact the accessible content of the type.
+The hidden content of the type is mutable or modifiable.</p>
+</div>
+<div class="paragraph">
+<p>A type is <strong>level n independent, n&gt;1</strong>, annotated <code>@Independent1(level = n)</code>, when external modifications cannot impact the accessible content of the type.
+The hidden content of the type is level n immutable.</p>
+</div>
+<div class="paragraph">
+<p>A type is <strong>independent</strong>, annotated  <code>@Independent</code> , when external modifications cannot impact the content of the type.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Rule 1 is equivalent to stating tha all parameters of constructors and methods linking to any of the fields must be  <code>@NotModified</code>.
-A type which is not  <code>@Independent1</code>  is termed <em>dependent</em>.</p>
-</div>
-<div class="paragraph">
-<p>The static variant of <code>IteratorImpl</code> makes it more obvious that <code>IteratorImpl</code> satisfies rules 2 and 3:</p>
+<p>Consider the static variant of <code>IteratorImpl</code>, which makes it more obvious that <code>IteratorImpl</code> maintains a reference to the element array of its enclosing type:</p>
 </div>
 <div class="listingblock">
 <div class="title">Example 76, implementation of an <code>Iterator</code> as a static nested type</div>
@@ -4139,26 +4164,13 @@ A type which is not  <code>@Independent1</code>  is termed <em>dependent</em>.</
 </div>
 </div>
 <div class="paragraph">
-<p>The rules enforce that the data received from, or owned by, the enclosing type, remains properly shielded.</p>
+<p>The type <code>T</code> is part of the hidden content, the <code>T[]</code> and the counter <code>i</code> are part of the accessible content.
+No external modification can impact the array or the counter; indeed, only <code>T</code> and a <code>boolean</code> are exposed.
+The latter is recursively immutable, so does not allow modifications.
+The former allows modifications on the hidden content, whence the  <code>@Independent1</code>  annotation for <code>IteratorImpl</code>.</p>
 </div>
 <div class="paragraph">
-<p>Similar to level n immutability, we can define level n independence, by adding a fourth rule:</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Definition: a type is <strong>level n independent, n&gt;2</strong>, when</p>
-</div>
-<div class="paragraph">
-<p>Rule 4: the hidden content of the type is level n immutable</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>A type is fully independent when its hidden content is either absent, or recursively immutable.</p>
-</div>
-<div class="paragraph">
-<p>Recursively immutable types are fully independent as a type, but a type does not even have to be level 1 immutable to be fully independent.
+<p>Recursively immutable types are independent as a type, but a type does not even have to be level 1 immutable to be independent.
 In fact, any type communicating via recursively immutable types to the outside world is independent:</p>
 </div>
 <div class="listingblock">
@@ -5543,7 +5555,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-11 18:54:30 UTC
+Last updated 2021-10-12 13:03:41 UTC
 </div>
 </div>
 <style>
