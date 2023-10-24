@@ -473,6 +473,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_preparing_annotated_api_files">4.2. Preparing Annotated API files</a></li>
 <li><a href="#_the_annotated_api_file_format">4.3. The Annotated API file format</a></li>
 <li><a href="#_annotation_types">4.4. Annotation types</a></li>
+<li><a href="#_the_collections_framework">4.5. The Collections framework</a>
+<ul class="sectlevel3">
+<li><a href="#_not_null">4.5.1. Not null</a></li>
+<li><a href="#_iterating_over_maps">4.5.2. Iterating over maps</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#annotationxml-files">5. Annotation XML files</a></li>
@@ -482,18 +488,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_concepts">8. Concepts</a>
 <ul class="sectlevel2">
 <li><a href="#concept-modified">8.1. Modification</a></li>
-<li><a href="#concept-containers">8.2. Containers</a></li>
-<li><a href="#concept-linking">8.3. Linking and independence</a></li>
-<li><a href="#_immutability">8.4. Immutability</a>
+<li><a href="#concept-hidden-content">8.2. Hidden content</a></li>
+<li><a href="#concept-containers">8.3. Containers</a></li>
+<li><a href="#concept-linking">8.4. Linking and independence</a>
 <ul class="sectlevel3">
-<li><a href="#concept-e1immutable">8.4.1. Level 1 immutable</a></li>
-<li><a href="#concept-implicitly-immutable">8.4.2. Implicitly immutable types</a></li>
-<li><a href="#concept-e2immutable">8.4.3. Level 2 immutable</a></li>
-<li><a href="#technical-dynamic-type-annotations">8.4.4. Dynamic type annotations</a></li>
+<li><a href="#_factory_methods">8.4.1. Factory methods</a></li>
 </ul>
 </li>
-<li><a href="#concept-eventual">8.5. Eventual immutability</a></li>
-<li><a href="#concept-higher-order-modification">8.6. Higher-order modifications</a></li>
+<li><a href="#_immutability">8.5. Immutability</a>
+<ul class="sectlevel3">
+<li><a href="#concept-e1immutable">8.5.1. Level 1 immutable</a></li>
+<li><a href="#concept-e2immutable">8.5.2. Level n immutable</a></li>
+<li><a href="#concept-recursively-immutable">8.5.3. Recursive immutability</a></li>
+<li><a href="#_independence_of_a_type">8.5.4. Independence of a type</a></li>
+<li><a href="#technical-dynamic-type-annotations">8.5.5. Dynamic type annotations</a></li>
+</ul>
+</li>
+<li><a href="#concept-eventual">8.6. Eventual immutability</a></li>
 <li><a href="#_miscellaneous">8.7. Miscellaneous</a>
 <ul class="sectlevel3">
 <li><a href="#concept-constant">8.7.1. Constants</a></li>
@@ -515,52 +526,52 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_overview_of_annotations">10. Overview of annotations</a>
 <ul class="sectlevel2">
-<li><a href="#_annotation_modes">10.1. Annotation modes</a></li>
-<li><a href="#_inheritance_of_annotations">10.2. Inheritance of annotations</a></li>
-<li><a href="#list-of-annotations">10.3. List of annotations</a>
+<li><a href="#list-of-annotations">10.1. List of annotations</a>
 <ul class="sectlevel3">
-<li><a href="#allowsInterrupt-annotation">10.3.1. @AllowsInterrupt</a></li>
-<li><a href="#beforeMark-annotation">10.3.2. @BeforeMark</a></li>
-<li><a href="#constant-annotation">10.3.3. @Constant</a></li>
-<li><a href="#container-annotation">10.3.4. @Container</a></li>
-<li><a href="#dependent-annotation">10.3.5. @Dependent</a></li>
-<li><a href="#dependent1-annotation">10.3.6. @Dependent1</a></li>
-<li><a href="#e1container-annotation">10.3.7. @E1Container</a></li>
-<li><a href="#e1immutable-annotation">10.3.8. @E1Immutable</a></li>
-<li><a href="#e2container-annotation">10.3.9. @E2Container</a></li>
-<li><a href="#e2immutable-annotation">10.3.10. @E2Immutable</a></li>
-<li><a href="#extensionClass-annotation">10.3.11. @ExtensionClass</a></li>
-<li><a href="#final-annotation">10.3.12. @Final</a></li>
-<li><a href="#_finalizer">10.3.13. @Finalizer</a></li>
-<li><a href="#_fluent">10.3.14. @Fluent</a></li>
-<li><a href="#_identity">10.3.15. @Identity</a></li>
-<li><a href="#_ignoremodifications">10.3.16. @IgnoreModifications</a></li>
-<li><a href="#_independent">10.3.17. @Independent</a></li>
-<li><a href="#_linked">10.3.18. @Linked</a></li>
-<li><a href="#_linked1">10.3.19. @Linked1</a></li>
-<li><a href="#_mark">10.3.20. @Mark</a></li>
-<li><a href="#modified-annotation">10.3.21. @Modified</a></li>
-<li><a href="#mutableModifiesArguments-annotation">10.3.22. @MutableModifiesArguments</a></li>
-<li><a href="#notModified-annotation">10.3.23. @NotModified</a></li>
-<li><a href="#notNull-annotation">10.3.24. @NotNull</a></li>
-<li><a href="#notNull1-annotation">10.3.25. @NotNull1</a></li>
-<li><a href="#nullable-annotation">10.3.26. @Nullable</a></li>
-<li><a href="#only-annotation">10.3.27. @Only</a></li>
-<li><a href="#singleton-annotation">10.3.28. @Singleton</a></li>
-<li><a href="#testMark-annotation">10.3.29. @TestMark</a></li>
-<li><a href="#utilityClass-annotation">10.3.30. @UtilityClass</a></li>
-<li><a href="#variable-annotation">10.3.31. @Variable</a></li>
+<li><a href="#allowsInterrupt-annotation">10.1.1. @AllowsInterrupt</a></li>
+<li><a href="#beforeMark-annotation">10.1.2. @BeforeMark</a></li>
+<li><a href="#constant-annotation">10.1.3. @Constant</a></li>
+<li><a href="#container-annotation">10.1.4. @Container</a></li>
+<li><a href="#dependent-annotation">10.1.5. @Dependent</a></li>
+<li><a href="#e1container-annotation">10.1.6. @E1Container</a></li>
+<li><a href="#e1immutable-annotation">10.1.7. @E1Immutable</a></li>
+<li><a href="#e2container-annotation">10.1.8. @E2Container</a></li>
+<li><a href="#e2immutable-annotation">10.1.9. @E2Immutable</a></li>
+<li><a href="#eRcontainer-annotation">10.1.10. @ImmutableContainer</a></li>
+<li><a href="#extensionClass-annotation">10.1.11. @ExtensionClass</a></li>
+<li><a href="#final-annotation">10.1.12. @Final</a></li>
+<li><a href="#_finalizer">10.1.13. @Finalizer</a></li>
+<li><a href="#_fluent">10.1.14. @Fluent</a></li>
+<li><a href="#_identity">10.1.15. @Identity</a></li>
+<li><a href="#_ignoremodifications">10.1.16. @IgnoreModifications</a></li>
+<li><a href="#_independent">10.1.17. @Independent</a></li>
+<li><a href="#independent1-annotation">10.1.18. @Independent1</a></li>
+<li><a href="#_linked">10.1.19. @Linked</a></li>
+<li><a href="#_linked1">10.1.20. @Linked1</a></li>
+<li><a href="#_mark">10.1.21. @Mark</a></li>
+<li><a href="#modified-annotation">10.1.22. @Modified</a></li>
+<li><a href="#mutableModifiesArguments-annotation">10.1.23. @MutableModifiesArguments</a></li>
+<li><a href="#notModified-annotation">10.1.24. @NotModified</a></li>
+<li><a href="#notNull-annotation">10.1.25. @NotNull</a></li>
+<li><a href="#notNull1-annotation">10.1.26. @NotNull1</a></li>
+<li><a href="#nullable-annotation">10.1.27. @Nullable</a></li>
+<li><a href="#only-annotation">10.1.28. @Only</a></li>
+<li><a href="#singleton-annotation">10.1.29. @Singleton</a></li>
+<li><a href="#sse-annotation">10.1.30. @StaticSideEffects</a></li>
+<li><a href="#testMark-annotation">10.1.31. @TestMark</a></li>
+<li><a href="#utilityClass-annotation">10.1.32. @UtilityClass</a></li>
+<li><a href="#variable-annotation">10.1.33. @Variable</a></li>
 </ul>
 </li>
-<li><a href="#annotation-hierarchy">10.4. Relations between annotations</a>
+<li><a href="#annotation-hierarchy">10.2. Relations between annotations</a>
 <ul class="sectlevel3">
-<li><a href="#_on_types">10.4.1. On types</a></li>
-<li><a href="#_on_fields">10.4.2. On fields</a></li>
-<li><a href="#_on_constructors">10.4.3. On constructors</a></li>
-<li><a href="#_on_methods">10.4.4. On methods</a></li>
-<li><a href="#_on_parameters">10.4.5. On parameters</a></li>
-<li><a href="#nullability">10.4.6. Nullability</a></li>
-<li><a href="#_eventually_and_effectively_immutable">10.4.7. Eventually and effectively immutable</a></li>
+<li><a href="#_on_types">10.2.1. On types</a></li>
+<li><a href="#_on_fields">10.2.2. On fields</a></li>
+<li><a href="#_on_constructors">10.2.3. On constructors</a></li>
+<li><a href="#_on_methods">10.2.4. On methods</a></li>
+<li><a href="#_on_parameters">10.2.5. On parameters</a></li>
+<li><a href="#nullability">10.2.6. Nullability</a></li>
+<li><a href="#_eventually_and_effectively_immutable">10.2.7. Eventually and effectively immutable</a></li>
 </ul>
 </li>
 </ul>
@@ -576,21 +587,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_technical"><em>Technical</em></a></li>
-<li><a href="#_supporting_tools">12. Supporting tools</a>
+<li><a href="#_implementation">12. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#_gradle_plugin">12.1. Gradle plugin</a></li>
-<li><a href="#_key_value_store">12.2. Key-value store</a></li>
-<li><a href="#_intellij_idea_plugin">12.3.  IntelliJ IDEA  plugin</a>
+<li><a href="#_main_flow">12.1. Main flow</a></li>
+<li><a href="#_inspection">12.2. Inspection</a></li>
+<li><a href="#_resolution">12.3. Resolution</a></li>
+<li><a href="#_analysers">12.4. Analysers</a></li>
+<li><a href="#_statements_and_expressions">12.5. Statements and expressions</a></li>
+<li><a href="#_analysis_objects">12.6. Analysis objects</a></li>
+<li><a href="#_properties">12.7. Properties</a>
 <ul class="sectlevel3">
-<li><a href="#visual-objectives">12.3.1. Visual objectives</a></li>
-<li><a href="#_information_flow">12.3.2. Information flow</a></li>
-<li><a href="#_implementation">12.3.3. Implementation</a></li>
+<li><a href="#_value_properties">12.7.1. Value properties</a></li>
+<li><a href="#_context_properties">12.7.2. Context properties</a></li>
+<li><a href="#_external_properties">12.7.3. External properties</a></li>
+</ul>
+</li>
+<li><a href="#_variables">12.8. Variables</a></li>
+<li><a href="#_clustering">12.9. Clustering</a></li>
+<li><a href="#_typical_execution_order">12.10. Typical execution order</a></li>
+<li><a href="#_output_system">12.11. Output system</a></li>
+</ul>
+</li>
+<li><a href="#_supporting_tools">13. Supporting tools</a>
+<ul class="sectlevel2">
+<li><a href="#_gradle_plugin">13.1. Gradle plugin</a></li>
+<li><a href="#_key_value_store">13.2. Key-value store</a></li>
+<li><a href="#_intellij_idea_plugin">13.3.  IntelliJ IDEA  plugin</a>
+<ul class="sectlevel3">
+<li><a href="#visual-objectives">13.3.1. Visual objectives</a></li>
+<li><a href="#_information_flow">13.3.2. Information flow</a></li>
+<li><a href="#_implementation_2">13.3.3. Implementation</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#_where_next"><em>Where next?</em></a></li>
-<li><a href="#_copyright_and_license">13. Copyright and License</a></li>
+<li><a href="#_copyright_and_license">14. Copyright and License</a></li>
 </ul>
 </div>
 </div>
@@ -781,7 +813,7 @@ At this point (April 2021), the analyser still crashes on the sources of the plu
 </div>
 <div id="basic-use" class="imageblock">
 <div class="content">
-<img src="./images/e2immu_basic_use.png" alt="e2immu basic use">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/e2immu_basic_use.png" alt="e2immu basic use">
 </div>
 <div class="title">Figure 1. Basic use of e2immu</div>
 </div>
@@ -794,7 +826,7 @@ It also pushes these errors, warnings, and computed annotations to the annotatio
 So while you&#8217;re working on your project, each time you run the analyser, your editor is updated.
 We&#8217;re suggesting that you confirm critical annotations in the source code.
 They will get the annotation type <code>VERIFY</code> which is the default for source code read by the analyser, they allow you to 'stabilize' your code with respect to class types like  <code>@Container</code>  or
- <code>@E2Immutable</code> .</p>
+{e2immutable}.</p>
 </div>
 <div class="paragraph">
 <p>This set-up will get you pretty far, as long as</p>
@@ -849,13 +881,13 @@ This flow is depicted in <a href="#figure-annotated-xml-via-gradle">Add annotati
 </div>
 <div id="figure-fast-turnaround" class="imageblock">
 <div class="content">
-<img src="./images/e2immu_fast_turnaround.png" alt="e2immu fast turnaround">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/e2immu_fast_turnaround.png" alt="e2immu fast turnaround">
 </div>
 <div class="title">Figure 2. Fast turnaround use of e2immu</div>
 </div>
 <div id="figure-annotated-xml-via-gradle" class="imageblock">
 <div class="content">
-<img src="./images/e2immu_annotated_xml_via_gradle.png" alt="e2immu annotated xml via gradle">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/e2immu_annotated_xml_via_gradle.png" alt="e2immu annotated xml via gradle">
 </div>
 <div class="title">Figure 3. Add annotation.xml files to your jar</div>
 </div>
@@ -1272,6 +1304,219 @@ This type indicates that a value has not been computed, but stipulated by the us
 In Annotated API files, CONTRACT is the default type, and needs not be specified.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_the_collections_framework">4.5. The Collections framework</h3>
+<div class="sect3">
+<h4 id="_not_null">4.5.1. Not null</h4>
+<div class="paragraph">
+<p>We strongly object to the use of <code>null</code> in sets and maps&#8201;&#8212;&#8201;note that this can be valid point of view even if one embraces <code>null</code> as a valuable concept denoting <em>absence of a value</em>.
+It is our opinion that one should not store <em>absence of a value</em> in a set, nor should one use <em>absence of a value</em> as the key in a map.
+The same does not hold for arrays, and should therefore not be so important for lists.
+But then, consistency prevails.
+We are happy with <code>null</code> in arrays, but not in standard collections.</p>
+</div>
+<div class="paragraph">
+<p>Consequently, our <code>java.util</code> annotated APIs are littered with  <code>@NotNull</code>  and {nn1} annotations.
+Note that we have not equipped  <em>e2immu</em>  with a  <code>@NotNull</code>  annotation on types.
+When a collection comes in as a parameter, and the collection should be present,  <code>@NotNull</code>  is the obvious choice:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">int</span> combinedSize(<span class="annotation">@NotNull</span> <span class="predefined-type">Set</span>&lt;T&gt; set) {
+    <span class="keyword">return</span> someValue + set.size();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The implementation of {nn1} is rather patchy at the moment, focusing on arrays, functional interfaces, and iteration over collections, as in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> method(<span class="annotation">@NotNull1</span> <span class="predefined-type">Set</span>&lt;T&gt; set) {
+    <span class="keyword">for</span>(T t: set) {
+        <span class="keyword">if</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">x</span><span class="delimiter">&quot;</span></span>.equals(t.toString)) { <span class="comment">// forces t to be @NotNull, set to be @NotNull1</span>
+            ...
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_iterating_over_maps">4.5.2. Iterating over maps</h4>
+<div class="paragraph">
+<p>Interestingly, <code>Map.Entry</code> has a <code>setValue()</code> method which allows the developer to change the value of a mapping during iteration.
+As a consequence, we annotate the mutable type as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Container</span>
+<span class="annotation">@Independent1</span>
+<span class="type">interface</span> <span class="class">Entry</span>&lt;K, V&gt; {
+    <span class="annotation">@NotNull</span>
+    K getKey();
+
+    <span class="annotation">@NotNull</span>
+    V getValue();
+
+    <span class="annotation">@Modified</span>
+    V setValue(V v);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method <code>Map.entrySet()</code> returns a set of entries, which is a <em>view</em> on the map, indicating that the set is backed by the map, and changes to the set imply changes to the map.
+We must therefore annotate</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Container</span> <span class="comment">// and implicitly @Dependent</span>
+<span class="type">interface</span> <span class="class">Map</span><span class="error">$</span>&lt;K, V&gt; {
+   ...
+
+   <span class="comment">// implicitly @Dependent</span>
+   <span class="annotation">@NotNull1</span>
+   <span class="predefined-type">Set</span>&lt;<span class="predefined-type">Map</span>.Entry&lt;K, V&gt;&gt; entrySet();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To use <code>entrySet()</code> in a for-each construct, we must annotate the interface <code>Iterable</code>, which is extended by <code>Collection</code> and therefore also by <code>Set</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Container</span> <span class="comment">// and implicitly @Dependent</span>
+<span class="type">interface</span> <span class="class">Iterable</span><span class="error">$</span>&lt;T&gt; {
+    <span class="annotation">@NotModified</span>
+    <span class="type">void</span> forEach(<span class="annotation">@NotNull</span> <span class="annotation">@Independent1</span> Consumer&lt;? <span class="local-variable">super</span> T&gt; action);
+
+    <span class="comment">// implicitly @Dependent, `Iterator` has `remove()`</span>
+    <span class="annotation">@NotNull</span>
+    <span class="predefined-type">Iterator</span>&lt;T&gt; iterator();
+
+    <span class="annotation">@NotNull</span>
+    <span class="annotation">@Independent1</span>
+    Spliterator&lt;T&gt; spliterator();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, we note that <code>Iterator</code> has a <code>remove()</code> operation, which makes every iterator dependent on its iterable source:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Container</span>
+<span class="annotation">@Independent1</span>
+<span class="type">interface</span> <span class="class">Iterator</span><span class="error">$</span>&lt;T&gt; {
+    <span class="annotation">@Modified</span>
+    <span class="keyword">default</span> <span class="type">void</span> forEachRemaining(<span class="annotation">@NotNull</span> <span class="annotation">@Independent1</span> Consumer&lt;? <span class="local-variable">super</span> T&gt; action) {
+    }
+
+    <span class="annotation">@Modified</span>
+    <span class="type">boolean</span> hasNext();
+
+    <span class="annotation">@Modified</span> <span class="comment">// implicitly @Independent1</span>
+    T next();
+
+    <span class="annotation">@Modified</span>
+    <span class="type">void</span> remove();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this background, we can analyse the dependencies between <code>entry</code> and <code>map</code> in the common construct</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">for</span>(Entry&lt;K, V&gt; entry: map.entrySet()) {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which is equivalent to the more elaborate construct</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Iterator</span>&lt;Entry&lt;K, V&gt;&gt; iterator = map.entrySet().iterator();
+<span class="keyword">while</span>(iterator.hasNext()) {
+    Entry&lt;K, V&gt; entry = iterator.next();
+    K key = entry.getKey();
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both methods <code>entrySet()</code> and <code>iterator()</code> are {dependent}, so we start off with local variable <code>iterator</code> linked to <code>map</code>.
+Modifications to the iterator (e.g., by calling the <code>remove()</code> method), will modify the map.</p>
+</div>
+<div class="paragraph">
+<p>The <code>entry</code> is obtained by calling the method <code>next()</code> on the iterator, which is marked {independent1}.
+This means that the method result is linked to the hidden content of the iterator, which consists of <code>Entry</code> objects.
+These <code>Entry</code> objects, however, are not part of the hidden content of <code>Map</code>: only objects of types <code>K</code> and <code>V</code> have that property.
+Because the <code>Entry</code> objects have been obtained from <code>Map</code> in a {dependent} way, and <code>Map</code> is mutable, we equate changes to an <code>Entry</code> object to changes to the map.</p>
+</div>
+<div class="paragraph">
+<p>In a picture, the situation looks like:</p>
+</div>
+<div id="foreach-asis" class="imageblock">
+<div class="content">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/forEach_asIs.png" alt="forEach asIs">
+</div>
+<div class="title">Figure 4. Current situation, entry to map</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>The links are: {independent1} from <code>entry</code> to <code>iterator</code>, {dependent} from <code>iterator</code> to the entry set, and {dependent} from the entry set to the <code>map</code>.
+Because <code>entry</code> is hidden in <code>iterator</code>, and <code>iterator</code> is dependent on map <code>map</code>, and <code>entry</code> is not of a hidden type in <code>map</code>, and it is mutable, we link <code>entry</code> to <code>map</code> in a {dependent} way.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose we tell the analyser that the user can never use the <code>setValue</code> method of <code>Entry</code>.
+Then, <code>Entry</code> becomes {e2container}.
+Because it is now immutable, <code>entry</code> can only be content linked to <code>map</code>, i.e., at the {independent1} level.
+This is depicted by:</p>
+</div>
+<div id="foreach-nosenvalue" class="imageblock">
+<div class="content">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/forEach_noSetValue.png" alt="forEach noSetValue">
+</div>
+<div class="title">Figure 5. No setValue() method, entry to map</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, we could forbid the modification of entry sets, e.g., by contracting <code>entrySet()</code> to return an {e2container} object.
+(Calling a modifying method on such an object will cause  <em>e2immu</em>  to raise an error.) Then, <code>iterator</code>, still linked to the entry set, remains linked to the mutable <code>map</code>: while the <em>set</em> is immutable, the non-hidden <code>Entry</code> objects are not.
+As a consequence, <code>Entry</code> objects remain linked to the map, because the previous rule still applies.</p>
+</div>
+<div id="foreach-entry" class="imageblock">
+<div class="content">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/forEach_immutableSet.png" alt="forEach immutableSet">
+</div>
+<div class="title">Figure 6. entrySet() immutable, entry to map</div>
+</div>
+<div class="paragraph">
+<p>It would be safer to forbid the use of the <code>remove()</code> method in the iterator at the same time.
+However, this does not change the linking situation:</p>
+</div>
+<div id="foreach-entrynoremove" class="imageblock">
+<div class="content">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/forEach_immutableSetAndNoRemove.png" alt="forEach immutableSetAndNoRemove">
+</div>
+<div class="title">Figure 7. entrySet() immutable, and no remove() method, entry to map</div>
+</div>
+<div class="paragraph">
+<p>Finally, we remark that only changing the <code>remove()</code> method does not change the linking situation between <code>Entry</code> and <code>Map</code>.</p>
+</div>
+<div id="foreach-noremove" class="imageblock">
+<div class="content">
+<img src="/Users/bnaudts/git/e2immu-documentation/src/docs/asciidoc/images/forEach_noRemove.png" alt="forEach noRemove">
+</div>
+<div class="title">Figure 8. No remove() method, entry to map</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1397,63 +1642,210 @@ The former contains the option <code>--write-annotated-api=INSPECTED</code>, the
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="concept-modified">8.1. Modification</h3>
-
+<div class="paragraph">
+<p>Modification of parameters is seen as any modification to the entire object graph of the parameter.</p>
+</div>
+<div class="paragraph">
+<p>Modification of a field is seen as a modification to the accessible content of the field, i.e., as a modification which happens explicitly inside the type of the field.</p>
+</div>
+<div class="paragraph">
+<p>A method is modifying when it makes a modification to any of the fields of the type of the method.
+Modifications to a field of a different type within the same primary type <mark>TODO</mark>.</p>
+</div>
+<div class="paragraph">
+<p>A modification to a (necessarily non-private) foreign static field is called a <em>static side effect</em>.
+Type which has methods which make static side effects, is marked with  <code>@StaticSideEffects</code> .
+Static side effect marking can be disabled by annotating a static, non-private field with  <code>@IgnoreModifications</code> .</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="concept-containers">8.2. Containers</h3>
-
+<h3 id="concept-hidden-content">8.2. Hidden content</h3>
+<div class="paragraph">
+<p>We divide the object graph of the fields into an <em>accessible</em> part, and a <em>hidden part</em>.
+The <em>depth</em> of the object graph plays the primary role in separating both parts: most implementations do not access <em>all</em> types that are theoretically reachable from the fields.
+Secondly, we note that every class <code>C</code> that can be sub-classed, i.e., which has not been marked <code>final</code>, and every interface <code>I</code>, can have a subclass or implementation <code>S</code> which has fields that are outside its reach.
+So when faced with the formal type <code>C</code> or <code>I</code>, a concrete object of type <code>S</code> may be present.
+This object carries a part hidden to the methods and field accessors of <code>C</code> or <code>I</code>.</p>
+</div>
+<div class="paragraph">
+<p>We speak of the <em>hidden content</em> of the types when we refer to the hidden part of its fields' object graph.
+Hidden contents are omni-present in Java.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>The core concept of practical immutability is that modifications to the hidden content of a type are irrelevant to that type.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In  <em>e2immu</em> , the hidden content of a type <code>T</code> is computed on a type-by-type basis: it consists of a set of parameterized types <code>H1</code>, &#8230;&#8203;, <code>Hn</code>.
+A type <code>H</code> belongs to the hidden content of <code>T</code> when it is part of the object graph of the fields, and it is not <em>explicit</em> in <code>T</code>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>The underlying concept of being explicit is that the type cannot be replaced by an unbound type parameter, or <code>java.lang.Object</code> (JLO), to achieve identical semantics inside <code>T</code>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Formally, a type <code>E</code> is explicit in <code>T</code> when either</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>it is instantiated, e.g., <code>&#8230;&#8203; = new E(&#8230;&#8203;)</code> occurs in one of the statements of <code>T</code>; the exception to the rule is JLO; note that the presence of a lambda implies the creation of in instance of the functional interface type;</p>
+</li>
+<li>
+<p>a method is called on it, e.g., when <code>e</code> is of type <code>E</code>, then <code>e.someMethod(&#8230;&#8203;)</code> occurs in the statements of <code>T</code>; the exceptions to the rule are JLO&#8217;s methods;</p>
+</li>
+<li>
+<p>one of its fields is accessed, e.g., when <code>e</code> is of type <code>E</code>, then <code>e.someField</code> occurs in the statements of <code>T</code>;</p>
+</li>
+<li>
+<p>one of its extended types is explicit in <code>T</code>; this rule does not apply to JLO itself;</p>
+</li>
+<li>
+<p>the type occurs as the type of an object forced to comply with some type restriction:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>as an argument in a method or constructor call, unless the formal parameter of that method or constructor is JLO, or is an unbound type parameter;</p>
+</li>
+<li>
+<p>as the formal expression type <code>E</code> of a <code>return</code> statement in a method <code>m</code> of <code>T</code> returning a type different from JLO and an unbound type parameter;</p>
+</li>
+<li>
+<p>as the iterable&#8217;s formal return type <code>E</code> in a <code>for(X x: e)</code> construct;</p>
+</li>
+<li>
+<p>as the selector&#8217;s formal type in a <code>switch(e)</code> statement;</p>
+</li>
+<li>
+<p>as the formal expression type <code>E</code> of a cast argument <code>x = (X)e</code></p>
+</li>
+<li>
+<p>as the formal expression type <code>E</code> of an <code>e instanceof X</code> or <code>e instanceof X x</code> expression</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>it occurs as an explicit type in a statement of <code>T</code>:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>as the exception type in a <code>catch(E e)</code> clause;</p>
+</li>
+<li>
+<p>as the type of a cast, e.g., <code>x = (E)e</code>;</p>
+</li>
+<li>
+<p>as the type of an <code>instanceof</code> expression, with or without pattern, as in <code>x instanceof E e</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If the type <code>S</code> extends the type <code>C</code>, then types which are transparent in <code>C</code> may not be transparent in <code>S</code> anymore.
+The type <code>S</code> can also introduce new transparent types.
+However, a type cannot be transparent in <code>S</code> and explicit in <code>C</code>: all explicit types of <code>C</code> are also explicit in <code>S</code>.</p>
+</div>
+<div class="paragraph">
+<p>If a type <code>N</code> is a nested class of an enclosing type <code>E</code>, then all explicit types of <code>N</code> are also explicit in <code>E</code>.
+A type <code>E</code> and its inner class <code>I</code> (nested, not static) share the same set of transparent and explicit types.</p>
+</div>
+<div class="paragraph">
+<p>For practical reasons, <code>java.lang.Object</code>, <code>java.lang.String</code> and <code>java.lang.Class</code> are always explicit.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="concept-linking">8.3. Linking and independence</h3>
-
+<h3 id="concept-containers">8.3. Containers</h3>
+<div class="paragraph">
+<p>A type is a container when only private methods or private constructors modify their parameters.
+To the outside world, all parameters must be  <code>@NotModified</code>.</p>
+</div>
+<div class="paragraph">
+<p>When a modifying method is called on a parameter, but this modification is semantically deemed to be irrelevant, then  <code>@IgnoreModifications</code>  can be added to the parameter.
+This is implicitly the case when the parameter is of one of the abstract types in <code>java.util.function</code>, such as <code>Function</code>, <code>Consumer</code>, etc.
+The modifications caused by their concrete implementations are typically outside the scope of the type.
+The typical example of this situation is the <code>forEach</code> method of the <code>java.util.Collection</code> classes: iterating over the collection should be non-modifying, and modifications to the hidden content are semantically irrelevant to the collection.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_immutability">8.4. Immutability</h3>
-<div class="sect3">
-<h4 id="concept-e1immutable">8.4.1. Level 1 immutable</h4>
+<h3 id="concept-linking">8.4. Linking and independence</h3>
 <div class="paragraph">
-<p>Terminology used:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Variable field</dt>
-<dd>
-<p>marked  <code>@Variable</code> </p>
-</dd>
-<dt class="hdlist1">Effectively final field</dt>
-<dd>
-<p>marked  <code>@E1Immutable</code>  or  <code>@E1Container</code> .</p>
-</dd>
-<dt class="hdlist1">Eventually final field</dt>
-<dd>
-<p>marked  <code>@E1Immutable</code>  or  <code>@E1Container</code> , with <code>after=xxx</code> parameter</p>
-</dd>
-</dl>
+<p>Two variables are linked when a modification in one may imply a modification in the other.
+We differentiate between modifications to the accessible content (normal <em>linking</em>), and modifications to the hidden content (<em>hidden content linking</em>).</p>
 </div>
 <div class="paragraph">
-<p>A type is level 1 immutable when all its fields are effectively final.
-A type is <a href="#concept-eventual">eventually</a> level 1 immutable when after executing a marked method, the fields become effectively final.
-This transition is best understood as the removal of a number of methods, marked either  <code>@Mark</code>  or  <code>@Only</code>  with parameter <code>before</code>, which make the field variable.</p>
+<p>Linking typically occurs when the object graphs of the variables (partially) overlaps.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="concept-implicitly-immutable">8.4.2. Implicitly immutable types</h4>
 <div class="paragraph">
-<p>Terminology:</p>
+<p>A method is <em>dependent</em> when one of the fields of the type links to the return value of the method.
+A constructor or method parameter is <em>dependent</em> when it links to one of the fields of the type.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Implicitly immutable content</dt>
-<dd>
-<p>all the fields of a type which are of implicitly immutable type.</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>A method or parameter is independent when it is not dependent.
+However, given the possibility of hidden content linking, we differentiate between different <em>levels</em> of independence.
+When the hidden content of the field being linked to the return value or parameter is mutable or level 1 immutable, we speak of level 1 independence, and mark with {independent1}.
+When the hidden content is level 2 immutable, we speak of level 2 independence, and write <code>@Independent1(level=2)</code>.
+When no modifications are possible at all, the hidden content must be recursively immutable, and we speak of independence, marked as  <code>@Independent</code> .</p>
 </div>
+<div class="paragraph">
+<p>The computation of linking follows the rules:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>after an assignment <code>a = b</code>, the variable <code>a</code> is linked to the variable <code>b</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The computation of hidden content linking is similar but not quite identical:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>after an assignment <code>a = b</code>, the variable <code>a</code> is hidden content linked to the variable <code>b</code></p>
+</li>
+</ol>
 </div>
 <div class="sect3">
-<h4 id="concept-e2immutable">8.4.3. Level 2 immutable</h4>
+<h4 id="_factory_methods">8.4.1. Factory methods</h4>
 <div class="paragraph">
-<p>A type is level 2 immutable when</p>
+<p>A <em>factory method</em> is a static method in type <code>T</code> returning a (newly created) element of this type.
+In factory methods, we compute linking and content linking between the parameters and the return value, ignoring the fields.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_immutability">8.5. Immutability</h3>
+<div class="sect3">
+<h4 id="concept-e1immutable">8.5.1. Level 1 immutable</h4>
+<div class="paragraph">
+<p>A field is called <em>effectively final</em> when it receives a value during the construction phase of the object.
+There are two situations: either it is decorated with the modifier <code>final</code>, or it is set in a constructor, or a method only (indirectly) accessible from the constructors.
+We mark effectively final fields with  <code>@Final</code> ; fields without this property are called <em>variable</em> and marked {variable}.</p>
+</div>
+<div class="paragraph">
+<p>A type is <em>level 1 immutable</em> when all its fields are effectively final.
+No distinction is made between static and instance fields.</p>
+</div>
+<div class="paragraph">
+<p>A type is <a href="#concept-eventual">eventually</a> level 1 immutable when after executing a marked method, the fields become effectively final.
+This transition is best understood as the removal of a number of methods, marked either  <code>@Mark</code>  or  <code>@Only</code>  with parameter <code>before</code>, which make the field variable.
+The mark is annotated in the  <code>@Final</code>  annotation, as <code>@Final(after="mark")</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="concept-e2immutable">8.5.2. Level n immutable</h4>
+<div class="paragraph">
+<p>A type is level <em>n</em>, <em>n&gt;1</em>, immutable when</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1464,29 +1856,81 @@ This transition is best understood as the removal of a number of methods, marked
 <p>all fields are not modified</p>
 </li>
 <li>
-<p>if a field is not of implicitly immutable type, it must be either private, or level 2 immutable</p>
+<p>all fields are either private, or at least of level 2 immutable type</p>
 </li>
 <li>
-<p>all constructors and non-private methods are independent of the fields</p>
+<p>no parameters of non-private constructors and non-private methods are dependent of the fields, and no return values of non-private methods are dependent on the fields.</p>
+</li>
+<li>
+<p>the hidden content of the type is mutable or level 1 immutable, when <em>n=2</em>, and level <em>n-1</em> immutable otherwise.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>A type is <a href="#concept-eventual">eventually</a> level 2 immutable when after executing a marked method, the fields become effectively final and or not modified.
-This transition is best understood as the removal of a number of methods, marked either  <code>@Mark</code>  or  <code>@Only</code>  with parameter <code>before</code>, which make the field variable or modify the fields.</p>
+<p>No distinction is made between static and instance fields.</p>
+</div>
+<div class="paragraph">
+<p>A type is <a href="#concept-eventual">eventually</a> level <em>n</em> immutable when after executing a marked method, the fields become effectively final and or not modified.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="technical-dynamic-type-annotations">8.4.4. Dynamic type annotations</h4>
+<h4 id="concept-recursively-immutable">8.5.3. Recursive immutability</h4>
+<div class="paragraph">
+<p>A type is <em>recursively immutable</em> when it is level 2 immutable, with rule 5 modified to state that its hidden content is also recursively immutable.</p>
+</div>
+<div class="paragraph">
+<p>A recursively immutable type is <em>deeply</em> immutable, i.e., no part of its fields' object graph can be modified.</p>
+</div>
+<div class="paragraph">
+<p>A direct consequence of the definition is that any level 2 immutable type which holds recursively immutable fields only, is again recursively immutable.
+The following types are recursively immutable, and form the basis of the recursion which allows you to compose more of them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>java.lang.Object</code></p>
+</li>
+<li>
+<p>the primitive types, such as <code>int</code>, <code>long</code>, &#8230;&#8203;</p>
+</li>
+<li>
+<p><code>java.lang.Integer</code>, <code>java.lang.Long</code>, &#8230;&#8203; the boxed versions of the primitives <code>int</code>, <code>long</code> &#8230;&#8203;</p>
+</li>
+<li>
+<p><code>java.lang.String</code></p>
+</li>
+<li>
+<p><code>java.lang.Class</code>, whose object graph covers a large amount of other types such as</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_independence_of_a_type">8.5.4. Independence of a type</h4>
+<div class="paragraph">
+<p>A recursively immutable type is fully independent, at all times.
+As such, it is never explicitly marked  <code>@Independent</code> .</p>
+</div>
+<div class="paragraph">
+<p>A level 2 immutable type allows for level 1 independence; a level <em>n</em> immutable type allows for level <em>n-1</em> independence.
+Again, no explicit annotation is necessary.
+Obviously, a parameter or return value need not be linked to the fields, so it can be  <code>@Independent</code> .</p>
+</div>
+<div class="paragraph">
+<p>Dependence is only possible when the type is at most level 1 immutable; i.e., its accessible content is assignable or at least modifiable.
+But dependence is not a necessity.</p>
+</div>
+<div class="paragraph">
+<p>We define the independence of a type as the minimum of the independence values of its return values and parameters.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="technical-dynamic-type-annotations">8.5.5. Dynamic type annotations</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="concept-eventual">8.5. Eventual immutability</h3>
-
-</div>
-<div class="sect2">
-<h3 id="concept-higher-order-modification">8.6. Higher-order modifications</h3>
+<h3 id="concept-eventual">8.6. Eventual immutability</h3>
 
 </div>
 <div class="sect2">
@@ -1570,44 +2014,7 @@ The fact that it cannot be instantiated is verified by</p>
 <h2 id="_overview_of_annotations">10. Overview of annotations</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_annotation_modes">10.1. Annotation modes</h3>
-<div class="paragraph">
-<p>Depending on where you find yourself in the continuum between object-oriented programming and functional programming, or, put differently, almost never following the container and level 2 immutable rules, or mostly adhering to them, you may wish to be either notified for following the rules, or warned by the analyser for breaking the rules.
-It is in this spirit that we envisage working in</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Green mode</dt>
-<dd>
-<p>we assume that containers and level 2 immutable objects are sparse, and want to highlight when you follow the rules.</p>
-</dd>
-<dt class="hdlist1">Red mode</dt>
-<dd>
-<p>when the majority of your types are level 2 immutable, and non-containers are rare, it may be more interesting to be warned when a type is <em>not</em> following the rules.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Because annotations often occur in an opposing pair, the choice of a mode can help to reduce information overload.
-For example, in red mode, <a href="#mutableModifiesArguments-annotation">@MutableModifiesArguments</a> will be prominently displayed, and
-<a href="#e2container-annotation">@E2Container</a> will be "invisible".
-Similarly, <a href="#modified-annotation">@Modified</a> is highlighted and <a href="#notModified-annotation">@NotModified</a> will be plain.</p>
-</div>
-<div class="paragraph">
-<p>In green mode, we want <a href="#container-annotation">@Container</a> and <a href="#e2container-annotation">@E2Container</a> to be visible, while "normal" types are unmarked in black.
-The <a href="#notModified-annotation">@NotModified</a> will be highlighted, while <a href="#modified-annotation">@Modified</a> remains plain.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_inheritance_of_annotations">10.2. Inheritance of annotations</h3>
-<div class="paragraph">
-<p>In general, the analyser allows a method to do better than the method it overrides.
-It will raise an error when the overriding method is  <code>@Modified</code> , where the original is  <code>@NotModified</code>.
-<mark>TODO</mark></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="list-of-annotations">10.3. List of annotations</h3>
+<h3 id="list-of-annotations">10.1. List of annotations</h3>
 <div class="paragraph">
 <p>For each of the annotations, we answer a couple of standard questions:</p>
 </div>
@@ -1647,7 +2054,7 @@ It will raise an error when the overriding method is  <code>@Modified</code> , w
 <p>This classification hopefully helps to see the wood for the trees in the long list.</p>
 </div>
 <div class="sect3">
-<h4 id="allowsInterrupt-annotation">10.3.1. @AllowsInterrupt</h4>
+<h4 id="allowsInterrupt-annotation">10.1.1. @AllowsInterrupt</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1671,10 +2078,10 @@ It will raise an error when the overriding method is  <code>@Modified</code> , w
 </tbody>
 </table>
 <div class="paragraph">
-<p>Contract-only annotation indicating that this method or constructor increases the statement time (<a href="#concept-statement-time">Statement time</a>), or allows the execution to be interrupted.</p>
+<p>Contract-only annotation indicating that this method or constructor increases the statement time (<a href="#concept-statement-time">Statement time</a>), in other words, it allows the execution to be interrupted.</p>
 </div>
 <div class="paragraph">
-<p>Default value is true.
+<p>Default value of the annotation is true.
 Methods can be annotated with <code>@AllowsInterrupt(false)</code> to explicitly mark that they do not interrupt.</p>
 </div>
 <div class="paragraph">
@@ -1682,7 +2089,7 @@ Methods can be annotated with <code>@AllowsInterrupt(false)</code> to explicitly
 </div>
 </div>
 <div class="sect3">
-<h4 id="beforeMark-annotation">10.3.2. @BeforeMark</h4>
+<h4 id="beforeMark-annotation">10.1.2. @BeforeMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1710,19 +2117,15 @@ Methods can be annotated with <code>@AllowsInterrupt(false)</code> to explicitly
 <dt class="hdlist1">Summary</dt>
 <dd>
 <p>Annotation computed when an eventually immutable type is guaranteed to be in its <em>before</em> state, i.e., none of the marked methods have been called yet.
-As a dynamic type annotation (<a href="#technical-dynamic-type-annotations">Dynamic type annotations</a>), it is the opposite of  <code>@E1Immutable</code> ,
- <code>@E2Immutable</code> , or its container variants  <code>@E1Container</code> ,  <code>@E2Container</code> .
+As a dynamic type annotation (<a href="#technical-dynamic-type-annotations">Dynamic type annotations</a>), it is the opposite of {e1immutable},
+{e2immutable}, or its container variants {e1container}, {e2container}, {ercontainer}.
 They guarantee that an eventually immutable object is in its <em>after</em> state, i.e., a marked method has been called, and the object has become immutable.</p>
-</dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>not immediately relevant</p>
 </dd>
 </dl>
 </div>
 </div>
 <div class="sect3">
-<h4 id="constant-annotation">10.3.3. @Constant</h4>
+<h4 id="constant-annotation">10.1.3. @Constant</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1753,10 +2156,6 @@ They guarantee that an eventually immutable object is in its <em>after</em> stat
 Its primary purpose is to help debug the analyser.
 More details in <a href="#concept-constant">Constants</a>.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>This annotation has no opposite.</p>
-</dd>
 <dt class="hdlist1">Example</dt>
 <dd>
 <p>In this simple example, an <code>enum</code> constant is returned by the <code>highest</code> method:</p>
@@ -1765,7 +2164,7 @@ More details in <a href="#concept-constant">Constants</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@E2Container</span>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@ImmutableContainer</span>
 <span class="directive">public</span> <span class="type">enum</span> Enum_3 {
     ONE(<span class="integer">1</span>), TWO(<span class="integer">2</span>), THREE(<span class="integer">3</span>);
 
@@ -1784,7 +2183,7 @@ More details in <a href="#concept-constant">Constants</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="container-annotation">10.3.4. @Container</h4>
+<h4 id="container-annotation">10.1.4. @Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1814,10 +2213,9 @@ More details in <a href="#concept-constant">Constants</a>.</p>
 <p>The analyser computes this essential annotation for types which do not modify the parameters of their constructors and non-private methods.
 See <a href="#concept-containers">Containers</a> for an in-depth discussion.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
+<dt class="hdlist1">Group</dt>
 <dd>
-<p>Use this annotation in green mode.
-The opposite is  <code>@MutableModifiesArguments</code>  if the type has  <code>@Variable</code>  fields, or  <code>@E1Immutable</code>  if all the type&#8217;s fields are effectively final.</p>
+<p>The opposite is {mutableModifiesArguments} if the type has {variable} fields, or {e1immutable} if all the type&#8217;s fields are effectively final.</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 <dd>
@@ -1828,7 +2226,7 @@ Non-containers are in <a href="#e1immutable-annotation">@E1Immutable</a> and <a 
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent-annotation">10.3.5. @Dependent</h4>
+<h4 id="dependent-annotation">10.1.5. @Dependent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1855,14 +2253,18 @@ Non-containers are in <a href="#e1immutable-annotation">@E1Immutable</a> and <a 
 <dl>
 <dt class="hdlist1">Summary</dt>
 <dd>
-<p>Annotation used to indicate that the type&#8217;s fields <a href="#concept-linking">link</a> to the method&#8217;s parameter or return value, or the constructor&#8217;s parameters.
-This annotation is only present for fields that are not of <a href="#concept-implicitly-immutable">implicitly immutable type</a>.
-Additionally, on methods, the analyser only computes the annotation when the method is  <code>@NotModified</code>.</p>
+<p>Annotation used to indicate that the type&#8217;s fields <a href="#concept-linking">link</a> to the non-private method&#8217;s parameter or return value, or the non-private constructor&#8217;s parameters.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
+</dl>
+</div>
+<div class="paragraph">
+<p>This annotation is the default value in the {dependent}, {independent1},  <code>@Independent</code>  sequence; hence, it is never explicitly generated by the analyser.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Group</dt>
 <dd>
-<p>Use this annotation in the red mode.
-Its opposite is  <code>@Independent</code> .</p>
+<p>Its opposites are is  <code>@Independent</code>  (no linking is possible) and {independent1} (content linking only).</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 <dd>
@@ -1872,10 +2274,10 @@ Its opposite is  <code>@Independent</code> .</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">Dependent</span>&lt;<span class="predefined-type">String</span>&gt; {
+<pre class="CodeRay highlight"><code data-lang="java"><span class="type">class</span> <span class="class">DependentSet</span>&lt;<span class="predefined-type">String</span>&gt; {
     <span class="directive">private</span> <span class="directive">final</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; set;
 
-    <span class="directive">public</span> Dependent(<span class="annotation">@Dependent</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; set) {
+    <span class="directive">public</span> DependentSet(<span class="annotation">@Dependent</span> <span class="predefined-type">Set</span>&lt;<span class="predefined-type">String</span>&gt; set) {
         <span class="local-variable">this</span>.set = set;
     }
 
@@ -1891,79 +2293,7 @@ Its opposite is  <code>@Independent</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="dependent1-annotation">10.3.6. @Dependent1</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Summary</dt>
-<dd>
-<p>As one of the <a href="#concept-higher-order-modification">Higher-order modifications</a> annotations, {dependent1}
-on a parameter, of <a href="#concept-implicitly-immutable">implicitly immutable type</a>, indicates that this parameter is assigned to one of the fields, or assigned into the object graph of one of the fields.
-When computed on a method, the return value of the method, again of implicitly immutable type, is known to be part of the object graph of the fields.</p>
-</dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>This annotation has no opposite.
-It implies  <code>@Independent</code>  because it appears on implicitly immutable types only.</p>
-</dd>
-<dt class="hdlist1">Example</dt>
-<dd>
-<p>This annotation has been contracted in many collection-framework methods, such as</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Collections</span>.add(<span class="annotation">@Dependent1</span> E e);
-
-<span class="annotation">@Dependent1</span>
-E <span class="predefined-type">List</span>.get(<span class="type">int</span> index);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The most direct example explaining the definition is:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Dependent1_0</span>&lt;T&gt; {
-    <span class="annotation">@Linked1</span>(to = {<span class="string"><span class="delimiter">&quot;</span><span class="content">Dependent1_0:t</span><span class="delimiter">&quot;</span></span>})
-    <span class="directive">private</span> <span class="directive">final</span> T t;
-
-    <span class="directive">public</span> Dependent1_0(<span class="annotation">@Dependent1</span> T t) {
-        <span class="local-variable">this</span>.t = t;
-    }
-
-    <span class="annotation">@Dependent1</span>
-    <span class="directive">public</span> T getT() {
-        <span class="keyword">return</span> t;
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="e1container-annotation">10.3.7. @E1Container</h4>
+<h4 id="e1container-annotation">10.1.6. @E1Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1990,11 +2320,11 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 <dl>
 <dt class="hdlist1">Summary</dt>
 <dd>
-<p>This annotation is a short-hand for the combination of  <code>@E1Immutable</code>  and  <code>@Container</code> , as described in <a href="#concept-e1immutable">Level 1 immutable</a> and <a href="#concept-containers">Containers</a>.</p>
+<p>This annotation is a short-hand for the combination of {e1immutable} and  <code>@Container</code> , as described in <a href="#concept-e1immutable">Level 1 immutable</a> and <a href="#concept-containers">Containers</a>.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
+<dt class="hdlist1">Group</dt>
 <dd>
-<p>This annotation sits in between  <code>@MutableModifiesArguments</code> ,  <code>@Container</code>  and  <code>@E2Container</code> .</p>
+<p>This annotation sits in between {mutableModifiesArguments},  <code>@Container</code>  and {e2container}.</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 <dd>
@@ -2056,7 +2386,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="e1immutable-annotation">10.3.8. @E1Immutable</h4>
+<h4 id="e1immutable-annotation">10.1.7. @E1Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2085,9 +2415,9 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 <dd>
 <p>This annotation indicates that a type is <a href="#concept-e1immutable">level 1 immutable</a>, effectively or eventually, meaning all fields are effectively or eventually final.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
+<dt class="hdlist1">Group</dt>
 <dd>
-<p>This annotation sits in between  <code>@MutableModifiesArguments</code>  and  <code>@E2Immutable</code> .</p>
+<p>This annotation sits in between {mutableModifiesArguments} and {e2immutable}.</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 <dd>
@@ -2114,7 +2444,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2container-annotation">10.3.9. @E2Container</h4>
+<h4 id="e2container-annotation">10.1.8. @E2Container</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2141,12 +2471,9 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 <dl>
 <dt class="hdlist1">Summary</dt>
 <dd>
-<p>This annotation is a short-hand for the combination of  <code>@E2Immutable</code>  and  <code>@Container</code> , as described in <a href="#concept-e2immutable">Level 2 immutable</a> and <a href="#concept-containers">Containers</a>.</p>
+<p>This annotation is a short-hand for the combination of {e2immutable} and  <code>@Container</code> , as described in <a href="#concept-e2immutable">Level n immutable</a> and <a href="#concept-containers">Containers</a>.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>This annotation is the default in the red mode.</p>
-</dd>
+<dt class="hdlist1">Group</dt>
 <dt class="hdlist1">Example</dt>
 </dl>
 </div>
@@ -2160,7 +2487,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="e2immutable-annotation">10.3.10. @E2Immutable</h4>
+<h4 id="e2immutable-annotation">10.1.9. @E2Immutable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2189,26 +2516,68 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 <dd>
 <p>This annotation indicates that a type is level 2 immutable, effectively or eventually.</p>
 </dd>
-<dt class="hdlist1">Mode</dt>
-<dd>
-<p>This annotation is the default in the red mode.</p>
-</dd>
-<dt class="hdlist1">Details</dt>
-<dd>
-<p>Level 2 immutability adds extra restrictions on top of level 1 immutability:</p>
+</dl>
+</div>
+<div class="paragraph">
+<p>It has two additional parameters:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>all fields must be  <code>@NotModified</code>;</p>
+<p><em>level</em>, which is a numeric value at least 2, indicating the level of immutability</p>
 </li>
 <li>
-<p>all fields must be either private, level 2 immutable, or of implicitly immutable type;</p>
-</li>
-<li>
-<p>all non-private methods and constructors must be marked  <code>@Independent</code> </p>
+<p><em>recursive</em>, which is true when recursive, or deep, immutability is meant</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example</dt>
+</dl>
+</div>
 </li>
 </ol>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><mark>TODO</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="eRcontainer-annotation">10.1.10. @ImmutableContainer</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Summary</dt>
+<dd>
+<p>This annotation is a short-hand for the combination of effectively recursively immutable (written as <code>@E2Immutable(recursive=true)</code>) and  <code>@Container</code> , as described in <a href="#concept-e2immutable">Level n immutable</a> and <a href="#concept-containers">Containers</a>.</p>
+</dd>
+<dt class="hdlist1">Group</dt>
+<dd>
+<p>it sits at the very end of the  <code>@Container</code> , {e1container}, {e2container}, <code>@E2Container(level=3)</code>, &#8230;&#8203;, {ercontainer} sequence.</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 </dl>
@@ -2223,7 +2592,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="extensionClass-annotation">10.3.11. @ExtensionClass</h4>
+<h4 id="extensionClass-annotation">10.1.11. @ExtensionClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2265,7 +2634,7 @@ E <span class="predefined-type">List</span>.get(<span class="type">int</span> in
 </div>
 </div>
 <div class="sect3">
-<h4 id="final-annotation">10.3.12. @Final</h4>
+<h4 id="final-annotation">10.1.12. @Final</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2297,7 +2666,7 @@ Fields that have the Java modifier <code>final</code> possess the annotation, bu
 </dd>
 <dt class="hdlist1">Mode</dt>
 <dd>
-<p>Use this annotation to contract in the green mode, with the opposite,  <code>@Variable</code> , being the default.
+<p>Use this annotation to contract in the green mode, with the opposite, {variable}, being the default.
 In the red mode,  <code>@Final</code>  is the default.</p>
 </dd>
 <dt class="hdlist1">Parameters</dt>
@@ -2370,7 +2739,7 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_finalizer">10.3.13. @Finalizer</h4>
+<h4 id="_finalizer">10.1.13. @Finalizer</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"></code></pre>
@@ -2381,7 +2750,7 @@ A field is eventually final if the above definition holds when one excludes all 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_fluent">10.3.14. @Fluent</h4>
+<h4 id="_fluent">10.1.14. @Fluent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2433,7 +2802,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_identity">10.3.15. @Identity</h4>
+<h4 id="_identity">10.1.15. @Identity</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2484,7 +2853,7 @@ This is of consequence in the definition of independence for methods, as depende
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ignoremodifications">10.3.16. @IgnoreModifications</h4>
+<h4 id="_ignoremodifications">10.1.16. @IgnoreModifications</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2528,7 +2897,7 @@ The <code>print</code> method family is obviously modifying to these fields, how
 </div>
 </div>
 <div class="sect3">
-<h4 id="_independent">10.3.17. @Independent</h4>
+<h4 id="_independent">10.1.17. @Independent</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2578,7 +2947,79 @@ Its opposite is {dependent}.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked">10.3.18. @Linked</h4>
+<h4 id="independent1-annotation">10.1.18. @Independent1</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Summary</dt>
+<dd>
+<p>As one of the <a href="#concept-higher-order-modification">[concept-higher-order-modification]</a> annotations, {independent1}
+on a parameter, of <a href="#concept-implicitly-immutable">implicitly immutable type</a>, indicates that this parameter is assigned to one of the fields, or assigned into the object graph of one of the fields.
+When computed on a method, the return value of the method, again of implicitly immutable type, is known to be part of the object graph of the fields.</p>
+</dd>
+<dt class="hdlist1">Mode</dt>
+<dd>
+<p>This annotation has no opposite.
+It implies  <code>@Independent</code>  because it appears on implicitly immutable types only.</p>
+</dd>
+<dt class="hdlist1">Example</dt>
+<dd>
+<p>This annotation has been contracted in many collection-framework methods, such as</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">Collections</span>.add(<span class="annotation">@Dependent1</span> E e);
+
+<span class="annotation">@Dependent1</span>
+E <span class="predefined-type">List</span>.get(<span class="type">int</span> index);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most direct example explaining the definition is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">Dependent1_0</span>&lt;T&gt; {
+    <span class="annotation">@Linked1</span>(to = {<span class="string"><span class="delimiter">&quot;</span><span class="content">Dependent1_0:t</span><span class="delimiter">&quot;</span></span>})
+    <span class="directive">private</span> <span class="directive">final</span> T t;
+
+    <span class="directive">public</span> Dependent1_0(<span class="annotation">@Dependent1</span> T t) {
+        <span class="local-variable">this</span>.t = t;
+    }
+
+    <span class="annotation">@Dependent1</span>
+    <span class="directive">public</span> T getT() {
+        <span class="keyword">return</span> t;
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_linked">10.1.19. @Linked</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2615,13 +3056,44 @@ Its opposite is {dependent}.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_linked1">10.3.19. @Linked1</h4>
-<div class="paragraph">
-<p><mark>TODO</mark></p>
+<h4 id="_linked1">10.1.20. @Linked1</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Summary</dt>
+<dd>
+<p>Annotation to help debug the dependence system.</p>
+</dd>
+<dt class="hdlist1">Mode</dt>
+<dd>
+<p>There is no opposite.</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mark">10.3.20. @Mark</h4>
+<h4 id="_mark">10.1.21. @Mark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2649,7 +3121,7 @@ Its opposite is {dependent}.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="modified-annotation">10.3.21. @Modified</h4>
+<h4 id="modified-annotation">10.1.22. @Modified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2686,7 +3158,7 @@ Its opposite is {dependent}.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mutableModifiesArguments-annotation">10.3.22. @MutableModifiesArguments</h4>
+<h4 id="mutableModifiesArguments-annotation">10.1.23. @MutableModifiesArguments</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2718,7 +3190,7 @@ Definitions are in <a href="#concept-containers">Containers</a> and <a href="#co
 </dd>
 <dt class="hdlist1">Mode</dt>
 <dd>
-<p>It is the default in the green mode when none of  <code>@Container</code> ,  <code>@E1Immutable</code> ,  <code>@E1Container</code> ,  <code>@E2Immutable</code> ,  <code>@E2Container</code>  is present.
+<p>It is the default in the green mode when none of  <code>@Container</code> , {e1immutable}, {e1container}, {e2immutable}, {e2container} is present.
 Use it for contracting in the red mode.</p>
 </dd>
 <dt class="hdlist1">Example</dt>
@@ -2745,7 +3217,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notModified-annotation">10.3.23. @NotModified</h4>
+<h4 id="notModified-annotation">10.1.24. @NotModified</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2791,7 +3263,7 @@ Here we combine that with a parameter modifying method:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull-annotation">10.3.24. @NotNull</h4>
+<h4 id="notNull-annotation">10.1.25. @NotNull</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2829,7 +3301,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="notNull1-annotation">10.3.25. @NotNull1</h4>
+<h4 id="notNull1-annotation">10.1.26. @NotNull1</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2862,7 +3334,7 @@ It is the opposite of  <code>@Nullable</code> .</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="nullable-annotation">10.3.26. @Nullable</h4>
+<h4 id="nullable-annotation">10.1.27. @Nullable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2900,7 +3372,7 @@ Use it to contract in the red mode.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="only-annotation">10.3.27. @Only</h4>
+<h4 id="only-annotation">10.1.28. @Only</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -2947,7 +3419,7 @@ Please find an example with a useful <code>@Only(after="&#8230;&#8203;")</code> 
 </div>
 </div>
 <div class="sect3">
-<h4 id="singleton-annotation">10.3.28. @Singleton</h4>
+<h4 id="singleton-annotation">10.1.29. @Singleton</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3003,7 +3475,45 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="testMark-annotation">10.3.29. @TestMark</h4>
+<h4 id="sse-annotation">10.1.30. @StaticSideEffects</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Immu <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contract <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type <span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Param <span class="icon red"><i class="fa fa-times"></i></span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Summary</dt>
+<dd>
+<p>This annotation indicates that at least one method in the type calls a modifying method on a foreign static field.</p>
+</dd>
+<dt class="hdlist1">Example</dt>
+<dd>
+<p>The expression <code>System.out.println("x")</code> calls the modifying method <code>println</code> on the foreign static field <code>out</code> of the type <code>System</code>.
+When this field is not decorated with  <code>@IgnoreModifications</code>  in the Annotated APIs, the type containing the method calling <code>println</code> will be annotated with  <code>@StaticSideEffects</code> .</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="testMark-annotation">10.1.31. @TestMark</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3075,7 +3585,7 @@ This is the simplest example:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="utilityClass-annotation">10.3.30. @UtilityClass</h4>
+<h4 id="utilityClass-annotation">10.1.32. @UtilityClass</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3150,7 +3660,7 @@ The fact that it cannot be instantiated is verified by</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="variable-annotation">10.3.31. @Variable</h4>
+<h4 id="variable-annotation">10.1.33. @Variable</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -3186,7 +3696,7 @@ It is the opposite of  <code>@Final</code> .</p>
 </dd>
 <dt class="hdlist1">Example</dt>
 <dd>
-<p>Any non-eventual type with setters will have fields marked  <code>@Variable</code> :</p>
+<p>Any non-eventual type with setters will have fields marked {variable}:</p>
 </dd>
 </dl>
 </div>
@@ -3211,45 +3721,45 @@ It is the opposite of  <code>@Final</code> .</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="annotation-hierarchy">10.4. Relations between annotations</h3>
+<h3 id="annotation-hierarchy">10.2. Relations between annotations</h3>
 <div class="paragraph">
 <p>In this section we summarize the relations between annotations.</p>
 </div>
 <div class="sect3">
-<h4 id="_on_types">10.4.1. On types</h4>
+<h4 id="_on_types">10.2.1. On types</h4>
 <div class="paragraph">
 <p>Note that:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p> <code>@E2Container</code>  is a shorthand for the combination of  <code>@E2Immutable</code>  and  <code>@Container</code> ;</p>
+<p>{e2container} is a shorthand for the combination of {e2immutable} and  <code>@Container</code> ;</p>
 </li>
 <li>
-<p> <code>@E1Container</code>  is a shorthand for the combination of  <code>@E1Immutable</code>  and  <code>@Container</code> ;</p>
+<p>{e1container} is a shorthand for the combination of {e1immutable} and  <code>@Container</code> ;</p>
 </li>
 <li>
-<p> <code>@E2Immutable</code>  requires  <code>@E1Immutable</code> ;</p>
+<p>{e2immutable} requires {e1immutable};</p>
 </li>
 <li>
-<p>a type is  <code>@MutableModifiesArguments</code>  if and only if it is not  <code>@E1Immutable</code>  and not  <code>@Container</code> ;</p>
+<p>a type is {mutableModifiesArguments} if and only if it is not {e1immutable} and not  <code>@Container</code> ;</p>
 </li>
 <li>
-<p>when a type is  <code>@MutableModifiesArguments</code> , there will be at least one field marked  <code>@Variable</code> , and at least one parameter marked  <code>@Modified</code> ;</p>
+<p>when a type is {mutableModifiesArguments}, there will be at least one field marked {variable}, and at least one parameter marked  <code>@Modified</code> ;</p>
 </li>
 <li>
-<p>by definition, types without fields are  <code>@E2Immutable</code> ;</p>
+<p>by definition, types without fields are {e2immutable};</p>
 </li>
 <li>
-<p>all primitive types are implicitly  <code>@E2Container</code> ; the analyser will not mark them.</p>
+<p>all primitive types are implicitly {e2container}; the analyser will not mark them.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_fields">10.4.2. On fields</h4>
+<h4 id="_on_fields">10.2.2. On fields</h4>
 <div class="paragraph">
-<p>Note that  <code>@Variable</code>  fields can be  <code>@NotNull</code> !
+<p>Note that {variable} fields can be  <code>@NotNull</code> !
 This obviously requires a not-null initialiser to be present; all other assignments must be not-null as well.
 The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , can only occur when the effectively final value is the <code>null</code> constant.</p>
 </div>
@@ -3259,13 +3769,13 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 <div class="ulist">
 <ul>
 <li>
-<p>a field is either  <code>@Final</code>  or  <code>@Variable</code> </p>
+<p>a field is either  <code>@Final</code>  or {variable}</p>
 </li>
 <li>
 <p>a field is either  <code>@NotModified</code> or  <code>@Modified</code> </p>
 </li>
 <li>
-<p>a field is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or {nn2}), or  <code>@Nullable</code>  (see also <a href="#nullability">Nullability</a>).</p>
+<p>a field is either  <code>@NotNull</code>  (or {nn1}, or {nn2}), or  <code>@Nullable</code>  (see also <a href="#nullability">Nullability</a>).</p>
 </li>
 </ul>
 </div>
@@ -3275,13 +3785,13 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 <div class="ulist">
 <ul>
 <li>
-<p> <code>@Variable</code>  implies  <code>@Modified</code> , whether modifying methods exist for the field or not;</p>
+<p>{variable} implies  <code>@Modified</code> , whether modifying methods exist for the field or not;</p>
 </li>
 <li>
-<p> <code>@Final</code>   <code>@Modified</code> : part of  <code>@E1Immutable</code> ;</p>
+<p> <code>@Final</code>   <code>@Modified</code> : part of {e1immutable};</p>
 </li>
 <li>
-<p> <code>@Final</code>   <code>@NotModified</code>: part of  <code>@E2Immutable</code> ; sufficient for implicitly immutable types; for other types, the visibility and dependence rules kick in.</p>
+<p> <code>@Final</code>   <code>@NotModified</code>: part of {e2immutable}; sufficient for implicitly immutable types; for other types, the visibility and dependence rules kick in.</p>
 </li>
 </ul>
 </div>
@@ -3291,13 +3801,13 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 <div class="ulist">
 <ul>
 <li>
-<p>if a type is effectively  <code>@E2Immutable</code> , all its fields are  <code>@Final</code>   <code>@NotModified</code>;</p>
+<p>if a type is effectively {e2immutable}, all its fields are  <code>@Final</code>   <code>@NotModified</code>;</p>
 </li>
 <li>
-<p>if a type is effectively  <code>@E1Immutable</code> , all its fields are  <code>@Final</code> ;</p>
+<p>if a type is effectively {e1immutable}, all its fields are  <code>@Final</code> ;</p>
 </li>
 <li>
-<p>if a type is  <code>@MutableModifiesArguments</code> , at least one of its field is  <code>@Variable</code> .</p>
+<p>if a type is {mutableModifiesArguments}, at least one of its field is {variable}.</p>
 </li>
 </ul>
 </div>
@@ -3313,15 +3823,15 @@ The opposite, a  <code>@Final</code>  field that is  <code>@Nullable</code> , ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_constructors">10.4.3. On constructors</h4>
+<h4 id="_on_constructors">10.2.3. On constructors</h4>
 <div class="paragraph">
 <p>Non-trivial constructors have the  <code>@Modified</code>  property.
 When there is support data, a constructor is either  <code>@Independent</code>  (green) or {dependent} (red).
-A constructor without annotations therefore implies either that the type is not  <code>@E1Immutable</code> , or that the constructor is not assigning to support data fields.</p>
+A constructor without annotations therefore implies either that the type is not {e1immutable}, or that the constructor is not assigning to support data fields.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_methods">10.4.4. On methods</h4>
+<h4 id="_on_methods">10.2.4. On methods</h4>
 <div class="paragraph">
 <p>Opposites:</p>
 </div>
@@ -3335,7 +3845,7 @@ A constructor without annotations therefore implies either that the type is not 
 This property is only relevant when there is support data, and the method is  <code>@NotModified</code></p>
 </li>
 <li>
-<p>a method is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or {nn2}) (green), or  <code>@Nullable</code>  (red)</p>
+<p>a method is either  <code>@NotNull</code>  (or {nn1}, or {nn2}) (green), or  <code>@Nullable</code>  (red)</p>
 </li>
 </ul>
 </div>
@@ -3345,7 +3855,7 @@ This property is only relevant when there is support data, and the method is  <c
 <div class="ulist">
 <ul>
 <li>
-<p>if a type is effectively  <code>@E2Immutable</code>  (green), all its methods are  <code>@NotModified</code> (green).</p>
+<p>if a type is effectively {e2immutable} (green), all its methods are  <code>@NotModified</code> (green).</p>
 </li>
 </ul>
 </div>
@@ -3364,7 +3874,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_on_parameters">10.4.5. On parameters</h4>
+<h4 id="_on_parameters">10.2.5. On parameters</h4>
 <div class="paragraph">
 <p>Opposites:</p>
 </div>
@@ -3374,7 +3884,7 @@ This property is only relevant when there is support data, and the method is  <c
 <p>a parameter is either  <code>@NotModified</code> (green) or  <code>@Modified</code>  (red)</p>
 </li>
 <li>
-<p>a parameter is either  <code>@NotNull</code>  (or  <code>@NotNull1</code> , or {nn2}) (green), or  <code>@Nullable</code>  (red)</p>
+<p>a parameter is either  <code>@NotNull</code>  (or {nn1}, or {nn2}) (green), or  <code>@Nullable</code>  (red)</p>
 </li>
 </ul>
 </div>
@@ -3387,7 +3897,7 @@ This property is only relevant when there is support data, and the method is  <c
 <p>if a type is  <code>@Container</code> , the parameters of all non-private methods and constructors are  <code>@NotModified</code> (green);</p>
 </li>
 <li>
-<p>a parameter of primitive type, unbound parameter type, functional type, or  <code>@E2Immutable</code>  type, is always  <code>@NotModified</code> (green);</p>
+<p>a parameter of primitive type, unbound parameter type, functional type, or {e2immutable} type, is always  <code>@NotModified</code> (green);</p>
 </li>
 </ul>
 </div>
@@ -3397,7 +3907,7 @@ This property is only relevant when there is support data, and the method is  <c
 <div class="ulist">
 <ul>
 <li>
-<p>if a type is  <code>@MutableModifiesArguments</code>  (red), at least one of its parameters is  <code>@Modified</code>  (red), which will be marked;</p>
+<p>if a type is {mutableModifiesArguments} (red), at least one of its parameters is  <code>@Modified</code>  (red), which will be marked;</p>
 </li>
 <li>
 <p>quite trivially, parameters of a primitive type are always  <code>@NotNull</code>   and  <code>@NotModified</code>, but we will not mark parameters of a primitive type.</p>
@@ -3406,17 +3916,17 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="nullability">10.4.6. Nullability</h4>
+<h4 id="nullability">10.2.6. Nullability</h4>
 <div class="paragraph">
 <p>By convention,</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p> <code>@NotNull1</code>  implies  <code>@NotNull</code> </p>
+<p>{nn1} implies  <code>@NotNull</code> </p>
 </li>
 <li>
-<p>{nn2} implies  <code>@NotNull</code> ,  <code>@NotNull1</code> </p>
+<p>{nn2} implies  <code>@NotNull</code> , {nn1}</p>
 </li>
 <li>
 <p>etc.</p>
@@ -3428,7 +3938,7 @@ This property is only relevant when there is support data, and the method is  <c
 </div>
 </div>
 <div class="sect3">
-<h4 id="_eventually_and_effectively_immutable">10.4.7. Eventually and effectively immutable</h4>
+<h4 id="_eventually_and_effectively_immutable">10.2.7. Eventually and effectively immutable</h4>
 <div class="paragraph">
 <p>Field types and method return types can be eventually or effectively immutable when their formal type is not level 1 or level 2 immutable, but the dynamic or computed type is.
 In the latter case, static analysis shows that all assignments to the field, or all return statements, result in an immutable object.
@@ -3458,7 +3968,7 @@ In the former case, object flow computation proves that the mark has been passed
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">finality of field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Variable</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{variable}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Final(after="mark")</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Final</code> </p></td>
 </tr>
@@ -3724,10 +4234,566 @@ Please refer to <a href="#concept-finalizer">Finalizers</a>.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supporting_tools">12. Supporting tools</h2>
+<h2 id="_implementation">12. Implementation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The principles of  <em>e2immu</em>  guide the implementation of the analyser:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Try to use containers exclusively, in other words: never modify your parameters.</p>
+</li>
+<li>
+<p>Use as many immutable objects as possible; either directly, via builders, or via eventually final constructs.</p>
+</li>
+<li>
+<p>Never backtrack on decisions: delay making a decision as long as you cannot be sure, but once a decision is made, it is rock-solid.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The container requirement has been broken in exactly one situation: that of the <code>ExpressionContext</code>.
+Because we intend to use the implementation as one of the more serious test cases of  <em>e2immu</em> , one such situation is acceptable.
+It nicely contrasts with <code>EvaluationContext</code>, which does follow the rules, and which relies on an <code>EvaluationResult</code> to be applied.</p>
+</div>
+<div class="sect2">
+<h3 id="_main_flow">12.1. Main flow</h3>
+<div class="paragraph">
+<p>The main orchestrating class of  <em>e2immu</em>  is the <code>Parser</code> class, which initiates the different phases of  <em>e2immu</em> :</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>configuration and input preparation;</p>
+</li>
+<li>
+<p>inspection, transforming source code into objects at the type, method and field level;</p>
+</li>
+<li>
+<p>resolution, tying these objects together, while at the same time parsing statements and expressions;</p>
+</li>
+<li>
+<p>analysis, providing semantic information;</p>
+</li>
+<li>
+<p>output, showing and storing the results of the analysis.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The key classes for configuration and input preparation are, easily enough, <code>Configuration</code>, <code>Input</code>, <code>Resources</code>, <code>ClassPath</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inspection">12.2. Inspection</h3>
+<div class="paragraph">
+<p>The  <em>e2immu</em>  project currently depends on two libraries to help transform the Java source code and byte code into objects: JavaParser for the source, and ASM for the byte code.
+Currently, the byte code inspector does not inspect statements.</p>
+</div>
+<div class="paragraph">
+<p>Byte code inspection is done on-demand, because the system libraries provided with the Java Runtime are too extensive to convert <em>a priori</em>.
+The main class responsible is the <code>ByteCodeInspector</code>.</p>
+</div>
+<div class="paragraph">
+<p>Inspection using JavaParser is primarily carried out by the <code>TypeInspector</code> and the <code>MethodInspector</code>.</p>
+</div>
+<div class="paragraph">
+<p>Both inspection types fill up a <code>TypeMap</code> (which exists as a builder and a final, immutable implemention constructed after the resolution phase), which keeps track of all types known to  <em>e2immu</em> .
+A <code>TypeContext</code> object provides support for translating locally known simple type names to fully qualified ones.</p>
+</div>
+<div class="paragraph">
+<p>The end result of inspection are the types</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>TypeInfo</code>, with inspection details in <code>TypeInspection</code>;</p>
+</li>
+<li>
+<p><code>MethodInfo</code>, with inspection details in <code>MethodInspection</code>;</p>
+</li>
+<li>
+<p><code>FieldInfo</code>, with inspection details in <code>FieldInspection</code>;</p>
+</li>
+<li>
+<p><code>ParameterInfo</code>, with inspection details in <code>ParameterInspection</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resolution">12.3. Resolution</h3>
+<div class="paragraph">
+<p>The resolution phase has two primary goals.
+Firstly, it parses method bodies into statements (implementations of the interface <code>Statement</code>), starting with <code>Block</code>, and expressions (implementations of <code>Expression</code>).
+Central to the inspection of expressions is the <code>ExpressionContext</code>.
+Secondly, the resolution phase resolves all remaining type and method determination issues:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>which method call is meant in the face of overrides and overloads;</p>
+</li>
+<li>
+<p>it keeps track of the place of a type in the hierarchy, available for reference to the analyser;</p>
+</li>
+<li>
+<p>it determines the types of objects created with the diamond operator <code>&lt;&gt;</code>, of lambda&#8217;s without explicit parameter types.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Even though JavaParser has its own symbol-solving module,  <em>e2immu</em>  uses its own implementation.
+The most complicated of the resolution classes is <code>ParseMethodCallExpr</code>, which determines the exact method call.
+A lot of logic dealing with the type hierarchy is in <code>ParameterizedType</code>, the class responsible for representing types decorated with concrete values for type parameters.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Resolver</code> is the main class here, it adds <code>TypeResolution</code> to <code>TypeInfo</code>, and <code>MethodResolution</code> to <code>MethodInfo</code>.</p>
+</div>
+<div class="paragraph">
+<p>The output of the resolution phase is a list of types, sorted in order of dependency.
+This sorting step is necessary for analysis, to the extent that circular dependencies between types make analysis a lot harder.
+The class <code>SortedType</code> transfers information from the <code>Resolver</code> into the <code>PrimaryTypeAnalyser</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_analysers">12.4. Analysers</h3>
+<div class="paragraph">
+<p>In  <em>e2immu</em> , a number of different analysers cooperate to determine the semantic properties of the code:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <em>type analyser</em>, instantiated once for each (nested) type;</p>
+</li>
+<li>
+<p>the <em>method analyser</em>, instantiated for each method or constructor, even some hidden ones;</p>
+</li>
+<li>
+<p>the <em>parameter analyser</em>, instantiated for each parameter of each method and constructor;</p>
+</li>
+<li>
+<p>the <em>field analyser</em>, instantiated for each field;</p>
+</li>
+<li>
+<p>the <em>statement analyser</em>, instantiated for each statement of each method and constructor.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are obvious and strong dependencies between these analysers, e.g., the modification aspect of a field depends on determining whether there are statements that modify it.
+At the same time, there are dependencies between different aspects of the code, e.g., between methods calling other methods, methods initialising fields, etc.
+There is no easy way to determine an exact execution order for this multitude of analyser instances.</p>
+</div>
+<div class="paragraph">
+<p>To this end, the analyser implements an iterative approach, that gives each analyser one opportunity per iteration to determine its values and properties based on previously established facts.</p>
+</div>
+<div class="paragraph">
+<p>When a value or property cannot yet be determined, typically because a dependency has not yet been met, this value or property is <strong>delayed</strong>.
+The delay system keeps track of the causes of the delay, to allow for detecting circular dependencies.
+The latter can then be broken, to allow the iterative system to continue.
+As soon as a value has been determined, it is written out for others to refer to, and cannot be changed anymore.</p>
+</div>
+<div class="paragraph">
+<p>The analysers themselves consist of a number of components (or tasks), which are executed as part of the iteration.
+This execution takes place in a fixed order; it starts at the first, not-yet-executed (in the first iteration) or non-delayed (in the subsequent ones) component, and visits all others in the chain.
+The main loop stops iterating when all components have been resolved (are in the <em>done</em> state, rather than the <em>delayed</em> state).</p>
+</div>
+<div class="paragraph">
+<p>The order of the main analyser groups is</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>methods.
+For each method, the analyser processes the</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>parameters;</p>
+</li>
+<li>
+<p>statements, from first to last, recursively descending as explained later;</p>
+</li>
+<li>
+<p>method itself;</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>fields;</p>
+</li>
+<li>
+<p>types.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Inside the primary type (the .java file) the methods are processed alphabetically, as are the fields and nested types.
+This orchestration is the responsibility of the <code>PrimaryTypeAnalyser</code>, which is also used, recursively, to analyse types defined inside statements.
+It employs the <code>AnalyserComponents</code> class to execute the components.</p>
+</div>
+<div class="paragraph">
+<p>Annotated API files (or classes) are analysed by the <code>AnnotatedAPIAnalyser</code>, which is a shallow version of the primary type analyser, the type analyser (<code>ComputingTypeAnalyser</code>) and the field analyser (<code>FieldAnalyser</code>).
+Methods without code are analysed by the <code>ShallowMethodAnalyser</code>, rather than the <code>ComputingMethodAnalyser</code> and <code>ComputingParameterAnalyser</code>.</p>
+</div>
+<div class="paragraph">
+<p>In the special situation of <em>sealed</em> classes, we need a variant on the shallow analysers which aggregate data from the computed analysers in the child types.
+These are the <code>AggregatingTypeAnalyser</code>, <code>AggregatingMethodAnalyser</code>, and <code>AggregatingParameterAnalyser</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_statements_and_expressions">12.5. Statements and expressions</h3>
+<div class="paragraph">
+<p>Due to the hierarchical nature of statements, statement analysers and statement analysis objects are also structured hierarchically.
+The statements of a method are internally numbered from 0 onward.
+Because of the hierarchical nature, a dotted system is used: each sub-block introduces a dot, a sub-block number, and a dot again.
+So <code>0.1.2</code> indicates the 3rd statement in the 2nd block of the first statement of the method.
+The second block can be a "catch"-block, or the "else" block in an "if-else" statement.</p>
+</div>
+<div class="paragraph">
+<p>The general <code>Statement</code> interface has an implementation per type of statement specific to the Java language.
+Many of them contain expressions, represented by the <code>Expression</code> interface.
+Again, the typical range of expression implementations exist, mostly corresponding to expressions existing in the language.
+Specific to this implementation are <code>DelayedExpression</code>, <code>DelayedVariableExpression</code>, and <code>PropertyWrapper</code>.</p>
+</div>
+<div class="paragraph">
+<p>Expressions can be evaluated in the context in which they appear, the <code>EvaluationContext</code>.
+The result of this evaluation is an <code>EvaluationResult</code> object, which is subsequently processed by the statement analyser.
+When dependencies inside the expression have not been resolved yet (e.g., the return value of a method is still unknown, or a variable doesn&#8217;t have a value yet), the end result is an expression which contains delayed components.
+Each expression answers the <code>isDelayed</code> method, and can return a <code>CausesOfDelay</code> object to identify exactly what the reasons for the delay are.</p>
+</div>
+<div class="paragraph">
+<p>Some evaluation leads to simplification of the expression, which is sometimes a reason to emit a warning to the developer.
+When a complex expression evaluates to a constant, for example, it is likely that they should know about this.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_analysis_objects">12.6. Analysis objects</h3>
+<div class="paragraph">
+<p>Each analyser has a corresponding analysis object, which contains the results of the analysis.
+After analysis, the analyser is dropped, the analysis object remains.
+Each analysis component consists of two implementations: the builder, which holds the values while the analyser is alive, and the effectively immutable implementation which survives the analyser.
+There is currently one exception: the <code>StatementAnalyser</code> only has a <code>StatementAnalysis</code> data companion, which holds eventually immutable objects.
+The <code>MethodAnalysis</code> interface has a <code>MethodAnalysisImpl</code> immutable implementation, and a <code>MethodAnalysisImpl.Builder</code> mutable builder.</p>
+</div>
+<div class="paragraph">
+<p>An important aspect of the builders is that writing information is constrained: while causes of delay can be overwritten in each iteration, once a value has been determined for a property or some piece of information the analyser has to store, it cannot be changed anymore.
+To this end, we employ a variation of eventually final helper classes, such as <code>EventuallyFinal</code> and <code>VariableFirstThen</code>, with <code>setVariable</code> and <code>setFinal</code> write methods.</p>
+</div>
+<div class="paragraph">
+<p>The <code>StatementAnalysis</code> data object holds a number of sub-objects, where data is stored per topic:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>NavigationData</code> holds the data structure that points to the next statement, and the first statements of sub-blocks.
+This data structure can be modified by statement replacements.</p>
+</li>
+<li>
+<p><code>FlowData</code> holds the conditions under which this statement will be executed, and what the effect is on the flow of execution.
+E.g., a <code>throws</code> statement will cause either a guaranteed, or a conditional escape from the execution flow.</p>
+</li>
+<li>
+<p><code>StateData</code> holds state of the variables.
+After a conditional escape, for example, the state will be the negation of the condition that caused the escape.</p>
+</li>
+<li>
+<p><code>MethodLevelData</code> holds the data necessary for the method analyser; typically, only the method level data of the last statement of the method will be inspected.</p>
+</li>
+<li>
+<p><code>ConditionManager</code> is a support object that holds condition, state, and precondition in one object.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_properties">12.7. Properties</h3>
+<div class="paragraph">
+<p>The analysers compute semantic information, some of which can be expressed as numeric values for properties, many of which apply to most of the analysers.
+These properties can then be visualised, either by coloring, highlighting in an IDE, or by adding annotations.</p>
+</div>
+<div class="paragraph">
+<p>A property (implemented by the enumeration <code>Property</code>) has a numeric value when it is not delayed.
+Otherwise, it takes a <code>CausesOfDelay</code> value, which enumerates the reasons why no value was computed for this property.
+The property-value map <code>Properties</code> maps <code>Property</code> to <code>DV</code>.
+The latter stands for <em>delayable value</em>.</p>
+</div>
+<div class="paragraph">
+<p>There are four types of properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>value properties</p>
+</li>
+<li>
+<p>context properties</p>
+</li>
+<li>
+<p>external properties</p>
+</li>
+<li>
+<p>internal marker properties</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_value_properties">12.7.1. Value properties</h4>
+<div class="paragraph">
+<p>Value properties are associated with a expression which has been evaluated to a non-delayed result.
+When a variable takes a value, the variable&#8217;s value properties are computed directly from the value.
+There are five value properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>NOT_NULL_EXPRESSION</code>: the not-null aspect of an evaluated expression, seen outside its context.
+Its associated annotations are  <code>@Nullable</code> ,  <code>@NotNull</code> , and {nn1}.</p>
+</li>
+<li>
+<p><code>IMMUTABLE</code>: the immutability aspect of an evaluated expression, tied to the dynamic type, seen outside its context.
+Associated annotations are {mutableModifiesArguments}, {e1immutable}, {e2container}, &#8230;&#8203;</p>
+</li>
+<li>
+<p><code>INDEPENDENT</code>: the "independent" aspect of the evaluated expression, tied to the dynamic type.
+Annotations are {dependent}, {independent1},  <code>@Independent</code> .</p>
+</li>
+<li>
+<p><code>CONTAINER</code>: the "container" aspect, by default tied to the dynamic type, but potentially modified (from false to true) by a contract.
+The annotation needed to contract an abstract parameter to be of container type is  <code>@Container</code> .</p>
+</li>
+<li>
+<p><code>IDENTITY</code>: the fact that the evaluated expression is exactly the value of the first parameter of the method.
+Corresponds to  <code>@Identity</code>  on the method.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_context_properties">12.7.2. Context properties</h4>
+<div class="paragraph">
+<p>In contrast, context properties are unique to a variable, and are held independently of the value that the variable takes.
+Context properties accumulate information about the variable from one statement to the next.
+There are three context properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>CONTEXT_NOT_NULL</code>: the not-null aspect of the variable in the given context.
+E.g., when the variable appeared in the scope of a method, it must be not-null.
+When the variable appeared as the argument of an <code>addAll</code> method, it must be content-not-null.
+CNN takes the Condition Manager into account: in the context of <code>if(x != null)</code>, the statement <code>x.method()</code> does not force the CNN of <code>x</code> to the not null value.</p>
+</li>
+<li>
+<p><code>CONTEXT_IMMUTABLE</code>: can be higher than the formal immutability value</p>
+</li>
+<li>
+<p><code>CONTEXT_MODIFIED</code>, independent of value, value delays; however, values <strong>change</strong> depending on modification due to companions!
+As soon as a variable representing a field, or <code>this</code>, has this property set to true, the method in which this occurs is marked modifying, which is visualised by the  <code>@Modified</code>  property.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_external_properties">12.7.3. External properties</h4>
+<div class="paragraph">
+<p>When a field is assigned to a parameter in a constructor, the value of the field and that of the parameter are bound to each other.
+To break a very predictable circular dependency, parameters receive a value right from the first iteration.
+Because value properties are bound to this value, their eventual values may differ from the ones necessarily chosen in the very first iteration.
+The external properties receive the final values of the value properties for parameters, and for all other values for which a circular dependency had to be broken.
+A second example is the <code>this</code> variable, which can only get the correct immutability value once the type analyser has established it, but modification computation cannot continue until <code>this</code> has a value, and the type analyser needs the modification computations.
+There are two external properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EXTERNAL_NOT_NULL</code>: of relevance when CNN demands a high value, but the field cannot allow for one.
+So ENN &lt; CNN, and this will result in a potential null-pointer warning</p>
+</li>
+<li>
+<p><code>EXTERNAL_IMMUTABLE</code>: of relevance when CIMM demands a higher value than the formal type&#8217;s value, but the dynamic value cannot go as high.
+Results in a modification warning.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By convention, external properties on parameters have the value <code>NOT_INVOLVED</code> when the parameter is not linked to a field.</p>
+</div>
+<div class="paragraph">
+<p>The property <code>MODIFIED_OUTSIDE_METHOD</code> is similar to an external property.
+It originates in the field analyser. <mark>TODO rename?</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_variables">12.8. Variables</h3>
+<div class="paragraph">
+<p>A statement analyser, and associated statement analysis builder object, is present for each statement.
+The builder holds information about the state of all the variables known to the statement.</p>
+</div>
+<div class="paragraph">
+<p>Parameters are known from the first statement onwards; fields are only introduced in the statement that refers to them.
+All subsequent statements will also know the statement.</p>
+</div>
+<div class="paragraph">
+<p>Each variable in the statement analyser has values for three "levels"</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <em>initial</em> value, or value of the previous statement (I)</p>
+</li>
+<li>
+<p>the <em>evaluated</em> value (E)</p>
+</li>
+<li>
+<p>the <em>merged</em> value (M), as the summary of all nested statements</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Obviously, not all statements allow for nested statements; they will not have an M level.
+Information about a variable is stored in a <code>VariableInfoContainer</code>, which holds <code>VariableInfo</code> instances for each of the three levels.
+A <code>VariableInfo</code> object holds:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the variable and its name</p>
+</li>
+<li>
+<p>a value</p>
+</li>
+<li>
+<p>linked variables</p>
+</li>
+<li>
+<p>at which statement times it was read</p>
+</li>
+<li>
+<p>by which statements it was written</p>
+</li>
+<li>
+<p>by which statement it was last read.</p>
+</li>
+<li>
+<p>a property-value map.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When a field is detected during the evaluation phase, it cannot yet have a value at the initial level.
+A delayed value expression is returned for this field.
+In the next iteration, the field analyser may provide an initial value for the field.</p>
+</div>
+<div class="paragraph">
+<p>Variable fields and loop variables have "local copies" which exist starting from the 2nd iteration.</p>
+</div>
+<div class="paragraph">
+<p>A variable which points to a generic value (of type <code>Instance</code>) is evaluated to a <code>VariableExpression</code>, rather than the value itself.
+When variable <code>b</code> is assigned to variable <code>a</code>, <code>a</code> can have this <code>VariableExpression</code> as a value.
+No further redirections are possible.</p>
+</div>
+<div class="paragraph">
+<p>Variables are identified by their fully qualified name.
+Local copies can be identified by the <code>$</code> sign and the suffix, either specifying the latest assignment and read statement ids, or the statement time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_clustering">12.9. Clustering</h3>
+<div class="paragraph">
+<p>Variables link to other variables at different levels:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>static assignments (<code>a = b</code>)</p>
+</li>
+<li>
+<p>dynamic assignments, e.g., <code>a = Objects.requireNonNull(b)</code>, which become assignments after evaluation</p>
+</li>
+<li>
+<p>linking at the accessible content level (dependent objects), <code>s = t.subList(0, 3)</code></p>
+</li>
+<li>
+<p>linking at the hidden content level, <code>a.add(b)</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The context properties are assigned to clusters of variables: after executing <code>a=b; b.doSomething()</code>, for example, we must set the context not null value of <code>a</code> to not-null as well.</p>
+</div>
+<div class="paragraph">
+<p>The static assignment level is different from the three other levels in that it is available from the first iteration onward.
+Local copies of variable fields and variables assigned to in a loop are only introduced in the 2nd iteration; however, they simply expand the cluster and cannot cause different context property values.</p>
+</div>
+<div class="paragraph">
+<p>The only context property which is computed across the first three levels (i.e., static and dynamic assignment, and linking at the accessible content level) is <em>context modification</em>: after executing <code>s = t.subList(0, 3); s.add(x);</code> both <code>s</code> and <code>t</code> are likely to be modified.</p>
+</div>
+<div class="paragraph">
+<p>The result of linking is stored in the <code>linkedVariables</code> field of <code>VariableInfo</code>; it is of type <code>LinkedVariables</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_typical_execution_order">12.10. Typical execution order</h3>
+<div class="paragraph">
+<p>Parameters start with values, nullable, mutable in case of self-references; then they rely on ENN, ExtImm.</p>
+</div>
+<div class="paragraph">
+<p><code>this</code> also starts with a value, relies on ENN, ExtImm</p>
+</div>
+<div class="paragraph">
+<p>statical assignment linking → CNN, CIMM - delays only on dependent methods</p>
+</div>
+<div class="paragraph">
+<p>CondMgr works on delayed values, to assist in correct CNN values</p>
+</div>
+<div class="paragraph">
+<p>field value ← last statement + initialiser values + CNN, CIMM</p>
+</div>
+<div class="paragraph">
+<p>in statements, delayed variable value is replaced by field value + IMM + NNE</p>
+</div>
+<div class="paragraph">
+<p>Rest of linking follows as soon as there are values → CM → type immutable</p>
+</div>
+<div class="paragraph">
+<p>Breaking a circular computation CNN → field → ENN → NNP → CNN deactivates this local CNN.</p>
+</div>
+<div class="paragraph">
+<p>ENN, ExtImm can always augment on fields when value was chosen after breaking circular computation</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_output_system">12.11. Output system</h3>
+<div class="paragraph">
+<p>The output system of  <em>e2immu</em>  is very lightweight, yet sufficiently flexible to be parameterizable between extremely compact and nicely readable.
+Output elements (implementations of <code>OutputElement</code>, such as <code>Text</code>, <code>Symbol</code>, <code>Space</code>, and <code>Guide</code>) are collected in an <code>OutputBuilder</code>, and finally emitted by the <code>Formatter</code> which is parameterized by <code>FormatterOptions</code>.
+The <code>OutputBuilder</code> implements the <code>Collector</code> interface from the JDK streaming package, which allows for simple conversion and collection of lists and streams of statements, expressions, types, etc. into <code>OutputElement</code> and then <code>OutputBuilder</code> instances.</p>
+</div>
+<div class="paragraph">
+<p>At the moment the implementation is not tied to the inspection system, so there is no way to link back to line numbers and symbol positions of the original source.
+It is also not possible to maintain the existing formatting.</p>
+</div>
+<div class="paragraph">
+<p>Errors and warnings are stored in an enumeration called <code>Message.Label</code>, and are decorated with a <code>Location</code> and some textual information.
+They are collected in a <code>Messages</code> object.
+Resource files allow for translation of the messages in other languages.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Location</code> object holds an <code>Identifier</code>, which can be of the <code>PositionalIdentifier</code> variety that refers to the line number and position in the original source code, provided by the JavaParser.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supporting_tools">13. Supporting tools</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_gradle_plugin">12.1. Gradle plugin</h3>
+<h3 id="_gradle_plugin">13.1. Gradle plugin</h3>
 <div class="paragraph">
 <p>The Gradle plugin greatly facilitates the use of the analyser by integrating it your project&#8217;s build process.
 We based its initial implementation on the one from <a href="https://www.sonarqube.org/" target="_blank" rel="noopener">SonarQube</a>.</p>
@@ -3766,7 +4832,7 @@ Gradle takes care of source and class path.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_key_value_store">12.2. Key-value store</h3>
+<h3 id="_key_value_store">13.2. Key-value store</h3>
 <div class="paragraph">
 <p>The key-value store is a simple, two-class implementation of an independent key-value store acting as a bridge between the  <em>e2immu</em>  analyser and the  IntelliJ IDEA  plugin.
 It is mostly agnostic to the purpose in the project: it stores key-value pairs in sub-stores called projects.</p>
@@ -3851,16 +4917,16 @@ INFO: Started kv server on port 8281; read-within-millis 5000
 </div>
 </div>
 <div class="sect2">
-<h3 id="_intellij_idea_plugin">12.3.  IntelliJ IDEA  plugin</h3>
+<h3 id="_intellij_idea_plugin">13.3.  IntelliJ IDEA  plugin</h3>
 <div class="paragraph">
 <p>Without a plugin for an IDE, the analyser would be hard to use, and the main purpose of the project, namely, unobtrusively assisting in better coding, would remain very far off.
 The current plugin for  IntelliJ IDEA  is absolutely minimal.
 We based our initial implementation on the <a href="https://plugins.jetbrains.com/plugin/13303-return-highlighter" target="_blank" rel="noopener">Return statement highlighter plugin</a> by Edoardo Luppi.</p>
 </div>
 <div class="sect3">
-<h4 id="visual-objectives">12.3.1. Visual objectives</h4>
+<h4 id="visual-objectives">13.3.1. Visual objectives</h4>
 <div class="paragraph">
-<p>For the proof of concept, we aim to color elements of the source code in such a way that there is visual information explaining why a type is not  <code>@E2Immutable</code>  or  <code>@Container</code> .
+<p>For the proof of concept, we aim to color elements of the source code in such a way that there is visual information explaining why a type is not {e2immutable} or  <code>@Container</code> .
 In the green mode, we highlight the immutable elements, which useful when they are sparse.
 In the red mode, we warn for mutable ones in an otherwise pretty immutable environment:</p>
 </div>
@@ -3882,22 +4948,22 @@ In the red mode, we warn for mutable ones in an otherwise pretty immutable envir
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@E2Container</code>  (incl. primitives)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{e2container} (incl. primitives)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">green</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@E2Immutable</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{e2immutable}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">green</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@E1Container</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{e1container}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@E1Immutable</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{e1immutable}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">brown</p></td>
 </tr>
@@ -3907,7 +4973,7 @@ In the red mode, we warn for mutable ones in an otherwise pretty immutable envir
 <td class="tableblock halign-left valign-top"><p class="tableblock">blue</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@MutableModifiesArguments</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{mutableModifiesArguments}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">red</p></td>
 </tr>
@@ -3919,21 +4985,21 @@ In the red mode, we warn for mutable ones in an otherwise pretty immutable envir
 </tbody>
 </table>
 <div class="paragraph">
-<p>For fields, we note that  <code>@Variable</code> - <code>@Final</code>  and  <code>@NotModified</code>- <code>@Modified</code>  can technically occur in each combination:</p>
+<p>For fields, we note that {variable}- <code>@Final</code>  and  <code>@NotModified</code>- <code>@Modified</code>  can technically occur in each combination:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p> <code>@Variable</code>   <code>@Modified</code> : impossible for unmodifiable types</p>
+<p>{variable}  <code>@Modified</code> : impossible for unmodifiable types</p>
 </li>
 <li>
-<p> <code>@Variable</code>   <code>@NotModified</code></p>
+<p>{variable}  <code>@NotModified</code></p>
 </li>
 <li>
-<p> <code>@Final</code>   <code>@Modified</code> : part of  <code>@E1Immutable</code> , impossible for unmodifiable types</p>
+<p> <code>@Final</code>   <code>@Modified</code> : part of {e1immutable}, impossible for unmodifiable types</p>
 </li>
 <li>
-<p> <code>@Final</code>   <code>@NotModified</code>: part of  <code>@E2Immutable</code> </p>
+<p> <code>@Final</code>   <code>@NotModified</code>: part of {e2immutable}</p>
 </li>
 </ul>
 </div>
@@ -3957,13 +5023,13 @@ In the red mode, we warn for mutable ones in an otherwise pretty immutable envir
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Variable</code>   <code>@Modified</code> </p></td>
-<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"> <code>@Variable</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{variable}  <code>@Modified</code> </p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">{variable}</p></td>
 <td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">black</p></td>
 <td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">red</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Variable</code>   <code>@NotModified</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{variable}  <code>@NotModified</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@Final</code>   <code>@Modified</code> </p></td>
@@ -3984,20 +5050,20 @@ In the red mode, we warn for mutable ones in an otherwise pretty immutable envir
 <td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@SupportData</code>  (when field  <code>@NotModified</code> and owning type  <code>@E1Immutable</code> )</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <code>@SupportData</code> </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{supportData} (when field  <code>@NotModified</code> and owning type {e1immutable})</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{supportData}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">green italics</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">black italics</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The  <code>@SupportData</code>  annotation is relevant to understand why a type is not level 2 immutable.
+<p>The {supportData} annotation is relevant to understand why a type is not level 2 immutable.
 In other situations, it simply clutters.
-The analyser will only emit it when the type is already  <code>@E1Immutable</code>  or  <code>@E1Container</code> , and the field is already  <code>@NotModified</code>.</p>
+The analyser will only emit it when the type is already {e1immutable} or {e1container}, and the field is already  <code>@NotModified</code>.</p>
 </div>
 <div class="paragraph">
-<p>The plugin transfers dynamic type annotations involving immutability (such as  <code>@E2Container</code> ) from the field to the type.
+<p>The plugin transfers dynamic type annotations involving immutability (such as {e2container}) from the field to the type.
 As a consequence, the left-hand side <code>Set</code> type will color green in:</p>
 </div>
 <div class="listingblock">
@@ -4115,7 +5181,7 @@ The analyser colors:</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_information_flow">12.3.2. Information flow</h4>
+<h4 id="_information_flow">13.3.2. Information flow</h4>
 <div class="paragraph">
 <p>Exactly which information does the analyser store in the key-value store?
 The keys are type names, method names, parameter names, or field names in a format that both analyser and plugin understand:</p>
@@ -4152,7 +5218,7 @@ the composite key is the field&#8217;s or method&#8217;s key followed by a space
 </div>
 </div>
 <div class="sect3">
-<h4 id="_implementation">12.3.3. Implementation</h4>
+<h4 id="_implementation_2">13.3.3. Implementation</h4>
 <div class="paragraph">
 <p>The <code>JavaAnnotator</code> class links the plugin to the abstract syntax tree (or PSI in IntelliJ-speak).
 It is instrumental to decide which textual elements are to be highlighted.</p>
@@ -4206,7 +5272,7 @@ As soon as an element is not in the cache, the plugin requests the annotation va
 </div>
 </div>
 <div class="sect1">
-<h2 id="_copyright_and_license">13. Copyright and License</h2>
+<h2 id="_copyright_and_license">14. Copyright and License</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Copyright &#169; 2020-2021, Bart Naudts, <a href="https://www.e2immu.org" class="bare">https://www.e2immu.org</a></p>
@@ -4223,7 +5289,7 @@ If not, see <a href="http://www.gnu.org/licenses/" class="bare">http://www.gnu.o
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-10-12 13:05:02 UTC
+Last updated 2023-10-24 13:25:55 +0200
 </div>
 </div>
 <style>
