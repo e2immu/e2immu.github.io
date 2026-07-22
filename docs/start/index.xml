@@ -17,7 +17,7 @@
 We recommend The Road to Immutability → as a first introduction to the project. This document is also available as PDF in the Concepts → section.
 All downloads (sources, jars) can be found on e2immu&amp;rsquo;s GitHub page →.
 The e2immu project tries to be two things at the same time:
-it aspires to be educational: large software projects are easier to maintain when code is highly compartimentalised.</description>
+  it aspires to be educational: large software projects are easier to maintain when code is highly compartimentalised.</description>
     </item>
     
     <item>
@@ -27,10 +27,9 @@ it aspires to be educational: large software projects are easier to maintain whe
       
       <guid>https://www.e2immu.org/docs/start/concepts/</guid>
       <description>The best place to start reading about the immutability concepts is:
-The Road to Immutability →, PDF There&amp;rsquo;s also a slide deck covering the basic concepts.
-TL;DR modification: changes to the object graph of an object&amp;rsquo;s fields.
-container: a type which does not make modifications to the arguments of its constructors and non-private methods. You can use it as safe storage for your objects.
-final fields: all fields are effectively final (either explicitly, or only modified during the construction phase).</description>
+ The Road to Immutability →, PDF  There&amp;rsquo;s also a slide deck covering the basic concepts.
+TL;DR   modification: changes to the object graph of an object&amp;rsquo;s fields.
+  container: a type which does not make modifications to the arguments of its constructors and non-private methods. You can use it as safe storage for your objects.</description>
     </item>
     
     <item>
@@ -41,7 +40,7 @@ final fields: all fields are effectively final (either explicitly, or only modif
       <guid>https://www.e2immu.org/docs/start/analyser/</guid>
       <description>Next to promoting the use of practical immutability, the e2immu project provides a static code analyser to help enforce the proper use of these immutability concepts.
 The analyser is opinionated: it warns against a number of bad practices, such as:
-Assigning to a field outside the type of that field, is not allowed. Why? We believe that modification belongs to the type itself, as per the concept of a container. This may be too strong for certain situations.</description>
+  Assigning to a field outside the type of that field, is not allowed. Why? We believe that modification belongs to the type itself, as per the concept of a container.</description>
     </item>
     
     <item>
@@ -54,7 +53,7 @@ Assigning to a field outside the type of that field, is not allowed. Why? We bel
 TL;DR STEP 1: Ensure you have a JDK 16 (https://www.oracle.com/java/technologies/javase-jdk16-downloads.html) or better, and git (https://git-scm.com/download/win).
 STEP 2: Clone the project(s) from GitHub, minimally e2immu-support → and e2immu →.
 STEP 3: Use the Gradle wrapper and a Java JDK 16 to build and publish the jars to your local repository
-./gradlew publishToMavenLocal Now the support jar, analyser, two helper jars, and the Gradle plugin are available in your local repo.</description>
+./gradlew publishToMavenLocal  Now the support jar, analyser, two helper jars, and the Gradle plugin are available in your local repo.</description>
     </item>
     
   </channel>

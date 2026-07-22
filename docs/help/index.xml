@@ -14,9 +14,9 @@
       
       <guid>https://www.e2immu.org/docs/help/manuals/</guid>
       <description>The main manual is:
-e2immu manual →, PDF This manual needs additional work.
+ e2immu manual →, PDF  This manual needs additional work.
 There&amp;rsquo;s also a small slide deck:
-Slide deck 2: slides about the e2immu project </description>
+ Slide deck 2: slides about the e2immu project  </description>
     </item>
     
     <item>
@@ -48,9 +48,9 @@ The plugin&amp;rsquo;s operation is described in the manual, see Manuals →.</d
       
       <guid>https://www.e2immu.org/docs/help/dependencies/</guid>
       <description>The analyser primarily depends on
-JavaParser.org to parse Java source files; ASM to parse Java byte-code. Like many other Java projects, it also uses
-slf4j and LogBack for logging; commons.io for reading and writing to files; JUnit 5 for testing. The annotation store uses
-Vertx.io for configuration and HTTP communication. Obviously, the Gradle plugin links to Gradle libraries, and the IntelliJ highlighter to Jetbrains libraries.</description>
+ JavaParser.org to parse Java source files; ASM to parse Java byte-code.  Like many other Java projects, it also uses
+ slf4j and LogBack for logging; commons.io for reading and writing to files; JUnit 5 for testing.  The annotation store uses
+ Vertx.io for configuration and HTTP communication.  Obviously, the Gradle plugin links to Gradle libraries, and the IntelliJ highlighter to Jetbrains libraries.</description>
     </item>
     
     <item>
@@ -70,7 +70,7 @@ Goal IBTECH aims for the e2immu analyser to become a solid, dependable tool in p
       
       <guid>https://www.e2immu.org/docs/help/reporting-bugs/</guid>
       <description>The easiest way to report a bug is to create an issue in GitHub:
-Create a bug report for the analyser </description>
+ Create a bug report for the analyser  </description>
     </item>
     
     <item>
